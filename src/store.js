@@ -4,7 +4,8 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { userDeleteReducer, userDetailsByIdReducer, userDetailsReducer, userForgotPasswordReducer, userListReducer, userLoginReducer, userRegisterReducer, userResetPasswordReducer, userUpdatePasswordReducer, userUpdateProfileReducer, userUpdateReducer } from './reducers/userReducers'
 import { profileDetailsReducer, createProfileReducer, profileEmployeeIDDetailsReducer, profileUpdateReducer, createProfileEmpIdReducer } from './reducers/profileReducers'
 import { createNextOfKinEmpIdReducer, createNextOfKinReducer, nextOfKinDetailsEmployeeReducer, nextOfKinDetailsReducer, updateNextOfKinReducer } from './reducers/nextOfKinReducer'
-import { createEducationEmpIdReducer, createEducationReducer, educationDetailsEmployeeReducer, educationDetailsReducer, updateEducationReducer } from './reducers/educationReducers'
+import { createEducationEmpIdReducer, createEducationReducer, educationDetailsEmployeeReducer, educationDetailsReducer, updateEducationReducer } from './reducers/educationReducers';
+import { createMyLeaveEmpIdReducer, createMyLeaveReducer, myLeaveDetailsEmployeeReducer, myLeaveDetailsReducer, updateMyLeaveReducer } from './reducers/myLeaveReducers';
 
 
 const reducer = combineReducers({
@@ -34,6 +35,12 @@ const reducer = combineReducers({
     educationCreateEmpId: createEducationEmpIdReducer,
     nextOfKinCreateEmpId: createNextOfKinEmpIdReducer,
     profileCreateEmpId: createProfileEmpIdReducer,
+
+    myLeaveDetails: myLeaveDetailsReducer,
+    myLeaveUpdate: updateMyLeaveReducer,
+    myLeaveCreate: createMyLeaveReducer,
+    myleaveDetailsEmpId: myLeaveDetailsEmployeeReducer,
+    myleaveCreateEmpId: createMyLeaveEmpIdReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
@@ -52,4 +59,4 @@ const store = createStore(
     composeWithDevTools(applyMiddleware(...middleware))
 )
 
-export default store
+export default store;

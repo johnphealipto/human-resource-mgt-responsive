@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 import { Nav } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserDetails } from '../actions/userActions';

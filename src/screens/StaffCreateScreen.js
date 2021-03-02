@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form, Button, Row, Col, ListGroup } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -129,7 +129,6 @@ const StaffCreateScreen = ({ history }) => {
                             as="select" 
                             size='sm'
                             value={department}
-                            custom
                             onChange={(e) => setDepartment(e.target.value)}>
                                 <option value=''>Select...</option>
                                 <option value='IT'>IT</option>
@@ -160,11 +159,10 @@ const StaffCreateScreen = ({ history }) => {
                             as="select" 
                             size='sm'
                             value={role}
-                            custom
                             onChange={(e) => setRole(e.target.value)}>
                                 <option value=''>Select...</option>
-                                <option className='mt-5' value='hr'>HR</option>
-                                <option className='mt-5' value='employee'>EMPLOYEE</option>
+                                <option value='hr'>HR</option>
+                                <option value='employee'>EMPLOYEE</option>
                                 <option value='supervisor'>SUPERVISOR</option>
                                 <option value='admin'>ADMIN</option>
                                 <option value='hr-manager'>HR-MANAGER</option>
@@ -206,4 +204,4 @@ const StaffCreateScreen = ({ history }) => {
     )
 }
 
-export default StaffCreateScreen;
+export default StaffCreateScreen

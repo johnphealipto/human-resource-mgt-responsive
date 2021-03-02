@@ -26,7 +26,8 @@ const AllLeaveApplications = ({ history }) => {
         <Col className='col-xs-12 col-md-10'>
           <Header />
 					<h1 className='page-header'>LEAVE APPLICATIONS</h1>
-					<Table bordered hover size="sm" className='myleave-table'>
+					<hr />
+					<Table striped bordered hover size="sm" className='myleave-table'>
         <thead>
           <tr>
             <th>Date Applied</th>
@@ -54,7 +55,7 @@ const AllLeaveApplications = ({ history }) => {
     					</Form.Control>
 						</td>
 						<td>
-							<Button className='btn-sm'>
+							<Button>
 								Post
 							</Button>
 						</td>
@@ -74,7 +75,7 @@ const AllLeaveApplications = ({ history }) => {
     					</Form.Control>
 						</td>
 						<td>
-							<Button className='btn-sm'>
+							<Button>
 								Post
 							</Button>
 						</td>
@@ -94,7 +95,7 @@ const AllLeaveApplications = ({ history }) => {
     					</Form.Control>
         		</td>
 						<td>
-							<Button className='btn-sm'>
+							<Button>
 								Post
 							</Button>
 						</td>
@@ -114,7 +115,7 @@ const AllLeaveApplications = ({ history }) => {
     					</Form.Control>
         		</td>
 						<td>
-							<Button className='btn-sm'>
+							<Button>
 								Post
 							</Button>
 						</td>
@@ -134,7 +135,7 @@ const AllLeaveApplications = ({ history }) => {
     					</Form.Control>
         		</td>
 						<td>
-							<Button className='btn-sm'>
+							<Button>
 								Post
 							</Button>
 						</td>

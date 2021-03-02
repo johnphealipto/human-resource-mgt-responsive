@@ -33,11 +33,12 @@ const HomeScreen = ({ history }) => {
         <Col md={3} className='d-none d-md-block'>
           <FixedNavbar />
         </Col>
-        <Col className='col-xs-12 col-md-8'>
+        <Col className='col-xs-12 col-md-8  form-wrapper'>
           <Header />
+          {/* <hr/> */}
           <h1 className='page-header'>Home</h1>
           
-          <Form key={user.id}>
+          <Form key={user.id} className="form-container">
                 <Form.Row>
                   <Form.Group className="col-md-4">
                     <Form.Label>First Name</Form.Label>
@@ -71,7 +72,7 @@ const HomeScreen = ({ history }) => {
                     <Form.Control 
                       type="text"
                       placeholder={user.employeeCode}
-                      disabled
+                      readOnly
                     ></Form.Control>
                 	</Form.Group>
                 	<Form.Group className="col-md-6">
@@ -79,7 +80,7 @@ const HomeScreen = ({ history }) => {
                     <Form.Control 
                       type="text"
                       placeholder={user.department}
-                      disabled
+                      readOnly
                     ></Form.Control>
                   </Form.Group>
                 </Form.Row>
@@ -89,7 +90,7 @@ const HomeScreen = ({ history }) => {
                     <Form.Control 
                       type="text"
                       placeholder={user.role}
-                      disabled
+                      readOnly
                     ></Form.Control>
                 	</Form.Group>
                 	<Form.Group className="col-md-6">
@@ -97,7 +98,7 @@ const HomeScreen = ({ history }) => {
                     <Form.Control 
                       type="text"
                       placeholder={user.email}
-                      disabled
+                      readOnly
                     ></Form.Control>
                   </Form.Group>
                 </Form.Row>

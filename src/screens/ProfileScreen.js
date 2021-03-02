@@ -126,9 +126,9 @@ const ProfileScreen = ({ history }) => {
             <Col md={3} className='d-none d-md-block'>
                 <FixedNavbar />
             </Col>
-            <Col className='col-xs-12 col-md-8'>
+            <Col className=' col-lg-9 col-xs-12 col-md-8'>
             <Header />
-                <h1 className='page-header'>My Profile</h1>
+                <h1>My Profile</h1>
                
                 {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
                 {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
@@ -307,8 +307,7 @@ const ProfileScreen = ({ history }) => {
                                     as="select" 
                                     size='sm'
                                     value={gender}
-                                    onChange={(e) => setGender(e.target.value)}
-                                    custom>
+                                    onChange={(e) => setGender(e.target.value)}>
                                         <option value=''>Select...</option>
                                         <option value='MALE'>MALE</option>
                                         <option value='FEMALE'>FEMALE</option>

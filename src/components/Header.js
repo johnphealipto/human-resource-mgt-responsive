@@ -26,7 +26,6 @@ const Header = ({ history }) => {
         <header>
             <div className='lg-header d-none d-md-block'>
             <Navbar>
-                
                     <LinkContainer to='/'>
                         <Navbar.Brand id="logo-anchor">
                         <img id ="nav-bar-logo"src={Logo} alt="Outcess Logo" />
@@ -59,6 +58,7 @@ const Header = ({ history }) => {
                         )}
                     </div>
                     </Navbar.Collapse>
+                    <hr className="border-bottom"/>
             </Navbar>
             </div>
 

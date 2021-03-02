@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap'); */
+
 
 :root {
   --background-blue-color: #255aa0;
@@ -24,6 +26,9 @@ header {
   width: 90%;
   z-index: 5;
   /* box-shadow: 0 1px 1px rgba(0,0,0,0.05); */
+}
+.border-bottom{
+  border-bottom: 1px solid black !important;
 }
 
 header .logout {
@@ -217,7 +222,7 @@ button.applyleave-btn:active {
   margin-right: 30px;
 }
 #nav-bar-logo {
-  height: 40px;
+  width: 25vh;
   margin-left: 10px;
   margin-top: 5px;
   padding: 0px;

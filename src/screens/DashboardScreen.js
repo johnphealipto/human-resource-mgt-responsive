@@ -92,7 +92,7 @@ const DashboardScreen = ({ history }) => {
             </Col>
             <Col className='col-xs-12 col-md-8'>
                 <Header />
-                <h1 className='page-header'>Personal Details</h1>
+                <h1>Personal Details</h1>
                 {message && <Message variant='danger'>{message}</Message>}
                 {error && <Message variant='danger'>{error}</Message>}
                 {success && <Message variant='success'>Profile Updated</Message>}

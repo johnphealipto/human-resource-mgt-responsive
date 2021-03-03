@@ -7,7 +7,6 @@ import Loader from '../components/Loader'
 import { listUsers, register } from '../actions/userActions';
 import { USER_REGISTER_RESET } from '../constants/userConstants';
 import FixedNavbar from '../components/FixedNavbar';
-import '../styles/StaffCreateScreen.css';
 import Header from '../components/Header';
 
 const StaffCreateScreen = ({ history }) => {

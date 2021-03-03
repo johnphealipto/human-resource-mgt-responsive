@@ -39,13 +39,13 @@ const FixedNavbar = ({ history }) => {
           <i class="fas fa-home pr-4"></i>
           Home
         </NavLink>
-        <NavLink to='/dashboard' exact className="nav-link" activeClassName='active-here'>
-          <i class="far fa-id-card pr-4"></i>
-          Personal details
-        </NavLink>
         <NavLink to='/profile' exact className="nav-link" activeClassName='active-here'>
           <i class="fas fa-user-circle pr-4"></i>
           Profile
+        </NavLink>
+        <NavLink to='/dashboard' exact className="nav-link" activeClassName='active-here'>
+          <i class="far fa-id-card pr-4"></i>
+          Personal details
         </NavLink>
         <NavLink to='/nextofkin' exact className="nav-link" activeClassName='active-here'>
           <i class="fas fa-user-friends pr-4"></i>

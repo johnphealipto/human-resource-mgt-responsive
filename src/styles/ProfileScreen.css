@@ -13,7 +13,8 @@
 
 .profilescreen-wrapper form input,
 .profilescreen-wrapper form select {
-  margin-bottom: 2vh;
+  height: 6vh;
+  margin-bottom: 1vh;
   background-color: var(--input-field-color);
 }
 .profilescreen-wrapper form select {

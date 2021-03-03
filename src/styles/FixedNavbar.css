@@ -1,6 +1,5 @@
 .fixednavbar-wrapper {
   background-color: var(--background-blue-color);
-  color: ghostwhite;
   font-weight: 500;
   height: 100%;
   width: 225px;
@@ -13,49 +12,44 @@
 }
 .fixednavbar-wrapper .employee-details {
   background-color: var(--light-hover-blue);
-  margin: 1vh 1.5vh 5vh 1.5vh;
+  color: ghostwhite;
+  margin: .5vh 1.5vh 3.5vh 0;
   padding: 1.5vh 0 .01vh 2vh;
-  border-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
   box-shadow: 1px 1px 1px rgba(0,0,0,0.02), 
               2px 2px 2px rgba(0,0,0,0.02),
-              4px 4px 4px rgba(0,0,0,0.02);
+              4px 4px 4px rgba(0,0,0,0.02),
+              3px 0 0 ghostwhite inset;
 }
 .fixednavbar-wrapper .employee-details p:nth-child(1) {
   font-weight: bold;
   letter-spacing: 1px;
   margin-bottom: -0.2vh;
 }
-.fixednavbar-wrapper .fixednavbar-list-group {
-  background-color: var(--background-blue-color) !important;
-  margin-top: 4vh;
-  text-decoration: none;
-  list-style: none;
-}
 .fixednavbar-wrapper ul li {
   background-color: var(--background-blue-color);
   list-style: none;
 }
-.fixednavbar-wrapper i {
-  color: var(--background-white-color);
-}
 .fixednavbar-wrapper a.nav-link {
-  color: var(--background-white-color);
-  padding: 1.2vh 0 1.2vh 4vh;
-  margin-top: 2vh;
+  color: rgba(248, 248, 255, 0.85);
+  padding: 1.3vh 0 1.3vh 4vh;
+  margin-top: 1.8vh;
   margin-right: 2vh;
   transition: all 0.15s ease-out;
   -webkit-transition: all 0.15s ease-out;
 }
 .fixednavbar-wrapper a.nav-link.active-here,
 .fixednavbar-wrapper a.nav-link:hover {
-  color: var(--background-white-color);
+  color: rgb(248, 248, 255);
   background-color: var(--light-hover-blue);
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 1px 1px 1px rgba(0,0,0,0.02), 
               2px 2px 2px rgba(0,0,0,0.02),
               4px 4px 4px rgba(0,0,0,0.02),
-              6px 6px 6px rgba(0,0,0,0.02);
+              6px 6px 6px rgba(0,0,0,0.02),
+              3px 0 0 ghostwhite inset;
   transition: all 0.15s ease-out;
   -webkit-transition: all 0.15s ease-out;
 }

@@ -72,7 +72,7 @@ const HomeScreen = ({ history }) => {
                     <Form.Control 
                       type="text"
                       placeholder={user.employeeCode}
-                      readOnly
+                      disabled
                     ></Form.Control>
                 	</Form.Group>
                 	<Form.Group className="col-md-6">
@@ -80,7 +80,7 @@ const HomeScreen = ({ history }) => {
                     <Form.Control 
                       type="text"
                       placeholder={user.department}
-                      readOnly
+                      disabled
                     ></Form.Control>
                   </Form.Group>
                 </Form.Row>
@@ -90,7 +90,7 @@ const HomeScreen = ({ history }) => {
                     <Form.Control 
                       type="text"
                       placeholder={user.role}
-                      readOnly
+                      disabled
                     ></Form.Control>
                 	</Form.Group>
                 	<Form.Group className="col-md-6">
@@ -98,7 +98,7 @@ const HomeScreen = ({ history }) => {
                     <Form.Control 
                       type="text"
                       placeholder={user.email}
-                      readOnly
+                      disabled
                     ></Form.Control>
                   </Form.Group>
                 </Form.Row>

@@ -47,7 +47,7 @@
 .loginpage-wrapper input[type="email"]:focus,
 .loginpage-wrapper input[type="password"]:focus {
   background-color: var(--input-field-color);
-  box-shadow: 2px 0 1px var(--background-blue-color) inset;
+  box-shadow: 3px 0 0 var(--background-blue-color) inset;
 }
 .loginpage-wrapper button[type="submit"] {
   background-color: var(--background-blue-color);

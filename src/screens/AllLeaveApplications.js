@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Table, Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllEmployeeLeaveApplicationId } from '../actions/leaveApplication'
@@ -6,7 +6,9 @@ import FixedNavbar from '../components/FixedNavbar';
 import Header from '../components/Header';
 
 const AllLeaveApplications = ({ history }) => {
-  const dispatch = useDispatch()
+	const [leaveStatus, setLeaveStatus] = useState('')
+  
+	const dispatch = useDispatch()
 
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
@@ -55,13 +57,18 @@ const AllLeaveApplications = ({ history }) => {
 						<td>{user.fromDate}</td>
 						<td>{user.toDate}</td>
 						<td>{user.reasonForLeave}</td>
-						<td>{user.leaveStatus}</td>
             <td>
-							<Form.Control as="select" defaultValue="Pending" custom className='approveleave-selectinput'>
-								<option value="pending">Pending</option>
-          			<option value="approved">Approved</option>
-          			<option value="declined">Declined</option>
-          			<option value="awaitingConfirmation">Awaiting Confirmation</option>
+							<Form.Control 
+								as="select" 
+								defaultValue="Pending" 
+								custom className='approveleave-selectinput'
+								// value={leaveStatus}
+								// onChange={(e) => setLeaveStatus(e.target.value)}
+							>
+									<option value="pending">Pending</option>
+									<option value="approved">Approved</option>
+									<option value="declined">Declined</option>
+									<option value="awaitingConfirmation">Awaiting Confirmation</option>
     					</Form.Control>
         		</td>
 						<td>

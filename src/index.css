@@ -129,7 +129,7 @@ header #basic-navbar-nav a {
 }
 .myleave-modal .modal-content form input,
 .myleave-modal .modal-content form select {
-  margin-bottom: 2vh;
+  margin-bottom: .5vh;
   background-color: var(--input-field-color);
 }
 .myleave-modal .modal-content form select {
@@ -138,7 +138,7 @@ header #basic-navbar-nav a {
 .myleave-modal .modal-content form input:focus,
 .myleave-modal .modal-content form select:focus {   
   background-color: var(--input-field-color);
-  box-shadow: 2px 0 1px var(--background-blue-color) inset;
+  box-shadow: 3px 0 0 var(--background-blue-color) inset;
 }
 .myleave-modal .modal-content button {
   border-radius: 5px;
@@ -206,7 +206,6 @@ button.applyleave-btn:active {
   margin-left: 20px;
   height: 50px;
   /* margin-top: 20px; */
-  float: right;
   /* padding-top: 20px; */
   display: inline-block;
   padding-top: 15px;

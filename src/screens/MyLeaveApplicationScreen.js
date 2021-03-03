@@ -19,7 +19,7 @@ const MyLeaveApplicationScreen = ({ history }) => {
     const [fromDate, setLeaveStartDate] = useState('')
     const [toDate, setLeaveEndDate] = useState('')
     const [reasonForLeave, setLeaveDescription] = useState('')
-    const [status, setLeaveStatus] = useState('')
+    const [leaveStatus, setLeaveStatus] = useState('')
      
     const dispatch = useDispatch()
 
@@ -34,11 +34,6 @@ const MyLeaveApplicationScreen = ({ history }) => {
 
     const createLeaveApp = useSelector(state => state.createLeaveApp)
     const { error:errorCreate, success:successCreate } = createLeaveApp
-
-    
-
-    
-
 
 
     useEffect(() => {
@@ -113,68 +108,74 @@ const MyLeaveApplicationScreen = ({ history }) => {
         keyboard={false}
         className="myleave-modal"
       >
-        <Form onSubmit={createsubmitHandler}>
-
         <Modal.Header closeButton>
           <Modal.Title>Apply for Leave</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          
+        <Form onSubmit={createsubmitHandler}>
             
-            <Form.Group className="col-md-4" controlId="formGridState leaveType">
+            <Form.Group controlId="leaveType">
                 <Form.Label>Leave Type</Form.Label>
                 <Form.Control 
-                as="select" 
-                size='sm'
-                value={leaveType}
-                onChange={(e) => setLeaveType(e.target.value)}>
-                    <option value=''>Select...</option>
-                    <option value='sick'>Sick Leave</option>
-                    <option value='wedding'>Wedding</option>
+                  as="select"
+                  custom 
+                  size='sm'
+                  value={leaveType}
+                  onChange={(e) => setLeaveType(e.target.value)}>
+                    <option value=''>Select Leave Type</option>
+                    <option value='Sick-Leave'>Sick Leave</option>
+                    <option value='Paid-Leave'>Paid Leave</option>
+                    <option value='Maternity-Leave'>Maternity Leave</option>
+                    <option value='Work-Trip'>Work Trip</option>
                 </Form.Control>
             </Form.Group>
             <Form.Group controlId='startDate'>
               <Form.Label>Start Date</Form.Label>
               <Form.Control type='date' placeholder='Start Date'  value={fromDate}
-                                onChange={(e) => setLeaveStartDate(e.target.value)}></Form.Control>
+                onChange={(e) => setLeaveStartDate(e.target.value)}></Form.Control>
             </Form.Group>
             <Form.Group controlId='endDate'>
               <Form.Label>End Date</Form.Label>
               <Form.Control type='date' placeholder='End Date'  value={toDate}
-                                onChange={(e) => setLeaveEndDate(e.target.value)}></Form.Control>
+                onChange={(e) => setLeaveEndDate(e.target.value)}></Form.Control>
             </Form.Group>
             <Form.Group controlId='description'>
               <Form.Label>Reason</Form.Label>
-              <Form.Control type="text" placeholder="Detailed reason for leave application"  value={reasonForLeave}
-                                onChange={(e) => setLeaveDescription(e.target.value)}/>
+              <Form.Control type="text" placeholder="Detailed Reason For Leave Application"  value={reasonForLeave}
+                onChange={(e) => setLeaveDescription(e.target.value)}/>
             </Form.Group>
             <Form.Group controlId='status'>
               <Form.Label>Status</Form.Label>
-              <Form.Control placeholder="Pending" disabled  value={status}
-                                onChange={(e) => setLeaveStatus(e.target.value)}  />
+              <Form.Control placeholder="Pending" disabled  value={leaveStatus}
+                onChange={(e) => setLeaveStatus(e.target.value)}  />
             </Form.Group>
-          
+            <hr />
+            <Button className='applyleave-btn mb-2 mr-3' type='submit' onClick={handleClose}>
+              Apply
+            </Button>
+            <Button className='mb-2' variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+          </Form>
         </Modal.Body>
-        <Modal.Footer>
+        {/* <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button className='applyleave-btn' type='submit' onClick={handleClose}>
             Submit
           </Button>
-          
-        </Modal.Footer>
-        </Form>
+        </Modal.Footer> */}
       </Modal>
     </>
 
       <Table striped bordered hover size="sm" className='myleave-table'>
         <thead>
           <tr>
-            <th>Date Applied</th>
             <th>Leave Type</th>
-            <th>Duration</th>
-            <th>Reason</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Detailed Reason</th>
             <th>Status</th>
           </tr>
         </thead>

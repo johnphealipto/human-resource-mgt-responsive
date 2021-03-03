@@ -13,17 +13,16 @@
 
 .profilescreen-wrapper form input,
 .profilescreen-wrapper form select {
-  height: 6vh;
-  margin-bottom: 1vh;
-  background-color: var(--input-field-color);
-}
-.profilescreen-wrapper form select {
   height: 6.9vh;
+  margin-bottom: 1vh;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: var(--input-field-color);
 }
 .profilescreen-wrapper form input:focus,
 .profilescreen-wrapper form select:focus {   
   background-color: var(--input-field-color);
-  box-shadow: 2px 0 1px var(--background-blue-color) inset;
+  box-shadow: 3px 0 0 var(--background-blue-color) inset;
   /* outline: 0 none; */
 }
 .profilescreen-wrapper form button {

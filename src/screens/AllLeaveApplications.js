@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col, Table, Form, Button } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllEmployeeLeaveApplicationId } from '../actions/leaveApplication'
 import FixedNavbar from '../components/FixedNavbar';
 import Header from '../components/Header';
 
@@ -10,12 +11,21 @@ const AllLeaveApplications = ({ history }) => {
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
+	const getLeaveAppDetails = useSelector(state => state.getLeaveAppDetails)
+    const { data } = getLeaveAppDetails
+
   useEffect(() => {
 
     if(!userInfo) {
       history.push('/')
-    } 
-  }, [dispatch, history, userInfo])
+    } else {
+			dispatch(getAllEmployeeLeaveApplicationId())
+		}
+  }, [dispatch, history, data, userInfo])
+
+	const updateMyLeaveHandler= (e) => {
+    e.preventDefault(e)
+  }
 
   return (
     <>     
@@ -30,62 +40,22 @@ const AllLeaveApplications = ({ history }) => {
 					<Table striped bordered hover size="sm" className='myleave-table'>
         <thead>
           <tr>
-            <th>Date Applied</th>
-						<th>Name - Agent.ID</th>
             <th>Leave Type</th>
-            <th>Duration</th>
+            <th>Start Date</th>
+						<th>End Date</th>
             <th>Reason</th>
             <th>Status</th>
 						<th>...</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Jan 5, 2020</td>
-						<td>John Adibe <br /> Agent.5544</td>
-            <td>Sick leave</td>
-            <td>Jan 11, 2020 - Jan 14, 2020</td>
-            <td>Malaria and Typhoid fever</td>
-            <td>
-    					<Form.Control as="select" defaultValue="Pending" custom className='approveleave-selectinput'>
-								<option value="pending">Pending</option>
-          			<option value="approved">Approved</option>
-          			<option value="declined">Declined</option>
-          			<option value="awaitingConfirmation">Awaiting Confirmation</option>
-    					</Form.Control>
-						</td>
-						<td>
-							<Button>
-								Post
-							</Button>
-						</td>
-          </tr>
-          <tr>
-            <td>Oct 10, 2020</td>
-						<td>John Adibe <br /> Agent.5544</td>
-            <td>Paid leave</td>
-            <td>Oct 15, 2020 - Oct 17, 2020</td>
-            <td>Paid Leave</td>
-            <td>
-    					<Form.Control as="select" defaultValue="Pending" custom className='approveleave-selectinput'>
-								<option value="pending">Pending</option>
-          			<option value="approved">Approved</option>
-          			<option value="declined">Declined</option>
-          			<option value="awaitingConfirmation">Awaiting Confirmation</option>
-    					</Form.Control>
-						</td>
-						<td>
-							<Button>
-								Post
-							</Button>
-						</td>
-          </tr>
-          <tr>
-            <td>Feb 18, 2021</td>
-						<td>John Adibe <br /> Agent.5544</td>
-            <td>Sick leave</td>
-            <td>Feb 19, 2021 - Feb 22, 2021</td>
-            <td>Malaria and Typhoid fever</td>
+				{data.map(user => (
+          <tr key={user._id}>
+						<td>{user.leaveType}</td>
+						<td>{user.fromDate}</td>
+						<td>{user.toDate}</td>
+						<td>{user.reasonForLeave}</td>
+						<td>{user.leaveStatus}</td>
             <td>
 							<Form.Control as="select" defaultValue="Pending" custom className='approveleave-selectinput'>
 								<option value="pending">Pending</option>
@@ -100,46 +70,7 @@ const AllLeaveApplications = ({ history }) => {
 							</Button>
 						</td>
           </tr>
-					<tr>
-            <td>Feb 18, 2021</td>
-						<td>John Adibe <br /> Agent.5544</td>
-            <td>Sick leave</td>
-            <td>Feb 19, 2021 - Feb 22, 2021</td>
-            <td>Malaria and Typhoid fever</td>
-            <td>
-							<Form.Control as="select" defaultValue="Pending" custom className='approveleave-selectinput'>
-								<option value="pending">Pending</option>
-          			<option value="approved">Approved</option>
-          			<option value="declined">Declined</option>
-          			<option value="awaitingConfirmation">Awaiting Confirmation</option>
-    					</Form.Control>
-        		</td>
-						<td>
-							<Button>
-								Post
-							</Button>
-						</td>
-          </tr>
-					<tr>
-            <td>Feb 18, 2021</td>
-						<td>John Adibe <br /> Agent.5544</td>
-            <td>Sick leave</td>
-            <td>Feb 19, 2021 - Feb 22, 2021</td>
-            <td>Malaria and Typhoid fever</td>
-            <td>
-							<Form.Control as="select" defaultValue="Pending" custom className='approveleave-selectinput'>
-								<option value="pending">Pending</option>
-          			<option value="approved">Approved</option>
-          			<option value="declined">Declined</option>
-          			<option value="awaitingConfirmation">Awaiting Confirmation</option>
-    					</Form.Control>
-        		</td>
-						<td>
-							<Button>
-								Post
-							</Button>
-						</td>
-          </tr>
+					))}
         </tbody>
       </Table>
       	</Col>

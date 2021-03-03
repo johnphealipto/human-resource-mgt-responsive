@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Modal, Form, Row, Col } from 'react-bootstrap';
-import Message from '../components/Message'
-import Loader from '../components/Loader'
+import Message from '../components/Message';
+import Loader from '../components/Loader';
 import { LEAVE_APPLICATION_CREATE_RESET, LEAVE_APPLICATION_DETAILS_RESET, LEAVE_APPLICATION_UPDATE_EMPLOYEE_RESET } from '../constants/leaveApplicationConstants'
-import { createLeaveApplication, getMyLeaveApplication, updateEmployeeLeaveApplicationId } from '../actions/leaveApplication'
-import { useDispatch, useSelector } from 'react-redux'
+import { createLeaveApplication, getMyLeaveApplication, updateEmployeeLeaveApplicationId } from '../actions/leaveApplication';
+import { useDispatch, useSelector } from 'react-redux';
 import FixedNavbar from '../components/FixedNavbar';
 import Header from '../components/Header';
 
@@ -78,16 +78,15 @@ const MyLeaveApplicationScreen = ({ history }) => {
 
 
 
-    const createsubmitHandler= (e) => {
-      e.preventDefault(e)
-      dispatch((
-         leaveType,
-         fromDate,
-         toDate,
-         reasonForLeave
-        ))
-      console.log(`type: ${leaveType}, from: ${fromDate}, to: ${toDate}, reason: ${reasonForLeave}`)
-     
+  const createsubmitHandler= (e) => {
+    e.preventDefault(e)
+    dispatch(createLeaveApplication(
+        leaveType,
+        fromDate,
+        toDate,
+        reasonForLeave
+      ))
+    console.log(`type: ${leaveType}, from: ${fromDate}, to: ${toDate}, reason: ${reasonForLeave}`)
   }
 
   return (
@@ -180,15 +179,15 @@ const MyLeaveApplicationScreen = ({ history }) => {
           </tr>
         </thead>
         <tbody>
-            {data.map(user => (
-                <tr key={user._id}>
-                    <td>{user.leaveType}</td>
-                    <td>{user.fromDate}</td>
-                    <td>{user.toDate}</td>
-                    <td>{user.reasonForLeave}</td>
-                    <td>{user.leaveStatus}</td>
-                </tr>
-            ))}
+          {data.map(user => (
+            <tr key={user._id}>
+              <td>{user.leaveType}</td>
+              <td>{user.fromDate}</td>
+              <td>{user.toDate}</td>
+              <td>{user.reasonForLeave}</td>
+              <td>{user.leaveStatus}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </Container>			

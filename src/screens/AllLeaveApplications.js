@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Table, Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllEmployeeLeaveApplicationId } from '../actions/leaveApplication'
+import { getAllEmployeeLeaveApplicationId } from '../actions/leaveApplication';
+import Paginate from '../components/Paginate';
 import FixedNavbar from '../components/FixedNavbar';
 import Header from '../components/Header';
 
@@ -25,6 +26,7 @@ const AllLeaveApplications = ({ history }) => {
 		}
   }, [dispatch, history, data, userInfo])
 
+	
 	const updateMyLeaveHandler= (e) => {
     e.preventDefault(e)
   }
@@ -80,6 +82,11 @@ const AllLeaveApplications = ({ history }) => {
 					))}
         </tbody>
       </Table>
+			<Paginate
+				destination={employees}
+				pages={pages} 
+				page={page}
+				keyword={keyword ? keyword : ''} />
       	</Col>
       </Row>
     </>

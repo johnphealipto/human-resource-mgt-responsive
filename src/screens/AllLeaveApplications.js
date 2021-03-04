@@ -44,6 +44,7 @@ const AllLeaveApplications = ({ history }) => {
 					<Table striped bordered hover size="sm" className='myleave-table'>
         <thead>
           <tr>
+						<th>Email Address</th>
             <th>Leave Type</th>
             <th>Start Date</th>
 						<th>End Date</th>
@@ -55,6 +56,7 @@ const AllLeaveApplications = ({ history }) => {
         <tbody>
 				{data.map(user => (
           <tr key={user._id}>
+						<td>{userInfo.email}</td>
 						<td>{user.leaveType}</td>
 						<td>{user.fromDate}</td>
 						<td>{user.toDate}</td>
@@ -82,11 +84,11 @@ const AllLeaveApplications = ({ history }) => {
 					))}
         </tbody>
       </Table>
-			<Paginate
+			{/* <Paginate
 				destination={employees}
 				pages={pages} 
 				page={page}
-				keyword={keyword ? keyword : ''} />
+				keyword={keyword ? keyword : ''} /> */}
       	</Col>
       </Row>
     </>

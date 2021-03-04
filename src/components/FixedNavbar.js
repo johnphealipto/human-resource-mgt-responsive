@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom';
 import { Nav } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserDetails } from '../actions/userActions';
+import { getUserDetails, logout } from '../actions/userActions';
 import '../styles/FixedNavbar.css';
 
 
@@ -25,7 +25,13 @@ const FixedNavbar = ({ history }) => {
     else {
       dispatch(getUserDetails('me'))
     }
-    }, [dispatch, history, user, userInfo])
+  }, [dispatch, history, user, userInfo])
+
+
+
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
 
   return (
     <div className="fixednavbar-wrapper">
@@ -78,14 +84,14 @@ const FixedNavbar = ({ history }) => {
         </>
         )
         }
-
-        {/* <div className='fixednavbar-logout'>
-          <NavLink to='/' exact className="nav-link" activeClassName='active-here'>
-            <i class="fas fa-sign-out-alt pr-4"></i>
-            Logout
-          </NavLink>
-        </div> */}
       </Nav>
+
+      <div className='logout'>
+        <NavLink to='/' className="nav-link-logout" onClick={logoutHandler}>
+          <i class="fas fa-sign-out-alt pr-3"></i>
+          Logout
+        </NavLink>
+      </div>
     </div>
   );
 }

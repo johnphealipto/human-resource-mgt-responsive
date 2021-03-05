@@ -1,0 +1,96 @@
+.loginpage-container {
+  /* margin: auto; */
+}
+.loginpage-wrapper .login-img {
+  background-color: var(--background-blue-color);
+  width: 100vh;
+  height: 100vh;
+  margin-left: -30vh;
+  overflow: hidden;
+}
+.loginpage-wrapper .login-img img {
+  width: 150%;
+  opacity: 0.8;
+}
+.loginpage-wrapper .logo {
+  margin-top: 55vh;
+  width: 35vh;
+  margin: auto;
+  padding-bottom: 8vh;
+}
+.loginpage-wrapper .logo img {
+  margin-top: 23vh;
+  width: 100%;
+}
+.loginpage-wrapper form {
+  margin-left: 16vh;
+}
+.loginpage-wrapper .loginform-col i {
+  color: var(--background-blue-color);
+}
+.loginpage-wrapper .login-label {
+  text-align: left;
+  margin-bottom: -1vh;
+}
+.loginpage-wrapper .form-group.email,
+.loginpage-wrapper .form-group.password {
+  width: 50vh;
+}
+.loginpage-wrapper .form-group.password {
+  margin-top: 3vh;
+}
+.loginpage-wrapper input[type="email"],
+.loginpage-wrapper input[type="password"] {
+  margin-top: 5px;
+  background-color: var(--input-field-color);
+}
+.loginpage-wrapper input[type="email"]:focus,
+.loginpage-wrapper input[type="password"]:focus {
+  background-color: var(--input-field-color);
+  box-shadow: 3px 0 0 var(--background-blue-color) inset;
+}
+.loginpage-wrapper button[type="submit"] {
+  background-color: var(--background-blue-color);
+  font-size: 1rem;
+  letter-spacing: 1px;
+  border-radius: 5px;
+  margin-top: 2vh;
+  width: 50vh;
+}
+.loginpage-wrapper button[type="submit"]:hover {
+  background-color: var(--background-blue-color);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.11), 2px 2px 2px rgba(0, 0, 0, 0.11),
+    4px 4px 4px rgba(0, 0, 0, 0.11);
+}
+
+.loginpage-wrapper .forget-password p {
+  color: var(--background-blue-color);
+  margin-top: 2vh;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+
+/*Extra small devices {xs} (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) {
+  .loginpage-wrapper .form-group.email,
+  .loginpage-wrapper .form-group.password {
+    width: 40vh;
+  }
+  .loginpage-wrapper button[type="submit"] {
+    width: 40vh;
+  }
+  .loginpage-wrapper .logo,
+  .loginpage-wrapper form {
+    margin-left: 4.3vh;
+  }
+}
+
+
+/*Iphone X*/
+@media (width: 375px) and  (height: 812px) {
+  .loginpage-wrapper .logo,
+  .loginpage-wrapper form {
+    margin-left: 2vh;
+  }
+}

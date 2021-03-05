@@ -1,0 +1,46 @@
+.profilescreen-wrapper {
+  overflow: hidden;
+} 
+.profilescreen-wrapper h1 {
+  margin-top: 18vh;
+  text-transform: capitalize;
+}
+.profilescreen-wrapper form {
+  padding: 3vh;
+  padding-top: 5vh;
+  border-radius: 5px;
+}
+
+.profilescreen-wrapper form input,
+.profilescreen-wrapper form select {
+  height: 6.9vh;
+  margin-bottom: 1vh;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: var(--input-field-color);
+}
+.profilescreen-wrapper form input:focus,
+.profilescreen-wrapper form select:focus {   
+  background-color: var(--input-field-color);
+  box-shadow: 3px 0 0 var(--background-blue-color) inset;
+  /* outline: 0 none; */
+}
+.profilescreen-wrapper form button {
+  background-color: var(--background-blue-color);
+  letter-spacing: 1px;
+  width: 17vh;
+  margin-top: 2vh;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.25), 
+              2px 2px 2px rgba(0,0,0,0.25),
+              4px 4px 4px rgba(0,0,0,0.25);
+}
+.profilescreen-wrapper form button:hover {
+  background-color: var(--background-blue-color);
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.35), 
+              2px 2px 2px rgba(0,0,0,0.35),
+              4px 4px 4px rgba(0,0,0,0.35),
+              -1px -1px 1px rgba(0,0,0,0.05), 
+              -2px -2px 2px rgba(0,0,0,0.05),
+              -4px -4px 4px rgba(0,0,0,0.05);
+}

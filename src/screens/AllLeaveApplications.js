@@ -7,25 +7,28 @@ import Paginate from '../components/Paginate';
 import FixedNavbar from '../components/FixedNavbar';
 import Header from '../components/Header';
 
-const AllLeaveApplications = ({ history }) => {
+const AllLeaveApplications = ({ history, match }) => {
 	const [leaveStatus, setLeaveStatus] = useState('')
-  
+
+  const keyword = match.params.keyword || ''
+	const pageNumber = match.params.pageNumber || 1
+	const employees = 'leaveapplications'
 	const dispatch = useDispatch()
 
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
 	const getLeaveAppDetails = useSelector(state => state.getLeaveAppDetails)
-    const { data } = getLeaveAppDetails
+    const { data, pages, page } = getLeaveAppDetails
 
   useEffect(() => {
 
     if(!userInfo) {
       history.push('/')
     } else {
-			dispatch(getAllEmployeeLeaveApplicationId())
+			dispatch(getAllEmployeeLeaveApplicationId(keyword, pageNumber))
 		}
-  }, [dispatch, history, data, userInfo])
+  }, [dispatch, history, data, userInfo, keyword, pageNumber])
 
 	
 	const updateMyLeaveHandler= (e) => {
@@ -86,11 +89,11 @@ const AllLeaveApplications = ({ history }) => {
 					))}
         </tbody>
       </Table>
-			{/* <Paginate
+	  	<Paginate
 				destination={employees}
 				pages={pages} 
 				page={page}
-				keyword={keyword ? keyword : ''} /> */}
+				keyword={keyword ? keyword : ''} />
       	</Col>
       </Row>
     </>

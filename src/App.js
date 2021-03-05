@@ -31,7 +31,11 @@ function App() {
       <Route path='/education' component={EducationScreen} />
       <Route path='/dashboard' component={DashboardScreen} />
       <Route path='/myleave' component={MyLeaveApplicationScreen} />
-      <Route path='/leaveapplications' component={AllLeaveApplications} />
+      <Route path='/leaveapplications' component={AllLeaveApplications} exact/>
+      <Route path='/leaveapplications/search/:keyword' component={AllLeaveApplications} />
+      <Route path='/leaveapplications/page/:pageNumber' component={AllLeaveApplications} />
+      <Route path='/leaveapplications/search/:keyword/page/:pageNumber' component={AllLeaveApplications} />
+
       <Route path='/updatepassword' component={PasswordScreen} />
       <Route path='/admin/userlist' component={StaffListScreen} exact/>
       <Route path='/admin/userlist/search/:keyword' component={StaffListScreen} />

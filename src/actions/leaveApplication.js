@@ -92,7 +92,7 @@ export const getMyLeaveApplication = () => async (dispatch, getState) =>  {
 }
 
 
-export const getAllEmployeeLeaveApplicationId = () => async (dispatch, getState) => {
+export const getAllEmployeeLeaveApplicationId = (keyword = '', pageNumber = '') => async (dispatch, getState) => {
     try {
 
         dispatch({
@@ -106,7 +106,7 @@ export const getAllEmployeeLeaveApplicationId = () => async (dispatch, getState)
             }
         }
         await axios.get(
-            baseUrl + `/api/v1/hrs/leaveapplications`, config)
+            baseUrl + `/api/v1/hrs/leaveapplications?keyword=${keyword}&pageNumber=${pageNumber}`, config)
 
         dispatch({
             type: LEAVE_APPLICATION_DETAILS_EMPLOYEE_SUCCESS,

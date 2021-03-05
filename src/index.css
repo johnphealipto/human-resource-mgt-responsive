@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
 /* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap'); */
-
 
 :root {
   --background-blue-color: #255aa0;
@@ -12,7 +11,7 @@
 body {
   background-color: ghostwhite;
   margin: 0;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -27,7 +26,7 @@ header {
   z-index: 5;
   /* box-shadow: 0 1px 1px rgba(0,0,0,0.05); */
 }
-.border-bottom{
+.border-bottom {
   border-bottom: 1px solid black !important;
 }
 
@@ -60,9 +59,8 @@ header .xs-header #basic-navbar-nav a.nav-link.active-here {
   color: var(--background-white-color);
   background-color: var(--light-hover-blue);
   border-radius: 3px;
-  box-shadow: 1px 1px 1px rgba(0,0,0,0.02), 
-              2px 2px 2px rgba(0,0,0,0.02),
-              4px 4px 4px rgba(0,0,0,0.02);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.02), 2px 2px 2px rgba(0, 0, 0, 0.02),
+    4px 4px 4px rgba(0, 0, 0, 0.02);
   transition: all 0.15s ease-out;
   -webkit-transition: all 0.15s ease-out;
 }
@@ -70,12 +68,11 @@ header .xs-header #basic-navbar-nav a.nav-link:hover {
   color: var(--background-white-color);
   background-color: var(--light-hover-blue);
   border-radius: 3px;
-  box-shadow: 1px 1px 1px rgba(0,0,0,0.02), 
-              2px 2px 2px rgba(0,0,0,0.02),
-              4px 4px 4px rgba(0,0,0,0.02);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.02), 2px 2px 2px rgba(0, 0, 0, 0.02),
+    4px 4px 4px rgba(0, 0, 0, 0.02);
   transition: all 0.15s ease-out;
   -webkit-transition: all 0.15s ease-out;
-} 
+}
 header .xs-header hr {
   width: 100%;
   border: 1px solid var(--light-hover-blue);
@@ -85,12 +82,11 @@ header .xs-header .employee-details {
   text-align: center;
   margin-left: -2vh;
   margin-top: -1.8vh;
-  padding: .3vh 0 .15vh 0;
+  padding: 0.3vh 0 0.15vh 0;
   color: ghostwhite;
   border-radius: 5px;
-  box-shadow: 1px 1px 1px rgba(0,0,0,0.02), 
-              2px 2px 2px rgba(0,0,0,0.02),
-              4px 4px 4px rgba(0,0,0,0.02);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.02), 2px 2px 2px rgba(0, 0, 0, 0.02),
+    4px 4px 4px rgba(0, 0, 0, 0.02);
 }
 header .xs-header .employee-details p:nth-child(1) {
   font-weight: bold;
@@ -107,7 +103,6 @@ header #basic-navbar-nav a {
   color: ghostwhite;
   /* padding: 3vh 0 0 3vh; */
 }
-
 
 /* --- My Leave --- */
 .myleave-wrapper {
@@ -129,14 +124,14 @@ header #basic-navbar-nav a {
 }
 .myleave-modal .modal-content form input,
 .myleave-modal .modal-content form select {
-  margin-bottom: .5vh;
+  margin-bottom: 0.5vh;
   background-color: var(--input-field-color);
 }
 .myleave-modal .modal-content form select {
   height: 6.5vh;
 }
 .myleave-modal .modal-content form input:focus,
-.myleave-modal .modal-content form select:focus {   
+.myleave-modal .modal-content form select:focus {
   background-color: var(--input-field-color);
   box-shadow: 3px 0 0 var(--background-blue-color) inset;
 }
@@ -147,20 +142,16 @@ button.applyleave-btn {
   background-color: var(--background-blue-color);
   letter-spacing: 1px;
   border-radius: 5px;
-  box-shadow: 1px 1px 1px rgba(0,0,0,0.25), 
-              2px 2px 2px rgba(0,0,0,0.25),
-              4px 4px 4px rgba(0,0,0,0.25);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25), 2px 2px 2px rgba(0, 0, 0, 0.25),
+    4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 button.applyleave-btn:hover,
 button.applyleave-btn:focus,
 button.applyleave-btn:active {
   background-color: var(--background-blue-color);
-  box-shadow: 1px 1px 1px rgba(0,0,0,0.35), 
-              2px 2px 2px rgba(0,0,0,0.35),
-              4px 4px 4px rgba(0,0,0,0.35),
-              -1px -1px 1px rgba(0,0,0,0.05), 
-              -2px -2px 2px rgba(0,0,0,0.05),
-              -4px -4px 4px rgba(0,0,0,0.05);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35), 2px 2px 2px rgba(0, 0, 0, 0.35),
+    4px 4px 4px rgba(0, 0, 0, 0.35), -1px -1px 1px rgba(0, 0, 0, 0.05),
+    -2px -2px 2px rgba(0, 0, 0, 0.05), -4px -4px 4px rgba(0, 0, 0, 0.05);
 }
 .myleave-table {
   margin-top: 5vh;
@@ -168,7 +159,7 @@ button.applyleave-btn:active {
 .all-leaves select.approveleave-selectinput {
   height: 6vh;
 }
-.all-leaves select.approveleave-selectinput:focus {   
+.all-leaves select.approveleave-selectinput:focus {
   background-color: var(--input-field-color);
   box-shadow: 2px 0 1px var(--background-blue-color) inset;
   /* outline: 0 none; */
@@ -176,24 +167,18 @@ button.applyleave-btn:active {
 .all-leaves button {
   background-color: var(--background-blue-color);
   border-radius: 5px;
-  box-shadow: 1px 1px 1px rgba(0,0,0,0.25), 
-              2px 2px 2px rgba(0,0,0,0.25),
-              4px 4px 4px rgba(0,0,0,0.25);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25), 2px 2px 2px rgba(0, 0, 0, 0.25),
+    4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .all-leaves button:hover,
 .all-leaves button:focus,
 .all-leaves button:active {
   background-color: var(--background-blue-color);
-  box-shadow: 1px 1px 1px rgba(0,0,0,0.35), 
-              2px 2px 2px rgba(0,0,0,0.35),
-              4px 4px 4px rgba(0,0,0,0.35),
-              -1px -1px 1px rgba(0,0,0,0.05), 
-              -2px -2px 2px rgba(0,0,0,0.05),
-              -4px -4px 4px rgba(0,0,0,0.05);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35), 2px 2px 2px rgba(0, 0, 0, 0.35),
+    4px 4px 4px rgba(0, 0, 0, 0.35), -1px -1px 1px rgba(0, 0, 0, 0.05),
+    -2px -2px 2px rgba(0, 0, 0, 0.05), -4px -4px 4px rgba(0, 0, 0, 0.05);
 }
 /* --- End My Leave --- */
-
-
 
 .page-header {
   margin-top: 18vh;
@@ -312,6 +297,31 @@ button.applyleave-btn:active {
   font-size: 14px;
   text-align: center;
   color: red;
+}
+
+/* --- Search Input Field & Button */
+.search-input {
+  background-color: var(--input-field-color);
+  border-radius: 10px;
+}
+.search-input:focus {
+  background-color: var(--input-field-color);
+  box-shadow: 1px 1px 1px var(--background-blue-color),
+    -1px -1px 1px var(--background-blue-color);
+}
+.search-btn {
+  background-color: var(--background-blue-color);
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25), 2px 2px 2px rgba(0, 0, 0, 0.25),
+    4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.search-btn:hover,
+.search-btn:focus,
+.search-btn:active {
+  background-color: var(--background-blue-color);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35), 2px 2px 2px rgba(0, 0, 0, 0.35),
+    4px 4px 4px rgba(0, 0, 0, 0.35), -1px -1px 1px rgba(0, 0, 0, 0.05),
+    -2px -2px 2px rgba(0, 0, 0, 0.05), -4px -4px 4px rgba(0, 0, 0, 0.05);
 }
 
 @media (max-width: 300px) {

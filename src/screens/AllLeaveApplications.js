@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Table, Form, Button } from 'react-bootstrap'
+import { Row, Col, Table, Form, Button, Modal } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllEmployeeLeaveApplicationId } from '../actions/leaveApplication';
+import { getAllEmployeeLeaveApplicationId, updateEmployeeLeaveApplicationId } from '../actions/leaveApplication';
 import SearchBox from '../components/SearchBox';
 import Paginate from '../components/Paginate';
 import FixedNavbar from '../components/FixedNavbar';
 import Header from '../components/Header';
 
 const AllLeaveApplications = ({ history, match }) => {
+	const [leaveType, setLeaveType] = useState('')
+	const [fromDate, setLeaveStartDate] = useState('')
+	const [toDate, setLeaveEndDate] = useState('')
+	const [reasonForLeave, setLeaveDescription] = useState('')
 	const [leaveStatus, setLeaveStatus] = useState('')
+
+	const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const keyword = match.params.keyword || ''
 	const pageNumber = match.params.pageNumber || 1
@@ -33,11 +41,19 @@ const AllLeaveApplications = ({ history, match }) => {
 	
 	const updateMyLeaveHandler= (e) => {
     e.preventDefault(e)
+		dispatch(updateEmployeeLeaveApplicationId(
+        leaveType,
+        fromDate,
+        toDate,
+        reasonForLeave,
+				leaveStatus
+      ))
   }
+
 
   return (
     <>     
-    	<Row className='ml-4 mr-4 py-4 profilescreen-wrapper all-leaves'>
+    	<Row className='ml-4 mr-4 py-4'>
 				<Col md={2} className='d-none d-md-block'>
           <FixedNavbar />
         </Col>
@@ -54,8 +70,7 @@ const AllLeaveApplications = ({ history, match }) => {
             <th>Start Date</th>
 						<th>End Date</th>
             <th>Reason</th>
-            <th>Status</th>
-						<th>...</th>
+						<th>Update</th>
           </tr>
         </thead>
         <tbody>
@@ -66,29 +81,87 @@ const AllLeaveApplications = ({ history, match }) => {
 						<td>{user.fromDate}</td>
 						<td>{user.toDate}</td>
 						<td>{user.reasonForLeave}</td>
-            <td>
-							<Form.Control 
-								as="select" 
-								defaultValue="Pending" 
-								custom className='approveleave-selectinput'
-								// value={leaveStatus}
-								// onChange={(e) => setLeaveStatus(e.target.value)}
-							>
-									<option value="pending">Pending</option>
-									<option value="approved">Approved</option>
-									<option value="declined">Declined</option>
-									<option value="awaitingConfirmation">Awaiting Confirmation</option>
-    					</Form.Control>
-        		</td>
 						<td>
-							<Button>
-								Post
-							</Button>
+							<Button variant="primary" onClick={handleShow} className='applyleave applyleave-btn btn-sm'>
+        				Update
+      				</Button>
 						</td>
           </tr>
 					))}
         </tbody>
       </Table>
+			{data.map(user => (
+			<Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+				className="myleave-modal"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Change Leave Status</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+				
+        <Form onSubmit={updateMyLeaveHandler} >
+            
+            <Form.Group controlId="leaveType">
+                <Form.Label>Leave Type</Form.Label>
+                <Form.Control 
+									placeholder={user.leaveType}
+                  disabled >
+                </Form.Control>
+            </Form.Group>
+						<Form.Row>
+							<Form.Group as={Col} controlId='startDate'>
+								<Form.Label>Start Date</Form.Label>
+								<Form.Control 
+									placeholder={user.fromDate}
+									disabled>
+								</Form.Control>
+							</Form.Group>
+							<Form.Group as={Col} controlId='endDate'>
+								<Form.Label>End Date</Form.Label>
+								<Form.Control 
+									placeholder={user.toDate}
+									disabled
+								></Form.Control>
+							</Form.Group>
+						</Form.Row>
+            <Form.Group controlId='description'>
+              <Form.Label>Reason</Form.Label>
+              <Form.Control 
+								placeholder={user.reasonForLeave}
+                disabled
+							/>
+            </Form.Group>
+            <Form.Group controlId='status'>
+              <Form.Label>Status</Form.Label>
+              <Form.Control 
+                  as="select"
+                  custom 
+                  size='sm'
+                  value={leaveStatus}
+                  onChange={(e) => setLeaveStatus(e.target.value)}>
+                    <option value=''>Select Leave Status</option>
+                    <option value='Approve'>Approve</option>
+                    <option value='Decline'>Decline</option>
+                    <option value='Awaitin-Confirmation'>Awaiting Confirmation</option>
+                </Form.Control>
+            </Form.Group>
+            <hr />
+            <Button className='applyleave-btn mb-2 mr-3' type='submit' onClick={handleClose}>
+              Update
+            </Button>
+            <Button className='mb-2' variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+          </Form>
+					
+        </Modal.Body>
+      </Modal>
+			))}
+
 	  	<Paginate
 				destination={employees}
 				pages={pages} 

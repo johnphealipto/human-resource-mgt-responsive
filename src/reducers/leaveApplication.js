@@ -34,12 +34,15 @@ export const getleaveApplicationDetailsReducer = (state = { data: [] } , action)
     }
 }
 
-export const leaveApplicationDetailsEmployeeReducer = (state ={ leaveapplication: {} }, action) => {
+export const leaveApplicationDetailsEmployeeReducer = (state ={ data: [] }, action) => {
     switch (action.type) {
         case LEAVE_APPLICATION_DETAILS_EMPLOYEE_REQUEST:
             return { ...state, loading: true }
         case LEAVE_APPLICATION_DETAILS_EMPLOYEE_SUCCESS:
-            return { loading: false, leaveapplication: action.payload }
+            return { loading: false, 
+                data: action.payload.data,
+                pages: action.payload.pages,
+                page: action.payload.page }
         case LEAVE_APPLICATION_DETAILS_EMPLOYEE_FAIL:
             return {  loading: false, error: action.payload }
         case LEAVE_APPLICATION_DETAILS_EMPLOYEE_RESET:

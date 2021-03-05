@@ -11,11 +11,11 @@ const Paginate = ({ destination, pages, page, keyword = '' }) => {
                         ? `/${destination}/search/${keyword}/page/${x+1}`
                         : `/${destination}/page/${x+1}`}>
                             <Pagination.Item active={x+1 === page}>{x + 1}</Pagination.Item>
-                        </LinkContainer>
+                    </LinkContainer>
                 ))}
             </Pagination>
         )
     )
 }
 
-export default Paginate
+export default Paginate;

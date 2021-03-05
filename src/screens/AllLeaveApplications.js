@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col, Table, Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllEmployeeLeaveApplicationId } from '../actions/leaveApplication';
+import SearchBox from '../components/SearchBox';
 import Paginate from '../components/Paginate';
 import FixedNavbar from '../components/FixedNavbar';
 import Header from '../components/Header';
@@ -41,6 +42,7 @@ const AllLeaveApplications = ({ history }) => {
           <Header />
 					<h1 className='page-header'>LEAVE APPLICATIONS</h1>
 					<hr />
+					<SearchBox history={history} />
 					<Table striped bordered hover size="sm" className='myleave-table'>
         <thead>
           <tr>

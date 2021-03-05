@@ -5,7 +5,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import SearchBox from '../components/SearchBox'
+import SearchBox from '../components/SearchBox';
 import Paginate from '../components/Paginate';
 import { listUsers } from '../actions/userActions'
 

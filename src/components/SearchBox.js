@@ -18,8 +18,8 @@ const SearchBox = ({history}) => {
             <Form.Control type='text' 
                 name='q' onChange={(e) => setKeyword(e.target.value)}
                 placeholder='Search Employee'
-                className='mr-sm-2 ml-sm-5'></Form.Control>
-            <Button type='submit' variant='outline-success' className='py-2'>
+                className='mr-sm-2 ml-sm-5 search-input'></Form.Control>
+            <Button type='submit' className='py-2 search-btn'>
                 Search
             </Button>
         </Form>

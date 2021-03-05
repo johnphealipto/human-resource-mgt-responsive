@@ -5,10 +5,12 @@ import Loader from '../components/Loader';
 import { LEAVE_APPLICATION_CREATE_RESET, LEAVE_APPLICATION_DETAILS_RESET, LEAVE_APPLICATION_UPDATE_EMPLOYEE_RESET } from '../constants/leaveApplicationConstants'
 import { createLeaveApplication, getMyLeaveApplication, updateEmployeeLeaveApplicationId } from '../actions/leaveApplication';
 import { useDispatch, useSelector } from 'react-redux';
+import SearchBox from '../components/SearchBox';
+import Paginate from '../components/Paginate';
 import FixedNavbar from '../components/FixedNavbar';
 import Header from '../components/Header';
 
-const MyLeaveApplicationScreen = ({ history }) => {
+const MyLeaveApplicationScreen = ({ history, match }) => {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -20,6 +22,10 @@ const MyLeaveApplicationScreen = ({ history }) => {
     const [toDate, setLeaveEndDate] = useState('')
     const [reasonForLeave, setLeaveDescription] = useState('')
     const [leaveStatus, setLeaveStatus] = useState('')
+
+    const keyword = match.params.keyword || ''
+    const pageNumber = match.params.pageNumber || 1
+    const employees = 'myleave'
      
     const dispatch = useDispatch()
 
@@ -27,7 +33,7 @@ const MyLeaveApplicationScreen = ({ history }) => {
     const { userInfo } = userLogin
 
     const getLeaveAppDetails = useSelector(state => state.getLeaveAppDetails)
-    const { loading, data, } = getLeaveAppDetails
+    const { loading, data, pages, page } = getLeaveAppDetails
 
     const updateLeaveApp = useSelector(state => state.updateLeaveApp)
     const {  error:errorUpdate, success:successUpdate } = updateLeaveApp
@@ -41,8 +47,8 @@ const MyLeaveApplicationScreen = ({ history }) => {
       if(!userInfo) {
           history.push('/')
       } else {
-        dispatch(getMyLeaveApplication())
-        console.log(data)
+        dispatch(getMyLeaveApplication(keyword, pageNumber))
+        // console.log(data)
           // if(!leaveapplication) {
           //     dispatch(getMyLeaveApplication())
           //     console.log(leaveapplication)
@@ -67,8 +73,8 @@ const MyLeaveApplicationScreen = ({ history }) => {
           //     setLeaveStatus(leaveapplication.status)
 
           // }
-  }
-  }, [dispatch, history, data, successCreate, successUpdate, userInfo])
+    }
+  }, [dispatch, history, data, successCreate, successUpdate, userInfo, keyword, pageNumber])
 
 
 
@@ -191,6 +197,11 @@ const MyLeaveApplicationScreen = ({ history }) => {
           ))}
         </tbody>
       </Table>
+      <Paginate
+        destination={employees}
+        pages={pages} 
+        page={page}
+        keyword={keyword ? keyword : ''} />
     </Container>			
     		</div>
       	</Col>

@@ -23,7 +23,6 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
     const [reasonForLeave, setLeaveDescription] = useState('')
     const [leaveStatus, setLeaveStatus] = useState('')
 
-    const keyword = match.params.keyword || ''
     const pageNumber = match.params.pageNumber || 1
     const employees = 'myleave'
      
@@ -32,8 +31,8 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    const getLeaveAppDetails = useSelector(state => state.getLeaveAppDetails)
-    const { loading, data, pages, page } = getLeaveAppDetails
+    const leaveAppDetails = useSelector(state => state.leaveAppDetails)
+    const { loading, data, pages, page } = leaveAppDetails
 
     const updateLeaveApp = useSelector(state => state.updateLeaveApp)
     const {  error:errorUpdate, success:successUpdate } = updateLeaveApp
@@ -47,7 +46,7 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
       if(!userInfo) {
           history.push('/')
       } else {
-        dispatch(getMyLeaveApplication(keyword, pageNumber))
+        dispatch(getMyLeaveApplication(pageNumber))
         // console.log(data)
           // if(!leaveapplication) {
           //     dispatch(getMyLeaveApplication())
@@ -74,7 +73,7 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
 
           // }
     }
-  }, [dispatch, history, data, successCreate, successUpdate, userInfo, keyword, pageNumber])
+  }, [dispatch, history, data, successCreate, successUpdate, userInfo, pageNumber])
 
 
 
@@ -135,19 +134,25 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
                     <option value='Work-Trip'>Work Trip</option>
                 </Form.Control>
             </Form.Group>
-            <Form.Group controlId='startDate'>
+            <Form.Row>
+            <Form.Group as={Col} controlId='startDate'>
               <Form.Label>Start Date</Form.Label>
               <Form.Control type='date' placeholder='Start Date'  value={fromDate}
                 onChange={(e) => setLeaveStartDate(e.target.value)}></Form.Control>
             </Form.Group>
-            <Form.Group controlId='endDate'>
+            <Form.Group as={Col} controlId='endDate'>
               <Form.Label>End Date</Form.Label>
               <Form.Control type='date' placeholder='End Date'  value={toDate}
                 onChange={(e) => setLeaveEndDate(e.target.value)}></Form.Control>
             </Form.Group>
+            </Form.Row>
             <Form.Group controlId='description'>
-              <Form.Label>Reason</Form.Label>
-              <Form.Control type="text" placeholder="Detailed Reason For Leave Application"  value={reasonForLeave}
+              <Form.Label>Detailed Reason For Leave Application</Form.Label>
+              <Form.Control 
+                as="textarea" 
+                rows={3} 
+                style={{ backgroundColor: 'var(--input-field-color)' }}
+                value={reasonForLeave}
                 onChange={(e) => setLeaveDescription(e.target.value)}/>
             </Form.Group>
             <Form.Group controlId='status'>
@@ -200,8 +205,7 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
       <Paginate
         destination={employees}
         pages={pages} 
-        page={page}
-        keyword={keyword ? keyword : ''} />
+        page={page} />
     </Container>			
     		</div>
       	</Col>

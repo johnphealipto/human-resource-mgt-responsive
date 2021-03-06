@@ -21,6 +21,17 @@
               4px 4px 4px rgba(0,0,0,0.02),
               0 1px 0 ghostwhite inset,
               0 -1px 0 ghostwhite inset;
+  transition: all 0.15s ease-out;
+  -webkit-transition: all 0.15s ease-out;
+}
+.fixednavbar-wrapper .employee-details:hover {
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.02),
+              4px 4px 4px rgba(0,0,0,0.02),
+              5px 5px 5px rgba(0,0,0,0.02),
+              0 2px 0 ghostwhite inset,
+              0 -2px 0 ghostwhite inset;
+  transition: all 0.15s ease-out;
+  -webkit-transition: all 0.15s ease-out;
 }
 .fixednavbar-wrapper .employee-details p:nth-child(1) {
   font-weight: bold;
@@ -69,11 +80,22 @@
   bottom: 5vh;
   text-decoration: none;
   padding: 1.3vh 4vh 1.3vh 4vh;
-  margin-left: 5vh;
+  margin-left: 4vh;
   border-radius: 5px;
   box-shadow: 1px 1px 1px rgba(0,0,0,0.02), 
               2px 2px 2px rgba(0,0,0,0.02),
               4px 4px 4px rgba(0,0,0,0.02),
               0 1px 0 ghostwhite inset,
               0 -1px 0 ghostwhite inset;
+  transition: all 0.15s ease-out;
+  -webkit-transition: all 0.15s ease-out;
+}
+.fixednavbar-wrapper a.nav-link-logout:hover {
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.02),
+              4px 4px 4px rgba(0,0,0,0.02),
+              5px 5px 5px rgba(0,0,0,0.02),
+              0 2px 0 ghostwhite inset,
+              0 -2px 0 ghostwhite inset;
+  transition: all 0.15s ease-out;
+  -webkit-transition: all 0.15s ease-out;
 }

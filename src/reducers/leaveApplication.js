@@ -46,7 +46,7 @@ export const leaveApplicationDetailsEmployeeReducer = (state ={ data: [] }, acti
         case LEAVE_APPLICATION_DETAILS_EMPLOYEE_FAIL:
             return {  loading: false, error: action.payload }
         case LEAVE_APPLICATION_DETAILS_EMPLOYEE_RESET:
-            return {  leaveapplication: {} } 
+            return { data: [] } 
         default:
             return state
     }

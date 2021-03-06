@@ -68,7 +68,6 @@ const AllLeaveApplications = ({ history, match }) => {
 						<th>Email Address</th>
             <th>Leave Type</th>
             <th>Start Date</th>
-						<th>End Date</th>
             <th>Reason</th>
 						<th>Update</th>
           </tr>
@@ -79,7 +78,6 @@ const AllLeaveApplications = ({ history, match }) => {
 						<td>{userInfo.email}</td>
 						<td>{user.leaveType}</td>
 						<td>{user.fromDate}</td>
-						<td>{user.toDate}</td>
 						<td>{user.reasonForLeave}</td>
 						<td>
 							<Button variant="primary" onClick={handleShow} className='applyleave applyleave-btn btn-sm'>
@@ -129,9 +127,12 @@ const AllLeaveApplications = ({ history, match }) => {
 							</Form.Group>
 						</Form.Row>
             <Form.Group controlId='description'>
-              <Form.Label>Reason</Form.Label>
+              <Form.Label>Detailed Reason For Leave Application</Form.Label>
               <Form.Control 
-								placeholder={user.reasonForLeave}
+                as="textarea" 
+                rows={3} 
+                style={{ backgroundColor: 'var(--input-field-color)' }}
+                placeholder={user.reasonForLeave}
                 disabled
 							/>
             </Form.Group>

@@ -31,7 +31,6 @@ function App() {
       <Route path='/education' component={EducationScreen} />
       <Route path='/dashboard' component={DashboardScreen} />
       <Route path='/myleave' component={MyLeaveApplicationScreen} exact/>
-      <Route path='/myleave/search/:keyword' component={MyLeaveApplicationScreen} />
       <Route path='/myleave/page/:pageNumber' component={MyLeaveApplicationScreen} />
       <Route path='/myleave/search/:keyword/page/:pageNumber' component={MyLeaveApplicationScreen} />
 

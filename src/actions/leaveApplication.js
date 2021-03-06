@@ -54,7 +54,7 @@ export const createLeaveApplication = (
 }
 
 
-export const getMyLeaveApplication = (keyword = '', pageNumber = '') => async (dispatch, getState) =>  {
+export const getMyLeaveApplication = (pageNumber = '') => async (dispatch, getState) =>  {
     try {
         dispatch({
             type: LEAVE_APPLICATION_DETAILS_EMPLOYEE_REQUEST
@@ -71,7 +71,7 @@ export const getMyLeaveApplication = (keyword = '', pageNumber = '') => async (d
         }
 
         const { data } = await axios.get(
-            baseUrl + `/api/v1/empleave?keyword=${keyword}&pageNumber=${pageNumber}`, 
+            baseUrl + `/api/v1/empleave?pageNumber=${pageNumber}`, 
             config)
 
         dispatch({

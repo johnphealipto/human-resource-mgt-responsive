@@ -63,52 +63,23 @@ const LoginTestScreen = ({ history }) => {
             <Form onSubmit={submitHandler}>
               <Form.Group className='form-group email' controlId="formBasicEmail">
                 <i class="fas fa-user pr-3"></i>
-                <Form.Label className='login-label'></Form.Label>
-
-                {/* commmited this part */}
-                {/* <Form.Control 
+                <Form.Label className='login-label'>Email address</Form.Label>
+                <Form.Control 
                     autoFocus 
                     type="email" 
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter email" /> */}
-
-                    {/* added this part */}
-                    <div className="form">
-                        <input 
-                        type="text"
-                        id="email" 
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="form__input" 
-                        autocomplete="off" 
-                        placeholder=" "/>
-                    <label for="email" class="form__label">Email</label>
-                    </div>
+                    placeholder="Enter email" />
               </Form.Group>
 
               <Form.Group className='form-group password' controlId="formBasicPassword">
                 <i class="fas fa-unlock pr-3"></i>
-                <Form.Label className='login-label'></Form.Label>
-
-                {/* commmited this part */}
-                {/* <Form.Control 
+                <Form.Label className='login-label'>Password</Form.Label>
+                <Form.Control 
                     type="password" 
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password" /> */}
-
-                    <div className="form">
-                        <input 
-                        type="password"
-                        id="email" 
-                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="form__input" 
-                        autocomplete="off" 
-                        placeholder=" "/>
-                    <label for="password" className="form__label">Password</label>
-                    </div>
+                    placeholder="Password" />
               </Form.Group>
               <Button type='submit' variant='primary' className='btn btn-block'>
                     Sign In

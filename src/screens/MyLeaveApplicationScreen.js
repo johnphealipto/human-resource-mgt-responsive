@@ -47,7 +47,6 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
           history.push('/')
       } else {
         dispatch(getMyLeaveApplication(pageNumber))
-        // console.log(data)
           // if(!leaveapplication) {
           //     dispatch(getMyLeaveApplication())
           //     console.log(leaveapplication)
@@ -84,7 +83,8 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
         leaveType,
         fromDate,
         toDate,
-        reasonForLeave
+        reasonForLeave,
+        leaveStatus
       ))
     console.log(`type: ${leaveType}, from: ${fromDate}, to: ${toDate}, reason: ${reasonForLeave}`)
   }
@@ -157,8 +157,7 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
             </Form.Group>
             <Form.Group controlId='status'>
               <Form.Label>Status</Form.Label>
-              <Form.Control placeholder="Pending" disabled  value={leaveStatus}
-                onChange={(e) => setLeaveStatus(e.target.value)}  />
+              <Form.Control placeholder="Pending" disabled />
             </Form.Group>
             <hr />
             <Button className='applyleave-btn mb-2 mr-3' type='submit' onClick={handleClose}>

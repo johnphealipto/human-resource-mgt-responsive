@@ -2,16 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col, Table, Form, Button, Modal } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllEmployeeLeaveApplicationId, updateEmployeeLeaveApplicationId } from '../actions/leaveApplication';
+import { LEAVE_APPLICATION_CREATE_RESET, LEAVE_APPLICATION_UPDATE_EMPLOYEE_RESET, LEAVE_APPLICATION_DETAILS_RESET } from '../constants/leaveApplicationConstants';
 import SearchBox from '../components/SearchBox';
 import Paginate from '../components/Paginate';
 import FixedNavbar from '../components/FixedNavbar';
 import Header from '../components/Header';
 
 const AllLeaveApplications = ({ history, match }) => {
-	const [leaveType, setLeaveType] = useState('')
-	const [fromDate, setLeaveStartDate] = useState('')
-	const [toDate, setLeaveEndDate] = useState('')
-	const [reasonForLeave, setLeaveDescription] = useState('')
 	const [leaveStatus, setLeaveStatus] = useState('')
 
 	const [show, setShow] = useState(false);
@@ -27,27 +24,42 @@ const AllLeaveApplications = ({ history, match }) => {
   const { userInfo } = userLogin
 
 	const getLeaveAppDetails = useSelector(state => state.getLeaveAppDetails)
-  const { data, pages, page } = getLeaveAppDetails
+  const { myLeave, data, pages, page } = getLeaveAppDetails
+
+  const updateLeaveApp = useSelector(state => state.updateLeaveApp)
+  const {  error:errorUpdate, success:successUpdate } = updateLeaveApp
 
   useEffect(() => {
 
     if(!userInfo) {
       history.push('/')
     } else {
-			dispatch(getAllEmployeeLeaveApplicationId(keyword, pageNumber))
-		}
+      if(successUpdate) {
+          dispatch({
+              type: LEAVE_APPLICATION_UPDATE_EMPLOYEE_RESET
+          })
+          dispatch({
+              type: LEAVE_APPLICATION_DETAILS_RESET
+          })
+          history.push('/')
+      } else {
+        if(!myLeave || !myLeave.leaveStatus) {
+          dispatch(getAllEmployeeLeaveApplicationId(keyword, pageNumber))
+        } else {
+          setLeaveStatus(myLeave.leaveStatus)
+        }
+      }
+    }
   }, [dispatch, history, data, userInfo, keyword, pageNumber])
 
 	
-	const updateMyLeaveHandler= (e) => {
+	const updateMyLeaveHandler = (e) => {
     e.preventDefault(e)
-		dispatch(updateEmployeeLeaveApplicationId(
-        leaveType,
-        fromDate,
-        toDate,
-        reasonForLeave,
-				leaveStatus
-      ))
+		dispatch(updateEmployeeLeaveApplicationId({
+      _id: leaveStatus._id,
+			leaveStatus
+    }))
+    console.log(`Leave Status: ${leaveStatus}, id: ${leaveStatus._id}`)
   }
 
 
@@ -145,9 +157,9 @@ const AllLeaveApplications = ({ history, match }) => {
                   value={leaveStatus}
                   onChange={(e) => setLeaveStatus(e.target.value)}>
                     <option value=''>Select Leave Status</option>
-                    <option value='Approve'>Approve</option>
-                    <option value='Decline'>Decline</option>
-                    <option value='Awaitin-Confirmation'>Awaiting Confirmation</option>
+                    <option value='approved'>approved</option>
+                    <option value='reject'>reject</option>
+                    <option value='pending'>pending</option>
                 </Form.Control>
             </Form.Group>
             <hr />

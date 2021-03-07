@@ -52,16 +52,16 @@ export const leaveApplicationDetailsEmployeeReducer = (state ={ data: [] }, acti
     }
 }
 
-export const updateleaveApplicationDetailsEmployeeReducer = (state =  {} , action) => {
+export const updateleaveApplicationDetailsEmployeeReducer = (state =  { } , action) => {
     switch (action.type) {
         case LEAVE_APPLICATION_UPDATE_EMPLOYEE_REQUEST:
-            return { ...state, loading: true }
+            return { loading: true }
         case LEAVE_APPLICATION_UPDATE_EMPLOYEE_SUCCESS:
             return { loading: false, success: true, userInfo: action.payload }
         case LEAVE_APPLICATION_UPDATE_EMPLOYEE_FAIL:
             return {  loading: false, error: action.payload }
         case LEAVE_APPLICATION_UPDATE_EMPLOYEE_RESET:
-            return {}
+            return {  }
         default:
             return state
     }

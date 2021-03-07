@@ -35,6 +35,7 @@ const reducer = combineReducers({
     educationCreateEmpId: createEducationEmpIdReducer,
     nextOfKinCreateEmpId: createNextOfKinEmpIdReducer,
     profileCreateEmpId: createProfileEmpIdReducer,
+    
     updateLeaveApp: updateleaveApplicationDetailsEmployeeReducer,
     leaveAppDetails: leaveApplicationDetailsEmployeeReducer,
     getLeaveAppDetails: getleaveApplicationDetailsReducer,

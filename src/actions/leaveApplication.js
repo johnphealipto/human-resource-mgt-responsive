@@ -10,6 +10,7 @@ export const createLeaveApplication = (
     fromDate,
     toDate,
     reasonForLeave,
+    leaveStatus
 ) => async (dispatch, getState) =>  {
     try {
         dispatch({
@@ -32,6 +33,7 @@ export const createLeaveApplication = (
                 fromDate,
                 toDate,
                 reasonForLeave,
+                leaveStatus
             },
             config)
             
@@ -127,7 +129,7 @@ export const getAllEmployeeLeaveApplicationId = (keyword = '', pageNumber = '') 
 
 
 
-export const updateEmployeeLeaveApplicationId = (id) => async (dispatch, getState) => {
+export const updateEmployeeLeaveApplicationId = (leaveStatus) => async (dispatch, getState) => {
     try {
 
         dispatch({
@@ -141,13 +143,12 @@ export const updateEmployeeLeaveApplicationId = (id) => async (dispatch, getStat
             }
         }
 
-        
-        await axios.get(
-            baseUrl + `/api/v1/hrs/leaveapplications'${id}/employee`, config)
+        await axios.put(
+            baseUrl + `/api/v1/hrs/leaveapplications/${leaveStatus._id}/employee`, leaveStatus, config)
 
         dispatch({
             type: LEAVE_APPLICATION_UPDATE_EMPLOYEE_SUCCESS,
-           
+            success: true,
         })
 
     } catch (error) {

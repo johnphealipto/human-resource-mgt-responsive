@@ -38,7 +38,7 @@ const HomeScreen = ({ history }) => {
           {/* <hr/> */}
           <h1 className='page-header'>Home</h1>
           
-          <Form key={user.id} className="form-container">
+          <Form key={user.id} className="form-container form-shadow">
                 <Form.Row>
                   <Form.Group className="col-md-4">
                     <Form.Label>First Name</Form.Label>

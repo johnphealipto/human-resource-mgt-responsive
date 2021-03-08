@@ -99,24 +99,24 @@ const ProfileScreen = ({ history }) => {
 	}
 
 
-	const createsubmitHandler= (e) => {
-			e.preventDefault()
-			//Create Actions
-			dispatch(createProfile({
-				
-					dob,
-					contactNo,
-					privateEmail,
-					gender,
-					dateOfJoining,
-					dateOfLastPromotion,
-					address,
-					stateOfOrigin,
-					lga,
-					maritalStatus,
-					religion
-				}))
+const createsubmitHandler= (e) => {
+		e.preventDefault()
+		//Create Actions
+		dispatch(createProfile({
 			
+				dob,
+				contactNo,
+				privateEmail,
+				gender,
+				dateOfJoining,
+				dateOfLastPromotion,
+				address,
+				stateOfOrigin,
+				lga,
+				maritalStatus,
+				religion
+			}))
+		
 	}
 
 	return (
@@ -136,7 +136,7 @@ const ProfileScreen = ({ history }) => {
 							{loading && <Loader />}
 							{
 									profile ? (
-											<Form onSubmit={submitHandler}>
+											<Form onSubmit={submitHandler} className="form-shadow">
 											<Form.Row>
 													<Form.Group  className="col-md-4" controlId='dateOfBirth'>
 															<Form.Label>Date Of Birth</Form.Label>

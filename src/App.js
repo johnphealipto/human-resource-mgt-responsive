@@ -20,6 +20,7 @@ import MyLeaveApplicationScreen from './screens/MyLeaveApplicationScreen';
 import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import AllLeaveApplications from './screens/AllLeaveApplications';
+import UpdateMyLeave from './screens/UpdateMyLeave';
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
       <Route path='/myleave' component={MyLeaveApplicationScreen} exact/>
       <Route path='/myleave/page/:pageNumber' component={MyLeaveApplicationScreen} />
       <Route path='/myleave/search/:keyword/page/:pageNumber' component={MyLeaveApplicationScreen} />
+
+      {/* --- UpdateMyLeave */}
+      <Route path='/myleave/:id/update' component={UpdateMyLeave} />
 
       <Route path='/leaveapplications' component={AllLeaveApplications} exact/>
       <Route path='/leaveapplications/search/:keyword' component={AllLeaveApplications} />

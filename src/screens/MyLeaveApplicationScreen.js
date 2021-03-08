@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Modal, Form, Row, Col } from 'react-bootstrap';
+import moment from 'moment';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { LEAVE_APPLICATION_CREATE_RESET, LEAVE_APPLICATION_DETAILS_RESET, LEAVE_APPLICATION_UPDATE_EMPLOYEE_RESET } from '../constants/leaveApplicationConstants'
@@ -17,28 +18,28 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
   const handleShow = () => setShow(true);
 
   
-    const [leaveType, setLeaveType] = useState('')
-    const [fromDate, setLeaveStartDate] = useState('')
-    const [toDate, setLeaveEndDate] = useState('')
-    const [reasonForLeave, setLeaveDescription] = useState('')
-    const [leaveStatus, setLeaveStatus] = useState('')
+  const [leaveType, setLeaveType] = useState('')
+  const [fromDate, setLeaveStartDate] = useState('')
+  const [toDate, setLeaveEndDate] = useState('')
+  const [reasonForLeave, setLeaveDescription] = useState('')
+  const [leaveStatus, setLeaveStatus] = useState('')
 
-    const pageNumber = match.params.pageNumber || 1
-    const employees = 'myleave'
-     
-    const dispatch = useDispatch()
+  const pageNumber = match.params.pageNumber || 1
+  const employees = 'myleave'
+    
+  const dispatch = useDispatch()
 
-    const userLogin = useSelector(state => state.userLogin)
-    const { userInfo } = userLogin
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
 
-    const leaveAppDetails = useSelector(state => state.leaveAppDetails)
-    const { loading, data, pages, page } = leaveAppDetails
+  const leaveAppDetails = useSelector(state => state.leaveAppDetails)
+  const { loading, data, pages, page } = leaveAppDetails
 
-    const updateLeaveApp = useSelector(state => state.updateLeaveApp)
-    const {  error:errorUpdate, success:successUpdate } = updateLeaveApp
+  const updateLeaveApp = useSelector(state => state.updateLeaveApp)
+  const {  error:errorUpdate, success:successUpdate } = updateLeaveApp
 
-    const createLeaveApp = useSelector(state => state.createLeaveApp)
-    const { error:errorCreate, success:successCreate } = createLeaveApp
+  const createLeaveApp = useSelector(state => state.createLeaveApp)
+  const { error:errorCreate, success:successCreate } = createLeaveApp
 
 
     useEffect(() => {
@@ -193,8 +194,8 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
           {data.map(user => (
             <tr key={user._id}>
               <td>{user.leaveType}</td>
-              <td>{user.fromDate}</td>
-              <td>{user.toDate}</td>
+              <td>{moment(user.fromDate).format("DD-MM-YYYY")}</td>
+              <td>{moment(user.toDate).format("DD-MM-YYYY")}</td>
               <td>{user.reasonForLeave}</td>
               <td>{user.leaveStatus}</td>
             </tr>

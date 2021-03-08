@@ -5,7 +5,7 @@ import { userDeleteReducer, userDetailsByIdReducer, userDetailsReducer, userForg
 import { profileDetailsReducer, createProfileReducer, profileEmployeeIDDetailsReducer, profileUpdateReducer, createProfileEmpIdReducer } from './reducers/profileReducers'
 import { createNextOfKinEmpIdReducer, createNextOfKinReducer, nextOfKinDetailsEmployeeReducer, nextOfKinDetailsReducer, updateNextOfKinReducer } from './reducers/nextOfKinReducer'
 import { createEducationEmpIdReducer, createEducationReducer, educationDetailsEmployeeReducer, educationDetailsReducer, updateEducationReducer } from './reducers/educationReducers'
-import { updateleaveApplicationDetailsEmployeeReducer, leaveApplicationDetailsEmployeeReducer, getleaveApplicationDetailsReducer, createleaveApplicationReducer } from './reducers/leaveApplication'
+import { updateleaveApplicationDetailsEmployeeReducer, leaveApplicationDetailsEmployeeReducer, getleaveApplicationDetailsReducer, createleaveApplicationReducer, leaveApplicationDetailsByIdReducer } from './reducers/leaveApplication'
 
 
 const reducer = combineReducers({
@@ -39,7 +39,8 @@ const reducer = combineReducers({
     updateLeaveApp: updateleaveApplicationDetailsEmployeeReducer,
     leaveAppDetails: leaveApplicationDetailsEmployeeReducer,
     getLeaveAppDetails: getleaveApplicationDetailsReducer,
-    createLeaveApp: createleaveApplicationReducer
+    createLeaveApp: createleaveApplicationReducer,
+    leaveApplicationDetailsById: leaveApplicationDetailsByIdReducer
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

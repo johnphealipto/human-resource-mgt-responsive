@@ -50,7 +50,7 @@ const StaffListScreen = ({ history, match }) => {
                 </Link>
                 </Col>
                 <Col>
-                    <SearchBox history={history} />
+                    <SearchBox history={history} url={'/admin/userlist'} />
                 </Col>
                 <Col className='text-right'>
                     <Button className='my-3' onClick={createUserHandler}>

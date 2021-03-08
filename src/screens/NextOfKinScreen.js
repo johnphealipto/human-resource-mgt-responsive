@@ -88,11 +88,8 @@ const NextOfKinScreen = ({ history }) => {
             email,
             relationship
         }))
-       
-       
-        
+      
     }
-
 
     return (
         <>
@@ -111,7 +108,7 @@ const NextOfKinScreen = ({ history }) => {
                 {loading && <Loader />}
                 {
                     nextOfKin ? (
-                        <Form onSubmit={submitHandler}>
+                        <Form onSubmit={submitHandler}className="form-shadow">
                         <Form.Row>
                             <Form.Group  className="col-md-4" controlId='firstname'>
                                 <Form.Label>Firstname</Form.Label>

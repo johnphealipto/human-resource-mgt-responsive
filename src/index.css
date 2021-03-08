@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
-/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap'); */
 
 :root {
   --background-blue-color: #255aa0;
@@ -10,6 +9,8 @@
 }
 body {
   background-color: ghostwhite;
+  color: #000;
+
   margin: 0;
   font-family: "Roboto Condensed", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -299,6 +300,39 @@ button.applyleave-btn:active {
   color: red;
 }
 
+/* --- All Leave Application Screen ---- */
+.all-leave-wrapper a.update-btn {
+  background-color: var(--background-blue-color);
+  padding: 1vh;
+  border-radius: 5px;
+  color: ghostwhite;
+  text-decoration: none;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25), 2px 2px 2px rgba(0, 0, 0, 0.25);
+  transition: all 0.15s ease-out;
+  -webkit-transition: all 0.15s ease-out;
+}
+.all-leave-wrapper a.update-btn:hover {
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35), 2px 2px 2px rgba(0, 0, 0, 0.35),
+    4px 4px 4px rgba(0, 0, 0, 0.35), -1px -1px 1px rgba(0, 0, 0, 0.05),
+    -2px -2px 2px rgba(0, 0, 0, 0.05), -4px -4px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.15s ease-out;
+  -webkit-transition: all 0.15s ease-out;
+}
+
+/* --- Update Leave Application Screen ---- */
+.form-shadow {
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05), 2px 2px 2px rgba(0, 0, 0, 0.05),
+    4px 4px 4px rgba(0, 0, 0, 0.05), -1px -1px 1px rgba(0, 0, 0, 0.05),
+    -2px -2px 2px rgba(0, 0, 0, 0.05), -4px -4px 4px rgba(0, 0, 0, 0.05);
+}
+.update-leave-wrapper form {
+  margin-top: 30px;
+  border-radius: 5px;
+  padding: 5vh 7vh;
+}
+.update-leave-wrapper h1 {
+  color: var(--background-blue-color);
+}
 
 /* --- Search Input Field & Button */
 .search-input {
@@ -325,12 +359,10 @@ button.applyleave-btn:active {
     -2px -2px 2px rgba(0, 0, 0, 0.05), -4px -4px 4px rgba(0, 0, 0, 0.05);
 }
 
-
-
 /* --- Pagination --- */
 .pagination .page-item {
   /* background-color: var(--input-field-color); */
-} 
+}
 .pagination a.page-link {
   background-color: var(--input-field-color);
 }
@@ -340,9 +372,6 @@ button.applyleave-btn:active {
   background-color: #000;
   color: ghostwhite;
 }
-
-
-
 
 @media (max-width: 300px) {
   #main-outer-div {

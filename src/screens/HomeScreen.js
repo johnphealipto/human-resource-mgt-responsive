@@ -30,10 +30,10 @@ const HomeScreen = ({ history }) => {
   return (
     <>   
       <Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-        <Col md={3} className='d-none d-md-block'>
+        <Col md={2} className='d-none d-md-block'>
           <FixedNavbar />
         </Col>
-        <Col className='col-xs-12 col-md-8  form-wrapper'>
+        <Col className='col-lg-9 col-xs-12 col-md-10 form-wrapper'>
           <Header />
           {/* <hr/> */}
           <h1 className='page-header'>Home</h1>

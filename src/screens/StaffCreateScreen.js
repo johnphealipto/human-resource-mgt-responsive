@@ -68,17 +68,17 @@ const StaffCreateScreen = ({ history }) => {
   return (
     <>
     	<Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-        <Col md={3} className='d-none d-md-block'>
+        <Col md={2} className='d-none d-md-block'>
             <FixedNavbar />
         </Col>
-        <Col className='col-xs-12 col-md-8'>
+        <Col className='col-lg-9 col-xs-12 col-md-10'>
                 <Header />
                 <h1 className='page-header'>Register a New Employee</h1>
                 {message && <Message variant='danger'>{message}</Message>}
                 {error && <Message variant='danger'>{error}</Message>}
                 {successRegister && <Message variant='success'>Profile Created</Message>}
                 {loading && <Loader />}
-                <Form onSubmit={submitHandler}>
+                <Form onSubmit={submitHandler} className="form-shadow">
                     <Form.Row>
                         <Form.Group  className="col-md-4" controlId='firstname'>
                             <Form.Label>First Name</Form.Label>
@@ -203,4 +203,4 @@ const StaffCreateScreen = ({ history }) => {
     )
 }
 
-export default StaffCreateScreen
+export default StaffCreateScreen;

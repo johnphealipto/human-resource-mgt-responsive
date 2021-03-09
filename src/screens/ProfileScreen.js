@@ -123,12 +123,12 @@ const createsubmitHandler= (e) => {
 			<>
 				
 			<Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-					<Col md={3} className='d-none d-md-block'>
+					<Col md={2} className='d-none d-md-block'>
 						<FixedNavbar />
 					</Col>
-					<Col className=' col-lg-9 col-xs-12 col-md-8'>
+					<Col className='col-lg-9 col-xs-12 col-md-10'>
 					<Header />
-							<h1>My Profile</h1>
+							<h1 className='page-header'>My Profile</h1>
 							
 							{errorCreate && <Message variant='danger'>{errorCreate}</Message>}
 							{errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
@@ -265,7 +265,7 @@ const createsubmitHandler= (e) => {
 											</Button>
 									</Form>
 									) : (
-											<Form onSubmit={createsubmitHandler}>
+											<Form onSubmit={createsubmitHandler} className="form-shadow">
 													<Form.Row>
 															<Form.Group  className="col-md-4" controlId='dateOfBirth'>
 																	<Form.Label>Date Of Birth</Form.Label>
@@ -407,4 +407,4 @@ const createsubmitHandler= (e) => {
 	)
 }
 
-export default ProfileScreen
+export default ProfileScreen;

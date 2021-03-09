@@ -96,10 +96,9 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
 				<Col md={2} className='d-none d-md-block'>
           <FixedNavbar />
         </Col>
-        <Col className='col-xs-12 col-md-10'>
+        <Col className='col-lg-9 col-xs-12 col-md-10'>
           <Header />
-					<h1 className='page-header'>MY LEAVE</h1>
-					<hr />
+					<h1 className='page-header'>My Leave</h1>
 					<div className='myleave-wrapper'>
           <Container>
       <>

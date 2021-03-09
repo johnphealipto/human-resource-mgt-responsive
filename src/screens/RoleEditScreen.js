@@ -78,7 +78,7 @@ const RoleEditScreen = ({ history, match }) => {
         <>
             {user.employee && (
             <Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-            <Col md={3} className='d-none d-md-block'>
+            <Col md={2} className='d-none d-md-block'>
             <div className="fixednavbar-wrapper">
       <div className='employee-details'>
         <p>{userInfo.role}</p>
@@ -131,14 +131,14 @@ const RoleEditScreen = ({ history, match }) => {
             </Col>
 
 
-            <Col className='col-xs-12 col-md-8'>
+            <Col className='col-lg-9 col-xs-12 col-md-10'>
                 <AdminHeader2 />
                 <h1 className='page-header'>Update {user.employee.email} Role</h1>
                 {message && <Message variant='danger'>{message}</Message>}
                 {error && <Message variant='danger'>{error}</Message>}
                 {successUpdate && <Message variant='success'>Profile Created</Message>}
                 {loading && <Loader />}
-                <Form onSubmit={submitHandler}>
+                <Form onSubmit={submitHandler} className="form-shadow">
                     <Form.Group controlId='isActive'>
                         <Form.Check
                         type='checkbox' 
@@ -161,6 +161,7 @@ const RoleEditScreen = ({ history, match }) => {
                             as="select" 
                             size='sm'
                             value={role}
+                            custom
                             onChange={(e) => setRole(e.target.value)}>
                                 <option value=''>Select...</option>
                                 <option value='hr'>HR</option>
@@ -196,4 +197,4 @@ const RoleEditScreen = ({ history, match }) => {
     )
 }
 
-export default RoleEditScreen
+export default RoleEditScreen;

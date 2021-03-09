@@ -95,10 +95,10 @@ const NextOfKinScreen = ({ history }) => {
         <>
          
         <Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-            <Col md={3} className='d-none d-md-block'>
-                <FixedNavbar />
-            </Col>
-            <Col className='col-xs-12 col-md-8'>
+        <Col md={2} className='d-none d-md-block'>
+            <FixedNavbar />
+        </Col>
+        <Col className='col-lg-9 col-xs-12 col-md-10'>
             <Header />
                 <h1 className='page-header'>Next Of Kin</h1>
                
@@ -108,7 +108,7 @@ const NextOfKinScreen = ({ history }) => {
                 {loading && <Loader />}
                 {
                     nextOfKin ? (
-                        <Form onSubmit={submitHandler}className="form-shadow">
+                        <Form onSubmit={submitHandler} className="form-shadow">
                         <Form.Row>
                             <Form.Group  className="col-md-4" controlId='firstname'>
                                 <Form.Label>Firstname</Form.Label>
@@ -175,7 +175,7 @@ const NextOfKinScreen = ({ history }) => {
                         </Button>
                     </Form>
                     ) : (
-                        <Form onSubmit={createsubmitHandler}>
+                        <Form onSubmit={createsubmitHandler} className="form-shadow">
                         <Form.Row>
                             <Form.Group  className="col-md-4" controlId='firstname'>
                                 <Form.Label>Firstname</Form.Label>

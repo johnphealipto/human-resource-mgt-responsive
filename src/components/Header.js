@@ -24,7 +24,7 @@ const Header = ({ history }) => {
 
     return (
         <header>
-            <div className='lg-header d-none d-md-block'>
+            {/* <div className='lg-header d-none d-md-block'>
             <Navbar>
                     <LinkContainer to='/'>
                         <Navbar.Brand id="logo-anchor">
@@ -37,13 +37,6 @@ const Header = ({ history }) => {
                         
                         {userInfo ? (
                             <>
-                            
-                            
-                            {/* <Nav.Link>{userInfo.role}</Nav.Link> */}
-                            
-                            {/* <LinkContainer to='/dashboard'>
-                            <Nav.Link>{userInfo.email}</Nav.Link>
-                            </LinkContainer> */}
                             <LinkContainer to='/'>
                             <Nav.Link onClick={logoutHandler} className='logout'>Logout</Nav.Link>
                             </LinkContainer>
@@ -60,7 +53,7 @@ const Header = ({ history }) => {
                     </Navbar.Collapse>
                     <hr className="border-bottom"/>
             </Navbar>
-            </div>
+            </div> */}
 
             <div className='xs-header d-block d-md-none'>
                 <Navbar expand="lg">

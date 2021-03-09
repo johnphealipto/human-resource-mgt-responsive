@@ -5,17 +5,11 @@
   text-transform: capitalize;
 }
 .profilescreen-wrapper form {
-  padding: 3vh;
-  padding-top: 5vh;
+  padding: 6vh;
   border-radius: 5px;
 }
 .profilescreen-wrapper form textarea.form-control {
   background-color: var(--input-field-color);
-}
-.profilescreen-wrapper form textarea {
-  background-color: var(--input-field-color);
-  box-shadow: 3px 0 0 var(--background-blue-color) inset;
-  /* outline: 0 none; */
 }
 .profilescreen-wrapper form input,
 .profilescreen-wrapper form select {

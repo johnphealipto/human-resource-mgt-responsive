@@ -103,7 +103,7 @@ const AdminNextOfKinScreen = ({ history, match }) => {
         <>
          
         <Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-                <Col md={3} className='d-none d-md-block'>
+                <Col md={2} className='d-none d-md-block'>
         <div className="fixednavbar-wrapper">
             <div className='employee-details'>
                 <p>{userInfo.role}</p>
@@ -134,7 +134,7 @@ const AdminNextOfKinScreen = ({ history, match }) => {
         </div>
         </Col>
 
-        <Col className='col-xs-12 col-md-8'>
+        <Col className='col-lg-9 col-xs-12 col-md-10'>
                 <AdminHeader
                     userId
                 />
@@ -145,7 +145,7 @@ const AdminNextOfKinScreen = ({ history, match }) => {
                 {loading && <Loader />}
                 {
                     nextOfKin ? (
-                        <Form onSubmit={submitHandler}>
+                        <Form onSubmit={submitHandler} className="form-shadow">
                         <Form.Row>
                             <Form.Group  className="col-md-4" controlId='firstname'>
                                 <Form.Label>Firstname</Form.Label>
@@ -212,7 +212,7 @@ const AdminNextOfKinScreen = ({ history, match }) => {
                         </Button>
                     </Form>
                     ) : (
-                        <Form onSubmit={createsubmitHandler}>
+                        <Form onSubmit={createsubmitHandler} className="form-shadow">
                         <Form.Row>
                             <Form.Group  className="col-md-4" controlId='firstname'>
                                 <Form.Label>Firstname</Form.Label>
@@ -287,4 +287,4 @@ const AdminNextOfKinScreen = ({ history, match }) => {
     )
 }
 
-export default AdminNextOfKinScreen
+export default AdminNextOfKinScreen;

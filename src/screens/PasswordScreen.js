@@ -74,7 +74,7 @@ const PasswordScreen = ({ history }) => {
          </Row>
 
         <Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-          <Col md={3} className='d-none d-md-block'>
+          <Col md={2} className='d-none d-md-block'>
         <div className="fixednavbar-wrapper">
       <div className='employee-details'>
         <p>{userInfo.role}</p>
@@ -127,14 +127,14 @@ const PasswordScreen = ({ history }) => {
             </Col>
 
 
-            <Col className='col-xs-12 col-md-8'>
+            <Col className='col-lg-9 col-xs-12 col-md-10'>
                 <AdminHeader2 />
                 <h1 className='page-header'>Update Password</h1>
                 {message && <Message variant='danger'>{message}</Message>}
                 {error && <Message variant='danger'>{error}</Message>}
                 {success && <Message variant='success'>Password Updated</Message>}
                
-                <Form onSubmit={submitHandler}>
+                <Form onSubmit={submitHandler} className="form-shadow">
                     <Form.Group controlId='crrentPassword'>
                         <Form.Label>Current Password</Form.Label>
                         <Form.Control 

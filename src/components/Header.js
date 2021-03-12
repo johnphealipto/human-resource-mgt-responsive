@@ -24,16 +24,12 @@ const Header = ({ history }) => {
 
     return (
         <header>
-            {/* <div className='lg-header d-none d-md-block'>
-            <Navbar>
-                    <LinkContainer to='/'>
-                        <Navbar.Brand id="logo-anchor">
-                        <img id ="nav-bar-logo"src={Logo} alt="Outcess Logo" />
-                        </Navbar.Brand>
-                    </LinkContainer>
-                    <Navbar.Collapse >
+            <div className='lg-header d-none d-md-block'>
+                <NavLink to='/' className='logo-wrapper'>
+                    <img id ="nav-bar-logo" src={Logo} alt="Outcess Logo" />
+                </NavLink>
                    
-                    <div className='logout'>
+                    {/* <div className='logout'>
                         
                         {userInfo ? (
                             <>
@@ -49,11 +45,8 @@ const Header = ({ history }) => {
                                 <Nav.Link><i className='fas fa-user'></i> Forgot password</Nav.Link>
                             </LinkContainer>
                         )}
-                    </div>
-                    </Navbar.Collapse>
-                    <hr className="border-bottom"/>
-            </Navbar>
-            </div> */}
+                    </div> */}
+            </div>
 
             <div className='xs-header d-block d-md-none'>
                 <Navbar expand="lg">

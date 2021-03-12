@@ -18,29 +18,16 @@ body {
 
 /* ---- Header --- */
 header {
-  background-color: ghostwhite;
-  position: relative;
-  margin-top: -2vh;
-  position: fixed;
-  width: 90%;
-  z-index: 5;
-  /* box-shadow: 0 1px 1px rgba(0,0,0,0.05); */
+  margin-bottom: 14.7vh;
+  /* position: fixed; */
+  /* z-index: 5; */
+  /* box-shadow: 0 1px 5px rgba(0,0,0,0.05); */
 }
-.border-bottom {
-  border-bottom: 1px solid black !important;
+header .logo-wrapper {
+  position: absolute;
+  right: 0;
 }
 
-header .logout {
-  /* position: relative; */
-  margin-left: 30vh;
-}
-header .xs-header #logo-anchor {
-  width: 30vh;
-  /* height: 5vh; */
-}
-header .xs-header #logo-anchor img {
-  width: 100%;
-}
 header .xs-header #basic-navbar-nav ul li {
   background-color: var(--background-blue-color);
   list-style: none;
@@ -140,7 +127,6 @@ header #basic-navbar-nav a {
 }
 button.applyleave-btn {
   background-color: var(--background-blue-color);
-  letter-spacing: 1px;
   border-radius: 5px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25), 2px 2px 2px rgba(0, 0, 0, 0.25),
     4px 4px 4px rgba(0, 0, 0, 0.25);
@@ -178,10 +164,33 @@ button.applyleave-btn:active {
     4px 4px 4px rgba(0, 0, 0, 0.35), -1px -1px 1px rgba(0, 0, 0, 0.05),
     -2px -2px 2px rgba(0, 0, 0, 0.05), -4px -4px 4px rgba(0, 0, 0, 0.05);
 }
+.allLeave-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 7vh;
+}
+.allLeave-title h1 {
+  background-color: whitesmoke;
+  color: var(--background-blue-color);
+  font-size: 1.7rem;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.05), 
+              -1px -1px 1px rgba(0, 0, 0, 0.05);
+}
 /* --- End My Leave --- */
 
 .page-header {
+  background-color: whitesmoke;
   color: var(--background-blue-color);
+  font-size: 1.7rem;
+  margin-bottom: 4.5vh;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.05), 
+              -1px -1px 1px rgba(0, 0, 0, 0.05);
 }
 #logout-navbar-nav {
   width: 10%;

@@ -85,7 +85,7 @@ const StaffEditScreen = ({ history, match }) => {
         <>
             {user.employee  && (
             <Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-                <Col md={2} className='d-none d-md-block'>
+                <Col md={4} lg={2} className='d-none d-md-block'>
             <div className="fixednavbar-wrapper">
             <div className='employee-details'>
                 <p>{userInfo.role}</p>
@@ -116,7 +116,7 @@ const StaffEditScreen = ({ history, match }) => {
         </div>
             </Col>
            
-            <Col className='col-lg-9 col-xs-12 col-md-10'>
+            <Col xs={12} md={8} lg={10}>
                 <AdminHeader
                     userId
                 />

@@ -104,10 +104,11 @@ const UpdateMyLeave = ({ history, match }) => {
   return (
     <>     
     	<Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-				<Col md={2} className='d-none d-md-block'>
+				<Col md={4} lg={2} className='d-none d-md-block'>
           <FixedNavbar />
         </Col>
-        <Col className='col-lg-9 col-xs-12 col-md-10'>
+        <Col xs={12} md={8} lg={10}>
+          <Header />
 			  <h1 className='page-header'>Change Leave Status</h1>
         <Form onSubmit={updateMyLeaveHandler} className='form-shadow'>
             
@@ -144,7 +145,7 @@ const UpdateMyLeave = ({ history, match }) => {
               <Form.Label>Detailed Reason For Leave Application</Form.Label>
               <Form.Control 
                 as="textarea" 
-                rows={3} 
+                rows={2} 
                 // style={{ backgroundColor: 'var(--input-field-color)' }}
                 // placeholder={user.reasonForLeave}
                 value={reasonForLeave}
@@ -162,9 +163,9 @@ const UpdateMyLeave = ({ history, match }) => {
                   onChange={(e) => setLeaveStatus(e.target.value)}
                   >
                     <option value=''>Select Leave Status</option>
-                    <option value='approved'>approved</option>
-                    <option value='reject'>reject</option>
-                    <option value='pending'>pending</option>
+                    <option value='approved'>APPROVED</option>
+                    <option value='reject'>REJECTED</option>
+                    <option value='pending'>PENDING</option>
                 </Form.Control>
             </Form.Group>
             <Button className='applyleave-btn mb-2 mr-3' type='submit'>

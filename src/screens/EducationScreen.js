@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import moment from 'moment'
 import { Link } from 'react-router-dom'
 import { Button, Row, Col, ListGroup, Form } from 'react-bootstrap'
 import Message from '../components/Message'
@@ -55,7 +56,7 @@ const EducationScreen = ({ history }) => {
                 setInstitutionAttended(education.institutionAttended)
                 setCourseOfStudy(education.courseOfStudy)
                 setProfessionalMembership(education.professionalMembership)
-                setYearOfGraduation(education.yearOfGraduation)
+                setYearOfGraduation(moment(education.yearOfGraduation).format("YYYY-MM-DD"))
             }
         }
     }
@@ -87,10 +88,10 @@ const EducationScreen = ({ history }) => {
   return (
     <>   
       <Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-      <Col md={2} className='d-none d-md-block'>
+      <Col md={4} lg={2} className='d-none d-md-block'>
         <FixedNavbar />
       </Col>
-      <Col className='col-lg-9 col-xs-12 col-md-10'>
+      <Col xs={12} md={8} lg={10}>
           <Header />
           <h1 className='page-header'>Education</h1>
           {errorCreate && <Message variant='danger'>{errorCreate}</Message>}

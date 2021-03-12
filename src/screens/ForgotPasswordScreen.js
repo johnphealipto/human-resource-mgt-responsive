@@ -66,13 +66,25 @@ const ForgotPasswordScreen = ({ history }) => {
                     <Form onSubmit={submitHandler}>
                     <Form.Group className='form-group email' controlId="formBasicEmail">
                         <i class="fas fa-user pr-3"></i>
-                        <Form.Label className='login-label'>Email address</Form.Label>
-                        <Form.Control 
+                        <Form.Label className='login-label'></Form.Label>
+                        {/* <Form.Control 
                             autoFocus 
                             type="email" 
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter email" />
+                            placeholder="Enter email" /> */}
+
+            
+                    <div className="form">
+                        <input 
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="form__input" 
+                        autocomplete="false" 
+                        placeholder=" "/>
+                    <label for="email" class="form__label">Email address</label>
+                    </div>
                     </Form.Group>
 
                     <Button type='submit' variant='primary' className='btn btn-block'>

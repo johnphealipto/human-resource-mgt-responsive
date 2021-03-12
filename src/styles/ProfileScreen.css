@@ -1,15 +1,20 @@
 .profilescreen-wrapper {
-  overflow: hidden;
-}
-.profilescreen-wrapper h1 {
-  text-transform: capitalize;
+  overflow-y: hidden;
 }
 .profilescreen-wrapper form {
-  padding: 6vh;
+  padding: 3vh;
+  padding-top: 5vh;
+  /* margin-left: 20vh; */
+  /* margin-right: 20vh; */
   border-radius: 5px;
 }
 .profilescreen-wrapper form textarea.form-control {
   background-color: var(--input-field-color);
+}
+.profilescreen-wrapper form textarea {
+  /* background-color: var(--input-field-color); */
+  /* box-shadow: 3px 0 0 var(--background-blue-color) inset; */
+  /* outline: 0 none; */
 }
 .profilescreen-wrapper form input,
 .profilescreen-wrapper form select {

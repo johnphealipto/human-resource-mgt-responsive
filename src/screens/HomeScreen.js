@@ -28,14 +28,13 @@ const HomeScreen = ({ history }) => {
     }, [dispatch, history, user, userInfo])
 
   return (
-    <>   
+    <>  
       <Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-        <Col md={2} className='d-none d-md-block'>
+        <Col md={4} lg={2} className='d-none d-md-block'>
           <FixedNavbar />
         </Col>
-        <Col className='col-lg-9 col-xs-12 col-md-10 form-wrapper'>
+        <Col xs={12} md={8} lg={10}>
           <Header />
-          {/* <hr/> */}
           <h1 className='page-header'>Home</h1>
           
           <Form key={user.id} className="form-container form-shadow">

@@ -1,6 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LoginScreen from './screens/LoginScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import PasswordScreen from './screens/PasswordScreen';
@@ -21,6 +20,7 @@ import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import AllLeaveApplications from './screens/AllLeaveApplications';
 import UpdateMyLeave from './screens/UpdateMyLeave';
+  
 
 function App() {
   return (

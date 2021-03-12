@@ -1,21 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Row, Col, Table, Form, Button, Modal } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Row, Col, Table } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { getAllEmployeeLeaveApplications, updateEmployeeLeaveApplicationId } from '../actions/leaveApplication';
+import { getAllEmployeeLeaveApplications } from '../actions/leaveApplication';
 import SearchBox from '../components/SearchBox';
 import Paginate from '../components/Paginate';
 import FixedNavbar from '../components/FixedNavbar';
 import Header from '../components/Header';
 
 const AllLeaveApplications = ({ history, match }) => {
-	const [leaveStatus, setLeaveStatus] = useState('')
-  const [id, setId] = useState('')
-
-	const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const keyword = match.params.keyword || ''
 	const pageNumber = match.params.pageNumber || 1
@@ -26,10 +20,7 @@ const AllLeaveApplications = ({ history, match }) => {
   const { userInfo } = userLogin
 
 	const getLeaveAppDetails = useSelector(state => state.getLeaveAppDetails)
-  const { myLeave, data, pages, page } = getLeaveAppDetails
-
-  const updateLeaveApp = useSelector(state => state.updateLeaveApp)
-  const {  error:errorUpdate, success:successUpdate } = updateLeaveApp
+  const { data, pages, page } = getLeaveAppDetails
 
 
   useEffect(() => {
@@ -51,8 +42,10 @@ const AllLeaveApplications = ({ history, match }) => {
         </Col>
         <Col className='col-xs-12 col-md-10'>
           <Header />
-					<h1 className='page-header'>Leave Applications</h1>
-					<SearchBox history={history} url={'/leaveapplications'} />
+          <div className='allLeave-title'>
+					  <h1>Leave Applications</h1>
+					  <SearchBox history={history} url={'/leaveapplications'} />
+          </div>
 					<Table striped bordered hover size="sm" className='myleave-table'>
         <thead>
           <tr>

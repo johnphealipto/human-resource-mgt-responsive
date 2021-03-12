@@ -68,10 +68,10 @@ const StaffCreateScreen = ({ history }) => {
   return (
     <>
     	<Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-        <Col md={2} className='d-none d-md-block'>
-            <FixedNavbar />
-        </Col>
-        <Col className='col-lg-9 col-xs-12 col-md-10'>
+            <Col md={4} lg={2} className='d-none d-md-block'>
+                <FixedNavbar />
+            </Col>
+            <Col xs={12} md={8} lg={10}>
                 <Header />
                 <h1 className='page-header'>Register a New Employee</h1>
                 {message && <Message variant='danger'>{message}</Message>}
@@ -127,6 +127,7 @@ const StaffCreateScreen = ({ history }) => {
                             <Form.Control 
                             as="select" 
                             size='sm'
+                            custom
                             value={department}
                             onChange={(e) => setDepartment(e.target.value)}>
                                 <option value=''>Select...</option>
@@ -157,6 +158,7 @@ const StaffCreateScreen = ({ history }) => {
                             <Form.Control 
                             as="select" 
                             size='sm'
+                            custom
                             value={role}
                             onChange={(e) => setRole(e.target.value)}>
                                 <option value=''>Select...</option>

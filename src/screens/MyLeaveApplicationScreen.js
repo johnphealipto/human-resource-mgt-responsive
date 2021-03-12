@@ -93,18 +93,20 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
   return (
     <>     
     	<Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-				<Col md={2} className='d-none d-md-block'>
-          <FixedNavbar />
-        </Col>
-        <Col className='col-lg-9 col-xs-12 col-md-10'>
+        <Col md={4} lg={2} className='d-none d-md-block'>
+					<FixedNavbar />
+				</Col>
+				<Col xs={12} md={8} lg={10}>
           <Header />
-					<h1 className='page-header'>My Leave</h1>
+					{/* <h1 className='page-header'>My Leave</h1> */}
+          <div className='allLeave-title'>
+					  <h1>My Leave</h1>
+					  <Button onClick={handleShow} className='applyleave-btn'>
+              Apply Leave
+            </Button>
+          </div>
 					<div className='myleave-wrapper'>
-          <Container>
       <>
-      <Button variant="primary" onClick={handleShow} className='applyleave applyleave-btn'>
-        Apply Leave
-      </Button>
 
       <Modal
         show={show}
@@ -204,8 +206,7 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
       <Paginate
         destination={employees}
         pages={pages} 
-        page={page} />
-    </Container>			
+        page={page} />			
     		</div>
       	</Col>
       </Row>

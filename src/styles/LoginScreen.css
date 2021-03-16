@@ -5,7 +5,7 @@
   background-color: var(--background-blue-color);
   width: 100vh;
   height: 100vh;
-  margin-left: -30vh;
+  margin-left: -35vh;
   overflow: hidden;
 }
 .loginpage-wrapper .login-img img {
@@ -33,16 +33,21 @@
   margin-bottom: -1vh;
 }
 .loginpage-wrapper .form-group.email,
-.loginpage-wrapper .form-group.password {
+.loginpage-wrapper .form-group.password,
+.loginpage-wrapper button[type="submit"] {
   width: 50vh;
 }
 .loginpage-wrapper .form-group.password {
   margin-top: 3vh;
 }
-.loginpage-wrapper input[type="email"],
-.loginpage-wrapper input[type="password"] {
-  margin-top: 5px;
-  /* background-color: var(--input-field-color); */
+.loginpage-wrapper input {
+  height: 6.6vh;
+  background-color: var(--input-field-color);
+  margin-top: .5vh;
+}
+.loginpage-wrapper input:focus {
+  background-color: var(--input-field-color);
+  box-shadow: 3px 0 0 var(--background-blue-color) inset;
 }
 
 .loginpage-wrapper button[type="submit"] {
@@ -50,8 +55,7 @@
   font-size: 1rem;
   letter-spacing: 1px;
   border-radius: 5px;
-  margin-top: 2vh;
-  width: 50vh;
+  margin-top: 1vh;
 }
 .loginpage-wrapper button[type="submit"]:hover {
   background-color: var(--background-blue-color);
@@ -66,18 +70,34 @@
   text-decoration: none;
 }
 
+
+/* moves the eye image */
+.loginpage-wrapper i#eye {
+  position: relative;
+  bottom: 4.5vh;
+  right: -45vh;
+  cursor: pointer;
+}
+
+
+/* --- Media Queries --- */
 /*Extra small devices {xs} (portrait phones, less than 576px)*/
 @media (max-width: 575.98px) {
   .loginpage-wrapper .form-group.email,
-  .loginpage-wrapper .form-group.password {
-    width: 40vh;
-  }
+  .loginpage-wrapper .form-group.password,
   .loginpage-wrapper button[type="submit"] {
-    width: 50vh;
+    width: 40vh;
   }
   .loginpage-wrapper .logo,
   .loginpage-wrapper form {
-    margin-left: 4.3vh;
+    margin-left: 4.35vh;
+  }
+
+  .loginpage-wrapper i#eye {
+    position: relative;
+    bottom: 4.5vh;
+    left: 35vh;
+    cursor: pointer;
   }
 }
 
@@ -87,75 +107,4 @@
   .loginpage-wrapper form {
     margin-left: 2vh;
   }
-}
-
-/* Animated login page */
-
-.form {
-  position: relative;
-  width: 20rem;
-  height: 3rem;
-}
-.form__input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50vh;
-  height: 100%;
-  border: 2px solid #e1e5ee;
-  border-radius: 0.3rem;
-  font-family: inherit;
-  font-size: inherit;
-  color: #000;
-  outline: none;
-  padding: 1.5rem;
-  background: none;
-  /* Change border when input focus*/
-}
-
-.form__input:hover {
-  border-color: #9fb6d4;
-}
-.form__input:focus {
-  border-color: #255aa0;
-}
-.form__label {
-  position: absolute;
-  left: 1rem;
-  top: 1.2rem;
-  padding: 0 0.2rem;
-  color: #000;
-  cursor: text;
-  transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
-  background-color: ghostwhite;
-}
-
-/* 
-1. When the input is in the focus state
-reduce the size of the label and move upwards 
-2. Keep label state when content is in input field 
-*/
-.form__input:focus ~ .form__label,
-.form__input:not(:placeholder-shown).form__input:not(:focus) ~ .form__label {
-  top: -0.5rem;
-  font-size: 0.8rem;
-  left: 0.8rem;
-}
-
-/* pasword visibility */
-.pass-wrapper {
-  position: relative;
-  display: flex;
-  margin-bottom: 14px;
-}
-
-/* moves the eye image */
-.pass-wrapper i {
-  position: absolute;
-  top: 50%;
-  right: 5%;
-}
-.pass-wrapper i:hover {
-  color: #38544c;
-  cursor: pointer;
 }

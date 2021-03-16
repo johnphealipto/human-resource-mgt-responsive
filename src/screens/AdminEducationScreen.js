@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom'
-import { Table, Button, Row, Col, Nav, Form } from 'react-bootstrap'
+import { Button, Row, Col, Nav, Form } from 'react-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { useDispatch, useSelector } from 'react-redux'
-import { EDUCATION_CREATE_EMPLOYEE_RESET, EDUCATION_CREATE_RESET, EDUCATION_DETAILS_EMPLOYEE_RESET, EDUCATION_UPDATE_RESET } from '../constants/educationConstants'
-import { createEducation, createEducationEmpId, getEducationDetailsEmpId, updateEducation } from '../actions/educationActions'
+import { EDUCATION_CREATE_EMPLOYEE_RESET, EDUCATION_DETAILS_EMPLOYEE_RESET, EDUCATION_UPDATE_RESET } from '../constants/educationConstants'
+import { createEducationEmpId, getEducationDetailsEmpId, updateEducation } from '../actions/educationActions'
 import '../styles/FixedNavbar.css';
 import AdminHeader from '../components/AdminHeader';
 import '../styles/ProfileScreen.css';
@@ -19,15 +18,13 @@ const AdminEducationScreen = ({ history, match }) => {
     const [yearOfGraduation, setYearOfGraduation] = useState('')
     const [professionalMembership, setProfessionalMembership] = useState('')
 
-    const [message, setMessage] = useState(null)
-
     const dispatch = useDispatch()
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
     const educationDetailsEmpId = useSelector(state => state.educationDetailsEmpId)
-    const { loading, error, education } = educationDetailsEmpId
+    const { loading, education } = educationDetailsEmpId
 
     const educationUpdate = useSelector(state => state.educationUpdate)
     const { success:successUpdate } = educationUpdate
@@ -88,7 +85,6 @@ const AdminEducationScreen = ({ history, match }) => {
            professionalMembership,
            yearOfGraduation
         }))
-       
     }
 
     return (
@@ -159,10 +155,6 @@ const AdminEducationScreen = ({ history, match }) => {
                                 onChange={(e) => setCourseOfStudy(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
-                            
-                            
-                    
-                            
                         </Form.Row>
                         <Form.Row>
                             <Form.Group  className="col-md-6" controlId='professionalMembership'>

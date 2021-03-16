@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { Button, Row, Col, ListGroup, Form, Nav} from 'react-bootstrap'
+import { NavLink } from 'react-router-dom'
+import { Button, Row, Col, Form, Nav} from 'react-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { useDispatch, useSelector } from 'react-redux'
@@ -37,10 +37,10 @@ const AdminProfileScreen = ({ history, match }) => {
     const { loading, profile } = profileDetailsEmpId
 
     const profileUpdate = useSelector(state => state.profileUpdate)
-    const { error:errorUpdate, success:successUpdate } = profileUpdate
+    const { success:successUpdate } = profileUpdate
 
     const profileCreateEmpId = useSelector(state => state.profileCreateEmpId)
-    const { error:errorCreate, success:successCreate } = profileCreateEmpId
+    const { success:successCreate } = profileCreateEmpId
 
   
 

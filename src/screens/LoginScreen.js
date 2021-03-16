@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { useForm } from "react-hook-form";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { Link } from 'react-router-dom';
 import { ScaleLoader } from 'react-spinners';
 import Message from '../components/Message';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
@@ -15,9 +12,6 @@ import { css } from '@emotion/css';
 import { USER_FORGOT_PASSWORD_RESET } from '../constants/userConstants';
 
 
-const eye = <FontAwesomeIcon icon={faEye} />;
-
-
 //Can be a string as well. Need to ensure each key-value pair ends with ;
 const override = css`
   display: block;
@@ -27,10 +21,10 @@ const override = css`
 
 const LoginTestScreen = ({ history }) => {
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordShown, setPasswordShown] = useState(false);
-  const togglePasswordVisiblity = () => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordShown, setPasswordShown] = useState(false);
+    const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
 
@@ -50,7 +44,7 @@ const LoginTestScreen = ({ history }) => {
             type: USER_FORGOT_PASSWORD_RESET
           })
         }
-    }, [history, userInfo])
+    }, [history, userInfo, dispatch])
     
     const submitHandler = (e) => {
         e.preventDefault()
@@ -62,67 +56,40 @@ const LoginTestScreen = ({ history }) => {
         <Row>
           <Col className='d-none d-lg-block col-xs-none col-lg-6'>
             <div className='login-img'>
-              <img src={LoginImg}/>
+              <img src={LoginImg} alt='Call Center' />
             </div>
           </Col>
           <Col className='loginform-col col-xs-12 col-lg-6'>
             <div className='logo'>
-              <img src={Logo}/>
+              <img src={Logo} alt='Outcess Logo' />
             </div>
-            {error && <Message variant='danger'>{error}</Message>}
             <Form onSubmit={submitHandler}>
-              <Form.Group className='form-group email' controlId="formBasicEmail">
-                <i class="fas fa-user pr-3"></i>
-                <Form.Label className='login-label'></Form.Label>
-                {/* <Form.Control 
-                    autoFocus 
-                    type="email" 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter email" /> */}
-
-     <div className="form">
-      <input 
-      type="email"
-      id="email" 
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-      className="form__input" 
-      autocomplete="true" 
-      placeholder=" "/>
-       <label for="email" class="form__label">Email</label>
-                    </div>
+              {error && <Message variant='danger'>{error}</Message>}
+              <Form.Group className='form-group email form-group-animate' controlId="formBasicEmail">
+              <i className="fas fa-user pr-3"></i>
+              <Form.Label className='form-label-animate'>Email Address</Form.Label>
+                <Form.Control 
+                  autoFocus 
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)} />
               </Form.Group>
 
-              <Form.Group className='form-group password' controlId="formBasicPassword">
-                <i class="fas fa-unlock pr-3"></i>
-                <Form.Label className='login-label'></Form.Label>
-                {/* <Form.Control 
-                    type="password" 
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password" /> */}
-  <div className="form pass-wrapper">
-      <input 
-      type="password"
-      name="password"
-      type={passwordShown ? "text" : "password"}
-      value={password}
-      onChange={(e) => setPassword(e.target.value)}
-      className="form__input" 
-      autocomplete="true" 
-      placeholder=" "/>
-      <i onClick={togglePasswordVisiblity}>{eye}</i>{" "}
-  <label for="password" className="form__label">Password</label>
-   </div>
-
+              <Form.Group className='form-group password form-animate' controlId="formBasicPassword">
+              <i className="fas fa-unlock pr-3"></i>
+              <Form.Label className='form-label-animate'>Password</Form.Label>
+                <Form.Control 
+                  type={passwordShown ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)} />
+                <i onClick={togglePasswordVisiblity} className={passwordShown ? "fas fa-eye" : "fas fa-eye-slash"} id="eye"></i>
               </Form.Group>
-              <Button type='submit' variant='primary' className='btn btn-block'>
-                    Sign In
-                </Button>
-                <Link to='/forgotpassword' className='forget-password'>
-                    <p>Forgot password?</p>
-                </Link>
+              <Button type='submit' className='btn btn-block'>
+                Sign In
+              </Button>
+              <Link to='/forgotpassword' className='forget-password'>
+                  <p>Forgot password?</p>
+              </Link>
             </Form>
             <div className="loading">
               {loading &&
@@ -134,7 +101,6 @@ const LoginTestScreen = ({ history }) => {
                 loading={loading}
                 />
               }
-              
             </div>
           </Col>
         </Row>

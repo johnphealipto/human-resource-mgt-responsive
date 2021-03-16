@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Button, Row, Col, ListGroup, Toast, Nav } from 'react-bootstrap'
-import { Link, NavLink} from 'react-router-dom'
+import { Form, Button, Row, Col, Toast, Nav } from 'react-bootstrap'
+import { NavLink} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import { updateUserPassword } from '../actions/userActions'

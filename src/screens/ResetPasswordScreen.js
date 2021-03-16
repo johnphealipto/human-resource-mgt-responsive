@@ -55,12 +55,12 @@ const ResetPasswordScreen = ({ history, match }) => {
                 <Row>
                 <Col className='d-none d-lg-block col-xs-none col-lg-6'>
                     <div className='login-img'>
-                    <img src={LoginImg}/>
+                    <img src={LoginImg} alt='Outcess' />
                     </div>
                 </Col>
                 <Col className='loginform-col col-xs-12 col-lg-6'>
                     <div className='logo'>
-                    <img src={Logo}/>
+                    <img src={Logo} alt='Outcess' />
                     </div>
                     {error && <Message variant='danger'>{error}</Message>}
                     {message && <Message variant='danger'>{message}</Message>}

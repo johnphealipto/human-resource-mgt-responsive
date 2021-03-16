@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Button, Row, Col, Nav, Form } from 'react-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { useDispatch, useSelector } from 'react-redux'
-import { createNextOfKin, createNextOfKinEmpId, getNextOfKinDetailsEmpId, updateNextOfKin } from '../actions/nextOfKinActions'
+import { createNextOfKinEmpId, getNextOfKinDetailsEmpId, updateNextOfKin } from '../actions/nextOfKinActions'
 import { NOK_CREATE_EMPLOYEE_RESET, NOK_DETAILS_EMPLOYEE_RESET, NOK_UPDATE_RESET } from '../constants/nextOfKinConstants'
 import '../styles/FixedNavbar.css';
 import AdminHeader from '../components/AdminHeader';
@@ -29,10 +29,10 @@ const AdminNextOfKinScreen = ({ history, match }) => {
     const { loading, nextOfKin } = nextOfKinDetailsEmpId
 
     const nextOfKinUpdate = useSelector(state => state.nextOfKinUpdate)
-    const { error:errorUpdate, success:successUpdate } = nextOfKinUpdate
+    const { success:successUpdate } = nextOfKinUpdate
 
     const nextOfKinCreateEmpId = useSelector(state => state.nextOfKinCreateEmpId)
-    const { error:errorCreate, success:successCreate } = nextOfKinCreateEmpId
+    const { success:successCreate } = nextOfKinCreateEmpId
 
   
 

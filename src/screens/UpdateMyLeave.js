@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { getAllEmployeeLeaveApplications, getAllEmployeeLeaveApplicationById, updateEmployeeLeaveApplicationId } from '../actions/leaveApplication';
-import { LEAVE_APPLICATION_CREATE_RESET, LEAVE_APPLICATION_UPDATE_EMPLOYEE_RESET, LEAVE_APPLICATION_DETAILS_RESET, LEAVE_APPLICATION_DETAILS_ID_RESET } from '../constants/leaveApplicationConstants';
+import { getAllEmployeeLeaveApplicationById, updateEmployeeLeaveApplicationId } from '../actions/leaveApplication';
+import { LEAVE_APPLICATION_UPDATE_EMPLOYEE_RESET, LEAVE_APPLICATION_DETAILS_ID_RESET } from '../constants/leaveApplicationConstants';
 import FixedNavbar from '../components/FixedNavbar';
 import Header from '../components/Header';
 
@@ -22,7 +22,7 @@ const UpdateMyLeave = ({ history, match }) => {
   const { userInfo } = userLogin
 
   const leaveApplicationDetailsById = useSelector(state => state.leaveApplicationDetailsById)
-    const { error, leaveapplication } = leaveApplicationDetailsById
+    const { leaveapplication } = leaveApplicationDetailsById
 
   const updateLeaveApp = useSelector(state => state.updateLeaveApp)
   const { success:successUpdate } = updateLeaveApp

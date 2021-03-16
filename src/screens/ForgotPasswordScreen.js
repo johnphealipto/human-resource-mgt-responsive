@@ -9,7 +9,7 @@ import Logo from '../img/outcess-logo.png';
 import '../styles/LoginScreen.css';
 import { css } from '@emotion/css'
 import { forgotPassword } from '../actions/userActions'
-import { USER_FORGOT_PASSWORD_RESET } from '../constants/userConstants'
+// import { USER_FORGOT_PASSWORD_RESET } from '../constants/userConstants'
 
 //Can be a string as well. Need to ensure each key-value pair ends with ;
 const override = css`
@@ -25,7 +25,7 @@ const ForgotPasswordScreen = ({ history }) => {
     const dispatch = useDispatch()
 
     const userForgotPassword = useSelector(state => state.userForgotPassword)
-    const { loading, error, success, user } = userForgotPassword
+    const { loading, error, success } = userForgotPassword
 
     useEffect(() => {
         
@@ -54,37 +54,25 @@ const ForgotPasswordScreen = ({ history }) => {
                 <Row>
                 <Col className='d-none d-lg-block col-xs-none col-lg-6'>
                     <div className='login-img'>
-                    <img src={LoginImg}/>
+                        <img src={LoginImg} alt='Call Center'/>
                     </div>
                 </Col>
                 <Col className='loginform-col col-xs-12 col-lg-6'>
                     <div className='logo'>
-                    <img src={Logo}/>
+                    <img src={Logo} alt='Outcess Logo'/>
                     </div>
                     {error && <Message variant='danger'>{error}</Message>}
                     {success ? <Message variant='success'>{message}</Message> : <div></div>}
                     <Form onSubmit={submitHandler}>
                     <Form.Group className='form-group email' controlId="formBasicEmail">
-                        <i class="fas fa-user pr-3"></i>
-                        <Form.Label className='login-label'></Form.Label>
-                        {/* <Form.Control 
+                        <i className="fas fa-user pr-3"></i>
+                        <Form.Label className='login-label'>Email address</Form.Label>
+                        <Form.Control 
                             autoFocus 
                             type="email" 
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter email" /> */}
-
-            
-                    <div className="form">
-                        <input 
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="form__input" 
-                        autocomplete="false" 
-                        placeholder=" "/>
-                    <label for="email" class="form__label">Email address</label>
-                    </div>
+                            placeholder="Enter email" />
                     </Form.Group>
 
                     <Button type='submit' variant='primary' className='btn btn-block'>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { Form, Button, Row, Col, ListGroup, Nav } from 'react-bootstrap'
+import { NavLink } from 'react-router-dom'
+import { Form, Button, Row, Col, Nav } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -80,10 +80,10 @@ const RoleEditScreen = ({ history, match }) => {
             <Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
             <Col md={4} lg={2} className='d-none d-md-block'>
             <div className="fixednavbar-wrapper">
-      <div className='employee-details'>
-        <p>{userInfo.role}</p>
-        <p>{userInfo.email}</p>
-      </div>
+                <div className='employee-details'>
+                    <p>{userInfo.role}</p>
+                    <p>{userInfo.email}</p>
+                </div>
             <Nav className="flex-column">
             <NavLink to='/home' exact className="nav-link" activeClassName='active-here'>
           <i class="fas fa-home pr-4"></i>

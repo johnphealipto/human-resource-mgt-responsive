@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table, Button, Modal, Form, Row, Col } from 'react-bootstrap';
+import { Table, Button, Modal, Form, Row, Col } from 'react-bootstrap';
 import moment from 'moment';
-import Message from '../components/Message';
-import Loader from '../components/Loader';
-import { LEAVE_APPLICATION_CREATE_RESET, LEAVE_APPLICATION_DETAILS_RESET, LEAVE_APPLICATION_UPDATE_EMPLOYEE_RESET } from '../constants/leaveApplicationConstants'
-import { createLeaveApplication, getMyLeaveApplication, updateEmployeeLeaveApplicationId } from '../actions/leaveApplication';
+import { createLeaveApplication, getMyLeaveApplication } from '../actions/leaveApplication';
 import { useDispatch, useSelector } from 'react-redux';
-import SearchBox from '../components/SearchBox';
 import Paginate from '../components/Paginate';
 import FixedNavbar from '../components/FixedNavbar';
 import Header from '../components/Header';
@@ -33,13 +29,13 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
   const { userInfo } = userLogin
 
   const leaveAppDetails = useSelector(state => state.leaveAppDetails)
-  const { loading, data, pages, page } = leaveAppDetails
+  const { data, pages, page } = leaveAppDetails
 
   const updateLeaveApp = useSelector(state => state.updateLeaveApp)
-  const {  error:errorUpdate, success:successUpdate } = updateLeaveApp
+  const { success:successUpdate } = updateLeaveApp
 
   const createLeaveApp = useSelector(state => state.createLeaveApp)
-  const { error:errorCreate, success:successCreate } = createLeaveApp
+  const { success:successCreate } = createLeaveApp
 
 
     useEffect(() => {
@@ -98,7 +94,6 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
 				</Col>
 				<Col xs={12} md={8} lg={10}>
           <Header />
-					{/* <h1 className='page-header'>My Leave</h1> */}
           <div className='allLeave-title'>
 					  <h1>My Leave</h1>
 					  <Button onClick={handleShow} className='applyleave-btn'>
@@ -159,7 +154,11 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
             </Form.Group>
             <Form.Group controlId='status'>
               <Form.Label>Status</Form.Label>
-              <Form.Control placeholder="Pending" disabled />
+              <Form.Control 
+                placeholder="Pending" 
+                disabled
+                value={leaveStatus}
+                onChange={(e) => setLeaveStatus(e.target.value)} />
             </Form.Group>
             <hr />
             <Button className='applyleave-btn mb-2 mr-3' type='submit' onClick={handleClose}>
@@ -170,14 +169,6 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
             </Button>
           </Form>
         </Modal.Body>
-        {/* <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button className='applyleave-btn' type='submit' onClick={handleClose}>
-            Submit
-          </Button>
-        </Modal.Footer> */}
       </Modal>
     </>
 

@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
-import { Link } from 'react-router-dom'
+import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
-import { Table, Button, Row, Col, ListGroup } from 'react-bootstrap'
+import { Table, Button, Row, Col } from 'react-bootstrap'
 import { getUserDetailsById } from '../actions/userActions';
 import FixedNavbar from '../components/FixedNavbar';
 

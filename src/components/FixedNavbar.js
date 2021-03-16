@@ -42,27 +42,27 @@ const FixedNavbar = ({ history }) => {
 
       <Nav className="flex-column">
         <NavLink to='/home' exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-home pr-4"></i>
+          <i className="fas fa-home pr-4"></i>
           Home
         </NavLink>
         <NavLink to='/profile' exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-user-circle pr-4"></i>
+          <i className="fas fa-user-circle pr-4"></i>
           Profile
         </NavLink>
         <NavLink to='/dashboard' exact className="nav-link" activeClassName='active-here'>
-          <i class="far fa-id-card pr-4"></i>
+          <i className="far fa-id-card pr-4"></i>
           Personal details
         </NavLink>
         <NavLink to='/nextofkin' exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-user-friends pr-4"></i>
+          <i className="fas fa-user-friends pr-4"></i>
           Next of Kin
         </NavLink>
         <NavLink to='/education' exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-graduation-cap pr-4"></i>
+          <i className="fas fa-graduation-cap pr-4"></i>
           Education
         </NavLink>
         <NavLink to='/myleave' exact className="nav-link" activeClassName='active-here'>
-        <i class="fas fa-paper-plane pr-4"></i>
+        <i className="fas fa-paper-plane pr-4"></i>
           My Leave
         </NavLink>
 
@@ -70,15 +70,15 @@ const FixedNavbar = ({ history }) => {
           (userInfo.role === 'hr' || userInfo.role === 'hr-manager' || userInfo.role === 'admin') && (
         <>
           <NavLink to='/leaveapplications' exact className="nav-link" activeClassName='active-here'>
-            <i class="fas fa-folder-open pr-4"></i>
+            <i className="fas fa-folder-open pr-4"></i>
             Leave Applications
           </NavLink>
           <NavLink to='/admin/userlist' exact className="nav-link" activeClassName='active-here'>
-            <i class="fas fa-users pr-4"></i>
+            <i className="fas fa-users pr-4"></i>
             All Employees
           </NavLink>
           <NavLink to='/admin/register' exact className="nav-link" activeClassName='active-here'>
-            <i class="fas fa-user-plus pr-4"></i>
+            <i className="fas fa-user-plus pr-4"></i>
             Register Employee
           </NavLink>
         </>
@@ -88,7 +88,7 @@ const FixedNavbar = ({ history }) => {
 
       <div className='logout'>
         <NavLink to='/' className="nav-link-logout" onClick={logoutHandler}>
-          <i class="fas fa-sign-out-alt pr-3"></i>
+          <i className="fas fa-sign-out-alt pr-3"></i>
           Logout
         </NavLink>
       </div>

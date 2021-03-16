@@ -10,7 +10,6 @@ import FixedNavbar from '../components/FixedNavbar';
 import Header from '../components/Header';
 
 const AllLeaveApplications = ({ history, match }) => {
-
   const keyword = match.params.keyword || ''
 	const pageNumber = match.params.pageNumber || 1
 	const employees = 'leaveapplications'

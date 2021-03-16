@@ -16,6 +16,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* --- All Tables --- */
+table {
+  background-color: rgba(248, 248, 255, 0.95);
+}
+/* --- All Tables --- */
+
 /* ---- Header --- */
 header {
   margin-bottom: 14.7vh;

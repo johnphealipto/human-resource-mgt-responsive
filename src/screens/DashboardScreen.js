@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Button, Form, ListGroup } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
+import { Row, Col, Button, Form } from 'react-bootstrap';
+import Message from '../components/Message';
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
@@ -31,7 +29,7 @@ const DashboardScreen = ({ history }) => {
     const { userInfo } = userLogin
 
     const userDetails = useSelector(state => state.userDetails)
-    const { loading, error, user } = userDetails
+    const { error, user } = userDetails
 
     const userUpdateProfile = useSelector(state => state.userUpdateProfile)
     const { success } = userUpdateProfile
@@ -70,17 +68,16 @@ const DashboardScreen = ({ history }) => {
         e.preventDefault()
         if(password !== confirmPassword) {
             setMessage('Passwords do not match')
-        } else {
-        dispatch(updateUserProfile({
-            _id: user._id,
-            firstname,
-            lastname,
-            password,
-            middlename,
-           
-          
-        }))
-         }
+        }
+        else {
+            dispatch(updateUserProfile({
+                _id: user._id,
+                firstname,
+                lastname,
+                password,
+                middlename,
+            }))
+        }
         
     }
 

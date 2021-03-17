@@ -13,6 +13,7 @@ const StaffCreateScreen = ({ history }) => {
     const [middlename, setMiddlename] = useState('')
     const [lastname, setLastname] = useState('')
     const [email, setEmail] = useState('')
+    const [dateOfJoining, setDateOfJoining] = useState('')
     const [department, setDepartment] = useState('')
     const [employeeCode, setEmployeeCode] = useState('')
     const [password, setPassword] = useState('')
@@ -53,6 +54,7 @@ const StaffCreateScreen = ({ history }) => {
                 middlename,
                 lastname,
                 email,
+                dateOfJoining,
                 department,
                 employeeCode,
                 role,
@@ -117,9 +119,15 @@ const StaffCreateScreen = ({ history }) => {
                             type='email' 
                             placeholder='Enter Email'
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                           
-                            ></Form.Control>
+                            onChange={(e) => setEmail(e.target.value)}></Form.Control>
+                        </Form.Group>
+                        <Form.Group  className="col-md-4" controlId='dateOfJoining'>
+                            <Form.Label>Date Of Joining</Form.Label>
+                            <Form.Control 
+                            type='date' 
+                            placeholder='Enter Date Of Joining'
+                            value={dateOfJoining}
+                            onChange={(e) => setDateOfJoining(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="col-md-4" controlId="formGridDepartment">
                             <Form.Label>Department</Form.Label>
@@ -140,7 +148,10 @@ const StaffCreateScreen = ({ history }) => {
                                 <option value='OUTCESS'>OUTCESS</option>
                             </Form.Control>
                         </Form.Group>
-                        <Form.Group  className="col-md-4" controlId='employeeCode'>
+                    </Form.Row>
+                    <Form.Row>
+                        
+                    <Form.Group  className="col-md-6" controlId='employeeCode'>
                             <Form.Label>Employee Code</Form.Label>
                             <Form.Control 
                             type='employeeCode' 
@@ -149,10 +160,7 @@ const StaffCreateScreen = ({ history }) => {
                             onChange={(e) => setEmployeeCode(e.target.value)}
                             ></Form.Control>
                         </Form.Group>
-                        
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Group className="col-md-4" controlId="formGridRole">
+                        <Form.Group className="col-md-6" controlId="formGridRole">
                             <Form.Label>Role</Form.Label>
                             <Form.Control 
                             as="select" 
@@ -174,7 +182,9 @@ const StaffCreateScreen = ({ history }) => {
                                 <option value='manager'>MANAGER</option>
                             </Form.Control>
                         </Form.Group>
-                        <Form.Group className="col-md-4" controlId='password'>
+                        </Form.Row>
+                        <Form.Row>
+                        <Form.Group className="col-md-6" controlId='password'>
                             <Form.Label>Password</Form.Label>
                             <Form.Control 
                             type='password' 
@@ -183,7 +193,7 @@ const StaffCreateScreen = ({ history }) => {
                             onChange={(e) => setPassword(e.target.value)}
                             ></Form.Control>
                         </Form.Group>
-                        <Form.Group className="col-md-4" controlId='confirrmPassword'>
+                        <Form.Group className="col-md-6" controlId='confirrmPassword'>
                             <Form.Label>Confirm Password</Form.Label>
                             <Form.Control 
                             type='password' 

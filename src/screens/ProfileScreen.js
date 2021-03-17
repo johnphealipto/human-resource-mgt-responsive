@@ -133,8 +133,7 @@ const createsubmitHandler= (e) => {
 							{errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
 							{successUpdate && <Message variant='success'>Profile Updated</Message>}
 							{loading && <Loader />}
-							{
-									profile ? (
+							{profile ? (
 											<Form onSubmit={submitHandler} className="form-shadow">
 											<Form.Row>
 													<Form.Group  className="col-md-4" controlId='dateOfBirth'>

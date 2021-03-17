@@ -38,41 +38,19 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
   const { success:successCreate } = createLeaveApp
 
 
+  // --- Leave Application Eligibilty 
+  const profileDetails = useSelector(state => state.profileDetails)
+	const { profile } = profileDetails
+
+
     useEffect(() => {
 
       if(!userInfo) {
           history.push('/')
       } else {
         dispatch(getMyLeaveApplication(pageNumber))
-          // if(!leaveapplication) {
-          //     dispatch(getMyLeaveApplication())
-          //     console.log(leaveapplication)
-          //     if(successUpdate || successCreate) {
-          //       dispatch({
-          //           type: LEAVE_APPLICATION_UPDATE_EMPLOYEE_RESET
-          //       })
-          //       dispatch({
-          //           type: LEAVE_APPLICATION_DETAILS_RESET
-          //       })
-          //       dispatch({
-          //           type:LEAVE_APPLICATION_CREATE_RESET
-          //       })
-          //       // history.push('/home')
-          //   } 
-  
-          // } else {
-          //     setLeaveType(leaveapplication.leaveType)
-          //     setLeaveStartDate(leaveapplication.fromDate)
-          //     setLeaveEndDate(leaveapplication.toDate)
-          //     setLeaveDescription(leaveapplication.reasonForLeave)
-          //     setLeaveStatus(leaveapplication.status)
-
-          // }
     }
   }, [dispatch, history, data, successCreate, successUpdate, userInfo, pageNumber])
-
-
-
 
   const createsubmitHandler= (e) => {
     e.preventDefault(e)
@@ -85,6 +63,14 @@ const MyLeaveApplicationScreen = ({ history, match }) => {
       ))
     console.log(`type: ${leaveType}, from: ${fromDate}, to: ${toDate}, reason: ${reasonForLeave}`)
   }
+
+  // --- Leave Application Eligibilty
+  const currentDate = new Date();
+  const dateOfJoining = profile.dateOfJoining
+  const prior = new Date().setDate(currentDate.getDate() - dateOfJoining);
+  // console.log(new Date(prior).toDateString());
+  console.log(profile);
+
 
   return (
     <>     

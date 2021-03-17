@@ -46,10 +46,11 @@ const LoginTestScreen = ({ history }) => {
         }
     }, [history, userInfo, dispatch])
     
-    const submitHandler = (e) => {
-        e.preventDefault()
-        dispatch(login(email, password))
-    }
+  const submitHandler = (e) => {
+    e.preventDefault()
+    dispatch(login(email, password))
+  }
+  
   return (
     <div className="loginpage-wrapper">
       <Container className='loginpage-container'>

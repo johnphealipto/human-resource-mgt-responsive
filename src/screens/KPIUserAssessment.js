@@ -1,46 +1,45 @@
-import React, { useState } from 'react';
-import { Modal } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Modal } from "react-bootstrap";
 import "../styles/Main.css";
-import '../styles/ProfileScreen.css';
-import Header from '../components/Header';
-import FixedNavBar from '../components/FixedNavbar';
-import '../styles/KPIboard.css';
+import "../styles/ProfileScreen.css";
+import Header from "../components/Header";
+import FixedNavBar from "../components/FixedNavbar";
+import "../styles/KPIboard.css";
 
 const UserKPIAssessment = () => {
-  const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   // ---- For the FixedNavBar ---- //
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const openSidebar = () => {
     setSidebarOpen(true);
-  }
+  };
   const closeSidebar = () => {
     setSidebarOpen(false);
-  }
-  
+  };
+
   // --- Handles Adding & Deleting Input Fields --- //
-  const [inputField, setInputField] = useState([{ }])
-  const handleAddField = () => {
-    setInputField([...inputField, { }])
-  }
-  const handleRemoveField = (index) => {
-    const field = [...inputField]
-    field.splice(index, 1)
-    setInputField(field)
-  }
+  //const [inputField, setInputField] = useState([{}]);
+  // const handleAddField = () => {
+  //   setInputField([...inputField, {}]);
+  // };
+  // const handleRemoveField = (index) => {
+  //   const field = [...inputField];
+  //   field.splice(index, 1);
+  //   setInputField(field);
+  // };
 
-
-  const [ratings, setRatings] = useState([])
+  const [ratings, setRatings] = useState([]);
   // const getRatings = (e) => {
   //   e.preventDefault(e)
   //   const score = document.getElementsByName('score').value;
-  //   ratings.push(score) 
+  //   ratings.push(score)
   //   console.log(score)
   // }
 
-  const score = (document.getElementsByName('score')).value;
+  const score = document.getElementsByName("score").value;
   // console.log(score)
 
   // --- Function for the KPI Calculations --- //
@@ -57,23 +56,71 @@ const UserKPIAssessment = () => {
     // document.getElementById('total').innerHTML = totalScore;
     // return totalScore
     // setTotalValue(totalScore)
-  }
-  var scoreSet = [1, 4, 4]
+  };
+  var scoreSet = [1, 4, 4];
   const sum = scoreSet.reduce((accumulator, element) => {
     return accumulator + element;
   }, 0);
-  console.log(sum)
+  console.log(sum);
 
   // const refScore = document.getElementsByName('score')
   // var totalExpectedScore = refScore.length * 4
   // var avgScorePercent = ((totalScore / totalExpectedScore) * 100).toFixed(0)
 
+  /**
+   * ROB'S edit
+   */
+
+  const [attitudeScore, setAttitudeScore] = useState(0);
+  const [punctualityScore, setPunctualityScore] = useState(0);
+  const [interpersonalSkillScore, setInterPersonalSkillScore] = useState(0);
+  const [data, setData] = useState([
+    { performanceFactor: "", performanceRating: "" },
+  ]);
+
+  const handleAddField = () => {
+    const values = [...data];
+    values.push({ performanceFactor: "", performanceRating: "" });
+    setData(values);
+  };
+
+  const handleRemoveField = (index) => {
+    const values = [...data];
+    values.splice(index, 1);
+    setData(values);
+  };
+
+  const handleDataChange = (index, event) => {
+    const values = [...data];
+    if (event.target.name === "performanceFactor") {
+      values[index].performanceFactor = event.target.value;
+    } else {
+      values[index].performanceRating = event.target.value;
+    }
+
+    setData(values);
+  };
+
+  const testSubmit = () => {
+    data.push(
+      { performanceFactor: "Punctuality", performanceRating: punctualityScore },
+      {
+        performanceFactor: "Attitude to work",
+        performanceRating: attitudeScore,
+      },
+      {
+        performanceFactor: "Interpersonal Skill",
+        performanceRating: interpersonalSkillScore,
+      }
+    );
+    console.log(data);
+  };
 
   return (
     <div className="dashboard-container">
       <Header sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
       <FixedNavBar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
-      
+
       <main>
         <div className="dashboard-body kpi">
           <Modal
@@ -90,114 +137,124 @@ const UserKPIAssessment = () => {
               <p>Are you Sure?</p>
               <p>This action cannot be reversed</p>
               <p>Once an assessment is submitted, it can't be taken back</p>
-              <input 
+              <input
                 type="button"
                 value="No"
                 className="KPI-close-btn"
-                onClick={handleClose} />
-              <input 
-                type="button"
-                value="Yes"
-                className="KPI-submit-btn"/>
-            </Modal.Body>  
+                onClick={handleClose}
+              />
+              <input type="button" value="Yes" className="KPI-submit-btn" />
+            </Modal.Body>
           </Modal>
           <div className="kpi-body">
             <div className="kpi-performance-section">
               <div>
-                <input 
-                  type="button" 
+                <input
+                  type="button"
                   value="+ Add Field"
                   className="add-field-btn"
-                  onClick={handleAddField} />
+                  onClick={handleAddField}
+                />
+              </div>
+              <div className="key-performance-box">
+                <div className="key-perf-title">
+                  <p>My Performance KPI</p>
+                  <p>Score</p>
                 </div>
-                <div className="key-performance-box">
-                  <div className="key-perf-title">
-                    <p>My Performance KPI</p>
-                    <p>Score</p>
+                <form>
+                  <div className="performance-field">
+                    <input type="text" disabled placeholder="Punctuality" />
+                    <input
+                      type="number"
+                      name="score"
+                      min="1"
+                      max="4"
+                      onChange={(event) =>
+                        setPunctualityScore(event.target.value)
+                      }
+                      //onChange={handleTotal}
+                    />
                   </div>
-                  <form>
-                    <div className="performance-field">
+                  <div className="performance-field">
+                    <input
+                      type="text"
+                      disabled
+                      placeholder="Attitude to Work"
+                    />
+                    <input
+                      type="number"
+                      name="score"
+                      min="1"
+                      max="4"
+                      onChange={(event) => setAttitudeScore(event.target.value)}
+                      //onChange={handleTotal}
+                    />
+                  </div>
+                  <div className="performance-field">
+                    <input
+                      type="text"
+                      disabled
+                      placeholder="Interpersonal Skill"
+                    />
+                    <input
+                      type="number"
+                      name="score"
+                      min="1"
+                      max="4"
+                      onChange={(event) =>
+                        setInterPersonalSkillScore(event.target.value)
+                      }
+                      //onChange={handleTotal}
+                    />
+                  </div>
+
+                  {data.map((datum, index) => (
+                    <div key={index} className="performance-field">
                       <input
                         type="text"
-                        disabled
-                        placeholder="Punctuality"
+                        placeholder="Enter Task"
+                        className="inputField"
+                        name="performanceFactor"
+                        onChange={(event) => handleDataChange(index, event)}
+                        defaultValue={datum.performanceFactor}
                       />
                       <input
-                        type="number" 
-                        name="score" 
-                        min="1" 
+                        type="number"
+                        name="performanceRating"
+                        min="1"
                         max="4"
-                        onChange={handleTotal}
-                      />
-                    </div>
-                    <div className="performance-field">
-                      <input
-                        type="text"
-                        disabled
-                        placeholder="Attitude to Work"
+                        onChange={(event) => handleDataChange(index, event)}
+                        defaultValue={datum.performanceRating}
                       />
                       <input
-                        type="number" 
-                        name="score" 
-                        min="1" 
-                        max="4"
-                        onChange={handleTotal}
+                        type="button"
+                        title="Delete Field"
+                        value="x"
+                        onClick={(e) => handleRemoveField(index)}
                       />
                     </div>
-                    <div className="performance-field">
-                      <input
-                        type="text"
-                        disabled
-                        placeholder="Interpersonal Skill"
-                      />
-                      <input
-                        type="number" 
-                        name="score" 
-                        min="1" 
-                        max="4"
-                        onChange={handleTotal}
-                      />
-                    </div>
-                    {inputField.map((item, index) =>
-                      <div key={index} className="performance-field">
-                        <input
-                          type="text"
-                          placeholder="Enter Task"
-                          className="inputField"
-                          name="keyTask"
-                        />
-                        <input
-                          type="number" 
-                          name="keyScore" 
-                          min="1" 
-                          max="4"
-                        />
-                        <input
-                          type="button"
-                          title="Delete Field"
-                          value="x"
-                          onClick={(e) => handleRemoveField(index)}
-                        />
-                      </div>
-                    )}
-                    <div>
-                      <textarea 
-                        placeholder="Add Comment"
-                        className="inputField" />
-                    </div>
-                    <input 
-                      type="button"
-                      value="Submit"
-                      className="KPI-submit-btn"
-                      onClick={handleShow}/>
-                      {/* <input 
+                  ))}
+                  <div>
+                    <textarea
+                      placeholder="Add Comment"
+                      className="inputField"
+                    />
+                  </div>
+                  <input
+                    type="button"
+                    value="Submit"
+                    className="KPI-submit-btn"
+                    //onClick={handleShow}/>
+                    onClick={testSubmit}
+                  />
+                  {/* <input 
                         type="button"
                         value="check"
                         className="KPI-submit-btn"
                         onClick={getRatings}/> */}
-                  </form>
-                </div>
+                </form>
               </div>
+            </div>
 
             <div className="kpi-legend-section">
               <div className="grading-system">
@@ -229,9 +286,9 @@ const UserKPIAssessment = () => {
             </div>
           </div>
         </div>
-      </main>  
+      </main>
     </div>
-  )
-}
+  );
+};
 
 export default UserKPIAssessment;

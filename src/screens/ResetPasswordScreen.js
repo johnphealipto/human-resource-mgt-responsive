@@ -55,18 +55,18 @@ const ResetPasswordScreen = ({ history, match }) => {
                 <Row>
                 <Col className='d-none d-lg-block col-xs-none col-lg-6'>
                     <div className='login-img'>
-                    <img src={LoginImg} alt='Outcess' />
+                    <img src={LoginImg} alt='OUTCESS'/>
                     </div>
                 </Col>
                 <Col className='loginform-col col-xs-12 col-lg-6'>
                     <div className='logo'>
-                    <img src={Logo} alt='Outcess' />
+                    <img src={Logo} alt='LOGO'/>
                     </div>
                     {error && <Message variant='danger'>{error}</Message>}
                     {message && <Message variant='danger'>{message}</Message>}
                     <Form onSubmit={submitHandler}>
                     <Form.Group className='form-group password' controlId="formBasicPassword">
-                        <i class="fas fa-unlock pr-3"></i>
+                        <i className="fas fa-unlock pr-3"></i>
                         <Form.Label className='login-label'>New Password</Form.Label>
                         <Form.Control 
                             type="password" 
@@ -75,7 +75,7 @@ const ResetPasswordScreen = ({ history, match }) => {
                             placeholder="Password" />
                     </Form.Group>
                     <Form.Group className='form-group password' controlId="formBasicPassword">
-                        <i class="fas fa-unlock pr-3"></i>
+                        <i className="fas fa-unlock pr-3"></i>
                         <Form.Label className='login-label'>Confirm Password</Form.Label>
                         <Form.Control 
                             type="password" 
@@ -110,4 +110,4 @@ const ResetPasswordScreen = ({ history, match }) => {
     )
 }
 
-export default ResetPasswordScreen
+export default ResetPasswordScreen;

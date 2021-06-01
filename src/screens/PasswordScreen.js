@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Button, Row, Col, Toast, Nav } from 'react-bootstrap'
-import { NavLink} from 'react-router-dom';
+import { Form, Button, Row, Col, Toast } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
-import { updateUserPassword } from '../actions/userActions'
-import { USER_UPDATE_PASSWORD_RESET } from '../constants/userConstants';
+import { adminUpdatePassword } from '../actions/userActions'
+import { ADMIN_UPDATE_USER_PASSWORD_RESET } from '../constants/userConstants';
 import '../styles/FixedNavbar.css';
-import AdminHeader2 from '../components/AdminHeader2';
+import Header from '../components/Header';
+import AdminFixedNavbar from '../components/AdminFixedNav';
 import '../styles/ProfileScreen.css';
 
 
-const PasswordScreen = ({ history }) => {
-    const [currentPassword, setCurrentPassword] = useState('')
+const PasswordScreen = ({ history, match }) => {
+
+    const userId = match.params.id
     const [newPassword, setNewPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState(null)
@@ -19,22 +20,23 @@ const PasswordScreen = ({ history }) => {
 
     const dispatch = useDispatch()
 
-    const userUpdatePassword = useSelector(state => state.userUpdatePassword)
-    const { error, success } = userUpdatePassword
+    const adminPasswordUpdate = useSelector(state => state.adminPasswordUpdate)
+    const { error, success } = adminPasswordUpdate
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
     useEffect(() => {
-        if(!userInfo) {
-            history.push('/login')
-        } else {
+        if(userInfo  && (userInfo.role === 'Human Resource Executive' || userInfo.role === 'CEO' || userInfo.role === 'Super Admin' || userInfo.role === 'Assistant Manager - Human Resources' || userInfo.role === 'Manager - Human Resources')) {
+            
             if(success) {
-                dispatch({
-                    type: USER_UPDATE_PASSWORD_RESET
-                })
-                history.push('/home')
-            }
+              dispatch({
+                type: ADMIN_UPDATE_USER_PASSWORD_RESET
+              })
+              history.push('/admin/userlist')
+          }
+        } else {
+          history.push('/login')
         }
     }, [dispatch, success, history, userInfo])
 
@@ -43,16 +45,23 @@ const PasswordScreen = ({ history }) => {
         if(newPassword !== confirmPassword) {
             setMessage('Passwords do not match')
         } else {
-            //Dispatch
-            dispatch(updateUserPassword({
-                currentPassword,
-                newPassword
+            dispatch(adminUpdatePassword({
+              _id: userId,
+              newPassword
             }))
-            //setShow(true)
         }
-        
-        
     }
+
+    // ---- For the FixedNavBar
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    
+    const openSidebar = () => {
+      setSidebarOpen(true);
+    };
+    
+    const closeSidebar = () => {
+      setSidebarOpen(false);
+    };
 
     return (
         <>
@@ -73,78 +82,24 @@ const PasswordScreen = ({ history }) => {
          </Col>
          </Row>
 
-        <Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-        <Col md={4} lg={2} className='d-none d-md-block'>
-        <div className="fixednavbar-wrapper">
-      <div className='employee-details'>
-        <p>{userInfo.role}</p>
-        <p>{userInfo.email}</p>
-      </div>
-            <Nav className="flex-column">
-            <NavLink to='/home' exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-home pr-4"></i>
-          Home
-        </NavLink>
-        <NavLink to='/dashboard' exact className="nav-link" activeClassName='active-here'>
-          <i class="far fa-id-card pr-4"></i>
-          Personal details
-        </NavLink>
-        <NavLink to='/updatepassword' exact className="nav-link" activeClassName='active-here'>
-        <i class="fas fa-unlock pr-4"></i>
-          Update Password
-        </NavLink>
-        <NavLink to='/dashboard' exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-graduation-cap pr-4"></i>
-          Education
-        </NavLink>
-        <NavLink to='/myleave' exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-sign-out-alt pr-4"></i>
-          My Leave
-        </NavLink>
-                {
-                    (userInfo.role === 'hr') && (
-                        <>
-                        <div className='admin-section'>
-            <p>Admin Section</p>
-          </div>
-          <NavLink to='/myleave' exact className="nav-link" activeClassName='active-here'>
-            <i class="fas fa-box-open pr-4"></i>
-            Leave Applications
-          </NavLink>
-          <NavLink to='/admin/userlist' exact className="nav-link" activeClassName='active-here'>
-            <i class="fas fa-users pr-4"></i>
-            All Employees
-          </NavLink>
-          <NavLink to='/admin/register' exact className="nav-link" activeClassName='active-here'>
-            <i class="fas fa-user-plus pr-4"></i>
-            Register Employee
-          </NavLink>
-                        </>
-                    )
-                }
-            </Nav>
-            </div>
-            </Col>
+
+         <div className="dashboard-container">
 
 
-            <Col xs={12} md={8} lg={10}>
-                <AdminHeader2 />
-                <h1 className='page-header'>Update Password</h1>
+          <Header sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
+          <AdminFixedNavbar userId={userId} sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
+
+          <main className='profilescreen-wrapper'>
+              <div className="dashboard-body">
+                <div className='allLeave-title'>
+              <h3>Update Password</h3>
+              </div>
                 {message && <Message variant='danger'>{message}</Message>}
                 {error && <Message variant='danger'>{error}</Message>}
                 {success && <Message variant='success'>Password Updated</Message>}
                
                 <Form onSubmit={submitHandler} className="form-shadow">
-                    <Form.Group controlId='crrentPassword'>
-                        <Form.Label>Current Password</Form.Label>
-                        <Form.Control 
-                        type='password' 
-                        placeholder='Enter Password'
-                        value={currentPassword}
-                        onChange={(e) => setCurrentPassword(e.target.value)}
-                        ></Form.Control>
-                    </Form.Group>
-                    
+                        
                     <Form.Group controlId='newpassword'>
                         <Form.Label>New Password</Form.Label>
                         <Form.Control 
@@ -167,9 +122,12 @@ const PasswordScreen = ({ history }) => {
                         Update
                     </Button>
                 </Form>
-            </Col>
-            
-        </Row>
+              </div>
+            </main>
+          </div>
+
+
+    
         </>
     )
 }

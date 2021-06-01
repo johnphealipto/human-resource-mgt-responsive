@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Form, Button } from 'react-bootstrap'
+import { Col, Form, Button, Modal} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { getAllEmployeeLeaveApplicationById, updateEmployeeLeaveApplicationId } from '../actions/leaveApplication';
-import { LEAVE_APPLICATION_UPDATE_EMPLOYEE_RESET, LEAVE_APPLICATION_DETAILS_ID_RESET } from '../constants/leaveApplicationConstants';
+import { getAllEmployeeLeaveApplicationById, rejectEmployeeLeaveApplicationId, updateEmployeeLeaveApplicationId } from '../actions/leaveApplication';
+import { LEAVE_APPLICATION_UPDATE_EMPLOYEE_RESET, LEAVE_APPLICATION_DETAILS_ID_RESET, LEAVE_APPLICATION_REJECT_RESET } from '../constants/leaveApplicationConstants';
 import FixedNavbar from '../components/FixedNavbar';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Message from '../components/Message';
+import { Link } from 'react-router-dom';
 
 const UpdateMyLeave = ({ history, match }) => {
   const leaveApplicationId = match.params.id
@@ -13,8 +16,16 @@ const UpdateMyLeave = ({ history, match }) => {
 	const [leaveType, setLeaveType] = useState('')
   const [fromDate, setLeaveStartDate] = useState('')
   const [toDate, setLeaveEndDate] = useState('')
+  const [noOfDays, setNoOfDays] = useState(0)
   const [reasonForLeave, setLeaveDescription] = useState('')
   const [leaveStatus, setLeaveStatus] = useState('')
+  const [approved, setApproved] = useState(false)
+  const [rejected, setRejected] = useState(false)
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+    setShow(true);
+  } 
 
 	const dispatch = useDispatch()
 
@@ -25,17 +36,23 @@ const UpdateMyLeave = ({ history, match }) => {
     const { leaveapplication } = leaveApplicationDetailsById
 
   const updateLeaveApp = useSelector(state => state.updateLeaveApp)
-  const { success:successUpdate } = updateLeaveApp
+  const { success:successUpdate, error:errorUpdate } = updateLeaveApp
+
+  const rejectLeave = useSelector(state => state.rejectLeave)
+  const { success:successReject, error:errorReject } = rejectLeave
 
 
   useEffect(() => {
-    if (userInfo  && (userInfo.role === 'hr' || userInfo.role === 'hr-manager' || userInfo.role === 'admin')) {
-       if(successUpdate) {
+    if (userInfo  && (userInfo.role === 'Human Resource Executive' || userInfo.role === 'CEO' || userInfo.role === 'Super Admin' || userInfo.role === 'Assistant Manager - Human Resources' || userInfo.role === 'Manager - Human Resources')) {
+       if(successUpdate || successReject) {
           dispatch({
               type: LEAVE_APPLICATION_UPDATE_EMPLOYEE_RESET
           })
           dispatch({
               type: LEAVE_APPLICATION_DETAILS_ID_RESET
+          })
+          dispatch({
+            type: LEAVE_APPLICATION_REJECT_RESET
           })
           history.push('/leaveapplications')
       } else {
@@ -45,10 +62,13 @@ const UpdateMyLeave = ({ history, match }) => {
       )
        } else {
         setLeaveType(leaveapplication.leaveType)
-        setLeaveStartDate(moment(leaveapplication.fromDate).format("DD-MM-YYYY"))
-        setLeaveEndDate(moment(leaveapplication.toDate).format("DD-MM-YYYY"))
+        setLeaveStartDate(moment(leaveapplication.fromDate).format("YYYY-MM-DD"))
+        setLeaveEndDate(moment(leaveapplication.toDate).format("YYYY-MM-DD"))
+        setNoOfDays(leaveapplication.noOfDays)
         setLeaveDescription(leaveapplication.reasonForLeave)
         setLeaveStatus(leaveapplication.leaveStatus)
+        setApproved(leaveapplication.finalApproval)
+        setRejected(leaveapplication.rejected)
      
       }
     }
@@ -59,122 +79,146 @@ const UpdateMyLeave = ({ history, match }) => {
     
    
       
-  }, [history, userInfo, leaveApplicationId, leaveapplication, successUpdate, dispatch])
-
-
-  // useEffect(() => {
-
-  //   if(!userInfo) {
-  //     history.push('/')
-  //   } else {
-  //     if(successUpdate) {
-  //         dispatch({
-  //             type: LEAVE_APPLICATION_UPDATE_EMPLOYEE_RESET
-  //         })
-  //         dispatch({
-  //             type: LEAVE_APPLICATION_DETAILS_RESET
-  //         })
-  //         history.push('/')
-  //     } else {
-  //       if(!myLeave || !myLeave.leaveStatus) {
-  //         dispatch(getAllEmployeeLeaveApplicationById(keyword, pageNumber))
-  //       } else {
-  //         setLeaveStatus(myLeave.leaveStatus)
-  //       }
-  //     }
-  //   }
-  // }, [dispatch, history, data, userInfo, keyword, pageNumber])
+  }, [history, userInfo, leaveApplicationId, leaveapplication, successUpdate, successReject, dispatch])
 
 	
 	const updateMyLeaveHandler = (e) => {
     e.preventDefault(e)
 		dispatch(updateEmployeeLeaveApplicationId({
       _id: leaveApplicationId,
-			leaveType,
-      fromDate,
-      toDate,
-      reasonForLeave,
-      leaveStatus
     }))
-    history.push('/leaveapplications')
-    console.log(`Leave Status: ${leaveStatus}, id: ${leaveApplicationId}`)
+    // history.push('/leaveapplications')
   }
+
+  const handleReject = (e) => {
+    e.preventDefault(e)
+    dispatch(rejectEmployeeLeaveApplicationId({
+      _id: leaveApplicationId,
+    }))
+  }
+
+  // ---- For the FixedNavBar
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+    
+  const openSidebar = () => {
+    setSidebarOpen(true);
+  };
+  
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
 
 
   return (
     <>     
-    	<Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-				<Col md={4} lg={2} className='d-none d-md-block'>
-          <FixedNavbar />
-        </Col>
-        <Col xs={12} md={8} lg={10}>
-          <Header />
-			  <h1 className='page-header'>Change Leave Status</h1>
-        <Form onSubmit={updateMyLeaveHandler} className='form-shadow'>
+
+      <div className="dashboard-container">
+        <Header sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
+        <FixedNavbar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
+        <main className='profilescreen-wrapper'>
+          <div className="dashboard-body">
+            <div className='allLeave-title'>
+          <h3>FINAL LEAVE APPROVAL</h3>
+          </div>
+          {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+          {errorReject && <Message variant='danger'>{errorReject}</Message>}
+          <Form onSubmit={updateMyLeaveHandler} className='form-shadow'>
             
-            <Form.Group controlId="leaveType">
+            <Form.Row>
+              <Form.Group as={Col} controlId="leaveType">
                 <Form.Label>Leave Type</Form.Label>
                 <Form.Control 
-									// placeholder={leaveType}
+									type='text'
                   value={leaveType}
                   onChange={(e) => setLeaveType(e.target.value)}
-                  disabled >
+                  disabled
+                   >
                 </Form.Control>
             </Form.Group>
-						<Form.Row>
-							<Form.Group as={Col} controlId='startDate'>
+                <Form.Group as={Col} controlId='noOfDays'>
+                  <Form.Label>No Of Days</Form.Label>
+                  <Form.Control type='number' placeholder='0'  value={noOfDays}
+                    onChange={(e) => setNoOfDays(e.target.value)} disabled></Form.Control>
+                </Form.Group>
+              </Form.Row>
+              
+              <Form.Row>
+              <Form.Group as={Col} controlId='startDate'>
 								<Form.Label>Start Date</Form.Label>
 								<Form.Control 
-									// placeholder={fromDate}
+									type='date'
                   value={fromDate}
                   onChange={(e) => setLeaveStartDate(e.target.value)}
-									disabled>
+                  disabled
+									>
 								</Form.Control>
 							</Form.Group>
 							<Form.Group as={Col} controlId='endDate'>
 								<Form.Label>End Date</Form.Label>
 								<Form.Control 
-									// placeholder={user.toDate}
+									type='date'
                   value={toDate}
                   onChange={(e) => setLeaveEndDate(e.target.value)}
 									disabled
 								></Form.Control>
 							</Form.Group>
-						</Form.Row>
-            <Form.Group controlId='description'>
-              <Form.Label>Detailed Reason For Leave Application</Form.Label>
-              <Form.Control 
-                as="textarea" 
-                rows={2} 
-                // style={{ backgroundColor: 'var(--input-field-color)' }}
-                // placeholder={user.reasonForLeave}
-                value={reasonForLeave}
-                onChange={(e) => setLeaveDescription(e.target.value)}
-                disabled
-							/>
-            </Form.Group>
-            <Form.Group controlId='status'>
-              <Form.Label>Status</Form.Label>
-              <Form.Control 
-                  as="select"
-                  custom 
-                  size='sm'
-                  value={leaveStatus}
-                  onChange={(e) => setLeaveStatus(e.target.value)}
-                  >
-                    <option value=''>Select Leave Status</option>
-                    <option value='approved'>APPROVED</option>
-                    <option value='reject'>REJECTED</option>
-                    <option value='pending'>PENDING</option>
-                </Form.Control>
-            </Form.Group>
-            <Button className='applyleave-btn mb-2 mr-3' type='submit'>
-              Update
-            </Button>
+              </Form.Row>
+              <Form.Group controlId='description'>
+                <Form.Label>Detailed Reason For Leave Application</Form.Label>
+                <Form.Control 
+                  as="textarea" 
+                  rows={4} 
+                  style={{ backgroundColor: 'var(--input-field-color)' }}
+                  value={reasonForLeave}
+                  onChange={(e) => setLeaveDescription(e.target.value)}
+                  disabled/>
+              </Form.Group>
+              {
+              approved ? (
+                <Link to='/leaveapplications' className='btn btn-light my-3 go-back-btn'>
+                    APPROVED || Go Back
+                </Link>
+              ) : rejected ? (
+                <Link to='/leaveapplications' className='btn btn-light my-3 go-back-btn'>
+                    REJECTED || Go Back
+                </Link>
+              ) :
+                <>
+                  <Button className='applyleave-btn mb-2 mr-3' type='submit'>
+                    Approve
+                  </Button>
+                  <Button className='mb-2 rejectleave-btn' onClick={handleShow} >
+                    Reject
+                  </Button>
+                   <Modal show={show} onHide={handleClose}>
+                  <div className='not-eligible'>
+              <div className='not-eligible-container'>
+        <Modal.Header closeButton>
+         
+          <Modal.Title>Reject Leave</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          
+                <i className="fas fa-exclamation-triangle fa-2x pb-3"></i><br/>
+          <p><h3>Are you sure you want to Reject!</h3></p>
+         
+          </Modal.Body>
+        <Modal.Footer>
+          <Button className='mb-2 rejectleave-btn' style={{ backgroundColor: '#e2522e', borderRadius: 50 }}  onClick={handleReject}>
+            Reject
+          </Button>
+        </Modal.Footer>
+         </div>
+          </div>
+      </Modal>
+                </>
+            }
           </Form>
-					
-      	</Col>
-      </Row>
+            </div>
+            <Footer />
+        </main>
+	    </div>
+    	
     </>
   )
 }

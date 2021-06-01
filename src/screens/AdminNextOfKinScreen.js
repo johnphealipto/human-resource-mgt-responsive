@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
-import { Button, Row, Col, Nav, Form } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { createNextOfKinEmpId, getNextOfKinDetailsEmpId, updateNextOfKin } from '../actions/nextOfKinActions'
 import { NOK_CREATE_EMPLOYEE_RESET, NOK_DETAILS_EMPLOYEE_RESET, NOK_UPDATE_RESET } from '../constants/nextOfKinConstants'
 import '../styles/FixedNavbar.css';
-import AdminHeader from '../components/AdminHeader';
+import Header from '../components/Header';
 import '../styles/ProfileScreen.css';
+import AdminFixedNavbar from '../components/AdminFixedNav';
 
 const AdminNextOfKinScreen = ({ history, match }) => {
     const userId = match.params.id
@@ -38,7 +38,7 @@ const AdminNextOfKinScreen = ({ history, match }) => {
 
     useEffect(() => {
 
-        if(userInfo  && (userInfo.role === 'hr' || userInfo.role === 'hr-manager' || userInfo.role === 'admin')) {
+        if(userInfo  && (userInfo.role === 'Human Resource Executive' || userInfo.role === 'CEO' || userInfo.role === 'Super Admin' || userInfo.role === 'Assistant Manager - Human Resources' || userInfo.role === 'Manager - Human Resources')) {
             
             if(successUpdate || successCreate) {
                 dispatch({
@@ -98,48 +98,31 @@ const AdminNextOfKinScreen = ({ history, match }) => {
         
     }
 
+    // ---- For the FixedNavBar
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    
+    const openSidebar = () => {
+      setSidebarOpen(true);
+    };
+    
+    const closeSidebar = () => {
+      setSidebarOpen(false);
+    };
+
 
     return (
         <>
-         
-        <Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-        <Col md={4} lg={2} className='d-none d-md-block'>
-        <div className="fixednavbar-wrapper">
-            <div className='employee-details'>
-                <p>{userInfo.role}</p>
-                <p>{userInfo.email}</p>
-            </div>
-        <Nav className="flex-column">
-        <NavLink to='/admin/userlist' exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-home pr-3"></i>
-          All Employees
-        </NavLink>
-        <NavLink to={`/admin/user/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="far fa-id-card pr-3"></i>
-          Details
-        </NavLink>
-        <NavLink to={`/admin/profile/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-user-circle pr-3"></i>
-          Profile
-        </NavLink>
-        <NavLink to={`/admin/education/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-user-friends pr-3"></i>
-          Education
-        </NavLink>
-        <NavLink to={`/admin/nextofkin/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-graduation-cap pr-3"></i>
-          Employee Next Of Kin
-        </NavLink>
-        </Nav>
-        </div>
-        </Col>
+          
+          <div className="dashboard-container">
 
-            <Col xs={12} md={8} lg={10}>
-                <AdminHeader
-                    userId
-                />
-                <h1 className='page-header'>Next Of Kin</h1>
-               
+            <Header sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
+            <AdminFixedNavbar userId={userId} sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
+
+            <main className='profilescreen-wrapper'>
+                <div className="dashboard-body">
+                <div className='allLeave-title'>
+                <h3>Next Of Kin</h3>
+                </div>
                 
                 {successUpdate && <Message variant='success'>Profile Updated</Message>}
                 {loading && <Loader />}
@@ -150,7 +133,7 @@ const AdminNextOfKinScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-4" controlId='firstname'>
                                 <Form.Label>Firstname</Form.Label>
                                 <Form.Control 
-                                type='firstname' 
+                                type='text' 
                             
                                 placeholder='Enter Firstname'
                                 value={firstname}
@@ -160,7 +143,7 @@ const AdminNextOfKinScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-4" controlId='lastname'>
                                 <Form.Label>Lastname</Form.Label>
                                 <Form.Control 
-                                type='lastname' 
+                                type='text' 
                                 
                                 placeholder='Enter Lastname'
                                 value={lastname}
@@ -186,7 +169,7 @@ const AdminNextOfKinScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-6" controlId='contact'>
                                 <Form.Label>Contact Number</Form.Label>
                                 <Form.Control 
-                                type='contact' 
+                                type='text' 
                                 placeholder='Enter Contact'
                                 value={contact}
                                 onChange={(e) => setContact(e.target.value)}
@@ -195,7 +178,7 @@ const AdminNextOfKinScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-6" controlId='relationship'>
                                 <Form.Label>Relationship</Form.Label>
                                 <Form.Control 
-                                type='relationship' 
+                                type='text' 
                                 placeholder='Enter Relationship'
                                 value={relationship}
                                 onChange={(e) => setRelationship(e.target.value)}
@@ -217,7 +200,7 @@ const AdminNextOfKinScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-4" controlId='firstname'>
                                 <Form.Label>Firstname</Form.Label>
                                 <Form.Control 
-                                type='firstname' 
+                                type='text' 
                             
                                 placeholder='Enter Firstname'
                                 value={firstname}
@@ -227,7 +210,7 @@ const AdminNextOfKinScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-4" controlId='lastname'>
                                 <Form.Label>Lastname</Form.Label>
                                 <Form.Control 
-                                type='lastname' 
+                                type='text' 
                                 
                                 placeholder='Enter Lastname'
                                 value={lastname}
@@ -253,7 +236,7 @@ const AdminNextOfKinScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-6" controlId='contact'>
                                 <Form.Label>Contact Number</Form.Label>
                                 <Form.Control 
-                                type='contact' 
+                                type='text' 
                                 placeholder='Enter Contact'
                                 value={contact}
                                 onChange={(e) => setContact(e.target.value)}
@@ -262,7 +245,7 @@ const AdminNextOfKinScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-6" controlId='relationship'>
                                 <Form.Label>Relationship</Form.Label>
                                 <Form.Control 
-                                type='relationship' 
+                                type='text' 
                                 placeholder='Enter Relationship'
                                 value={relationship}
                                 onChange={(e) => setRelationship(e.target.value)}
@@ -280,9 +263,11 @@ const AdminNextOfKinScreen = ({ history, match }) => {
                     </Form>
                     )
                 }
-                
-            </Col>
-        </Row>
+    
+                </div>
+            </main>
+        </div>
+       
         </>
     )
 }

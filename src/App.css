@@ -1,8 +1,89 @@
-.particles {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
+
+/* Loading Bar */
+.dpl-loading--container {
+	visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    background-color: transparent;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: .25rem;
+    transition: opacity ease-in-out 125ms 0ms,visibility ease-in-out 125ms 0ms;
+    z-index: 888;
+}
+.dpl-loading--container.\--is-active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.dpl-loading--container.\--is-active .dpl-loading--progress {
+	animation: loading-bar 3s ease-in-out 0s forwards;
+}
+
+.dpl-loading--container.\--is-active .dpl-loading--progress.--is-infinite {
+	animation: loading-bar-alternate 3s ease-in-out 0s forwards;
+}
+
+.dpl-loading--progress {
+	display: block;
+  height: .2rem;
+  background: linear-gradient(90deg, #3670bc, var(--background-blue-color));
+  transform-origin: left;
+  will-change: transform;
+}
+
+
+
+@keyframes loading-bar-alternate {
+    0% {
+        transform: scaleX(0);
+		transform-origin: left;
+    }
+    10% {
+        transform: scaleX(.2);
+		transform-origin: left;
+    }
+    20% {
+        transform: scaleX(.6);
+		transform-origin: left;
+    }
+    50% {
+        transform: scaleX(1);
+		transform-origin: left;
+    }
+	51% {
+		transform: scalex(1);
+		transform-origin: right;
+	}
+	80% {
+		transform: scalex(.5);
+		transform-origin: right;
+	}
+	90% {
+		transform: scalex(.2);
+		transform-origin: right;
+	}
+	100% {
+		transform: scalex(0);
+		transform-origin: right;
+	}
+	
+}
+
+/* Loading bar styles needed to place the bar in the codepen */
+.loadingbar--container {
+	position: relative;
+}
+
+.loadingbar--container.position-relative .dpl-loading--container {
+	position: relative;
+}
+
+
+
+/* Repeat class to make animations loop */
+.repeat,
+.repeat::after {
+	animation-iteration-count: infinite !important;
 }

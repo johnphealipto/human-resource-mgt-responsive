@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
-import { Form, Button, Row, Col, Nav } from 'react-bootstrap'
+import moment from 'moment'
+import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import { getUserDetailsById, updateUser } from '../actions/userActions'
 import { USER_DETAILS_ID_RESET, USER_UPDATE_RESET } from '../constants/userConstants'
 import '../styles/FixedNavbar.css';
-import AdminHeader from '../components/AdminHeader';
 import '../styles/ProfileScreen.css';
+import Header from '../components/Header';
+import AdminFixedNavbar from '../components/AdminFixedNav';
+
 
 
 const StaffEditScreen = ({ history, match }) => {
@@ -22,6 +24,8 @@ const StaffEditScreen = ({ history, match }) => {
     const [role, setRole] = useState('')    
     const [department, setDepartment] = useState('')    
     const [employeeCode, setEmployeeCode] = useState('')  
+    const [dateOfJoining, setDateOfJoining] = useState('')
+    const [leaveDays, setLeaveDays] = useState(0)
 
     const dispatch = useDispatch()
 
@@ -29,13 +33,13 @@ const StaffEditScreen = ({ history, match }) => {
     const { userInfo } = userLogin
 
     const userUpdate = useSelector(state => state.userUpdate)
-    const { success:successUpdate } = userUpdate
+    const { success:successUpdate, error:errorUpdate } = userUpdate
 
     const userDetailsById = useSelector(state => state.userDetailsById)
     const { error, user } = userDetailsById
 
     useEffect(() => {
-        if (userInfo  && (userInfo.role === 'hr' || userInfo.role === 'hr-manager' || userInfo.role === 'admin')) {
+        if (userInfo  && (userInfo.role === 'Human Resource Executive' || userInfo.role === 'CEO' || userInfo.role === 'Super Admin' || userInfo.role === 'Assistant Manager - Human Resources' || userInfo.role === 'Manager - Human Resources')) {
             
            
             if(successUpdate) {
@@ -57,6 +61,8 @@ const StaffEditScreen = ({ history, match }) => {
                 setRole(user.employee.role)
                 setDepartment(user.employee.department)
                 setEmployeeCode(user.employee.employeeCode)
+                setDateOfJoining(moment(user.employee.dateOfJoining).format("YYYY-MM-DD"))
+                setLeaveDays(user.employee.leaveDays)
 
             }
         }
@@ -74,55 +80,42 @@ const StaffEditScreen = ({ history, match }) => {
             middlename,
             lastname,
             email,
+            dateOfJoining,
            role,
            employeeCode,
+           leaveDays,
            department
         }))
-        history.push('/admin/userlist')
+        // history.push('/admin/userlist')
     }
+    
+    // ---- For the FixedNavBar
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    
+    const openSidebar = () => {
+      setSidebarOpen(true);
+    };
+    
+    const closeSidebar = () => {
+      setSidebarOpen(false);
+    };
 
     return (
         <>
-            {user.employee  && (
-            <Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-                <Col md={4} lg={2} className='d-none d-md-block'>
-            <div className="fixednavbar-wrapper">
-            <div className='employee-details'>
-                <p>{userInfo.role}</p>
-                <p>{userInfo.email}</p>
-            </div>
-        <Nav className="flex-column">
-        <NavLink to='/admin/userlist' exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-home pr-3"></i>
-          All Employees
-        </NavLink>
-        <NavLink to={`/admin/user/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="far fa-id-card pr-3"></i>
-          Details
-        </NavLink>
-        <NavLink to={`/admin/profile/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-user-circle pr-3"></i>
-          Profile
-        </NavLink>
-        <NavLink to={`/admin/education/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-graduation-cap pr-3"></i>
-          Education
-        </NavLink>
-        <NavLink to={`/admin/nextofkin/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-user-friends pr-3"></i>
-          Employee Next Of Kin
-        </NavLink>
-        </Nav>
-        </div>
-            </Col>
-           
-            <Col xs={12} md={8} lg={10}>
-                <AdminHeader
-                    userId
-                />
-                <h1 className='page-header'>Update {user.employee.firstname}'s Record</h1>
-               
+        <div className="dashboard-container">
+
+			<Header sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
+            <AdminFixedNavbar userId={userId} sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
+		  
+        {user.employee  && (
+			<main className='profilescreen-wrapper'>
+				<div className="dashboard-body">
+                    <div className='allLeave-title'>
+				<h3>
+                Update {user.employee.firstname}'s Record</h3>
+               </div>
                 {error && <Message variant='danger'>{error}</Message>}
+                {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
                 {successUpdate && <Message variant='success'>Profile Created</Message>}
                 
                 <Form onSubmit={submitHandler} className="form-shadow">
@@ -130,7 +123,7 @@ const StaffEditScreen = ({ history, match }) => {
                         <Form.Group  className="col-md-4" controlId='firstname'>
                             <Form.Label>First Name</Form.Label>
                             <Form.Control 
-                            type='firstname' 
+                            type='text' 
                            
                             placeholder='Enter First name'
                             value={firstname}
@@ -140,7 +133,7 @@ const StaffEditScreen = ({ history, match }) => {
                         <Form.Group  className="col-md-4" controlId='middlename'>
                             <Form.Label>Middle Name</Form.Label>
                             <Form.Control 
-                            type='middlename' 
+                            type='text' 
                             
                             placeholder='Enter Middle name'
                             value={middlename}
@@ -150,7 +143,7 @@ const StaffEditScreen = ({ history, match }) => {
                         <Form.Group  className="col-md-4" controlId='lastname'>
                             <Form.Label>Last Name</Form.Label>
                             <Form.Control 
-                            type='lastname' 
+                            type='text' 
                             
                             placeholder='Enter Last name'
                             value={lastname}
@@ -177,13 +170,26 @@ const StaffEditScreen = ({ history, match }) => {
                             value={department}
                             onChange={(e) => setDepartment(e.target.value)}>
                                 <option value=''>Select...</option>
-                                <option value='IT'>IT</option>
-                                <option value='PROJECT'>PROJECT</option>
-                                <option value='HR'>HR</option>
+                                <option value='Admin'>Admin</option>
+                                <option value='Sales'>Sales</option>
                                 <option value='MIS'>MIS</option>
-                                <option value='QUALITY-ASSURANCE'>QUALITY-ASSURANCE</option>
-                                <option value='TRAINING'>TRAINING</option>
-                                <option value='ADMIN'>ADMIN</option>
+                                <option value='Projects'>Projects</option>
+                                <option value='Operations'>Operations</option>
+                                <option value='QA'>QA</option>
+                                <option value='Customer Service'>Customer Service</option>
+                                <option value='Human Resources'>Human Resources</option>
+                                <option value='IT'>IT</option>
+                                <option value='Training & Development'>Training & Development</option>
+                                <option value='Accounts'>Accounts</option>
+                                <option value='Enugu - MCN'>Enugu - MCN</option>
+                                <option value='Branch'>Branch</option>
+                                <option value='Multichoice'>Multichoice</option>
+                                <option value='Ntel'>Ntel</option>
+                                <option value='Fairmoney'>Fairmoney</option>
+                                <option value='KYC'>KYC</option>
+                                <option value='Sim swap'>Sim swap</option>
+                                <option value='Enterprise'>Enterprise</option>
+                                <option value='Access bank'>Access bank</option>
                                 <option value='OUTCESS'>OUTCESS</option>
 
                             </Form.Control>
@@ -191,7 +197,7 @@ const StaffEditScreen = ({ history, match }) => {
                         <Form.Group  className="col-md-4" controlId='employeeCode'>
                             <Form.Label>Employee Code</Form.Label>
                             <Form.Control 
-                            type='employeeCode' 
+                            type='text' 
                             placeholder='Enter Employee Code'
                             value={employeeCode}
                             onChange={(e) => setEmployeeCode(e.target.value)}
@@ -200,7 +206,7 @@ const StaffEditScreen = ({ history, match }) => {
                         
                     </Form.Row>
                     <Form.Row>
-                        <Form.Group as={Col} controlId="formGridRole">
+                        <Form.Group className="col-md-4" controlId="formGridRole">
                             <Form.Label>Role</Form.Label>
                             <Form.Control 
                             as="select" 
@@ -208,18 +214,42 @@ const StaffEditScreen = ({ history, match }) => {
                             value={role}
                             onChange={(e) => setRole(e.target.value)}>
                                 <option value=''>Select...</option>
-                                <option value='hr'>HR</option>
-                                <option value='employee'>EMPLOYEE</option>
-                                <option value='supervisor'>SUPERVISOR</option>
-                                <option value='admin'>ADMIN</option>
-                                <option value='hr-manager'>HR-MANAGER</option>
-                                <option value='trainer'>TRAINER</option>
-                                <option value='team-lead'>TEAM-LEAD</option>
-                                <option value='asst-manager'>ASST-MANAGER</option>
-                                <option value='IT-Support'>IT-SUPPORT</option>
-                                <option value='agent'>AGENT</option>
-                                <option value='manager'>MANAGER</option>
+                                <option value='Admin Executive'>Admin Executive</option>
+                                <option value='Sales Executive'>Sales Executive</option>
+                                <option value='MIS Executive'>MIS Executive</option>
+                                <option value='Projects Executive'>Projects Executive</option>
+                                <option value='Team Lead'>Team Lead</option>
+                                <option value='Quality Assessor'>Quality Assessor</option>
+                                <option value='Customer Service Officer'>Customer Service Officer</option>
+                                <option value='Assistant Manager - Human Resources'>Assistant Manager - Human Resources</option>
+                                <option value='IT Support Specialist'>IT Support Specialist</option>
+                                <option value='Frontdesk/Recruitment officer'>Frontdesk/Recruitment officer</option>
+                                <option value='Trainer'>Trainer</option>
+                                <option value='Human Resource Executive'>Human Resource Executive</option>
+                                <option value='Software Developer (Intern)'>Software Developer (Intern)</option>
+                                <option value='Accounts Officer'>Accounts Officer</option>
+                                <option value='Accountant'>Accountant</option>
+                                <option value='Head Of Department'>Head Of Department</option>
+                                <option value='Assistant Manager'>Assistant Manager</option>
+                                <option value='CEO'>CEO</option>
+                                <option value='Agent'>Agent</option>
                             </Form.Control>
+                        </Form.Group>
+                        <Form.Group  className="col-md-4" controlId='dateOfJoining'>
+                            <Form.Label>Date Of Joining</Form.Label>
+                            <Form.Control 
+                                type='date' 
+                                placeholder='Enter Date Of Joining'
+                                value={dateOfJoining}
+                                onChange={(e) => setDateOfJoining(e.target.value)} />
+                        </Form.Group>
+                        <Form.Group  className="col-md-4" controlId='leaveDays'>
+                            <Form.Label>Leave Balance</Form.Label>
+                            <Form.Control 
+                                type='number' 
+                                placeholder='Enter Leave Days Balance'
+                                value={leaveDays}
+                                onChange={(e) => setLeaveDays(e.target.value)} />
                         </Form.Group>
                         
                     </Form.Row>
@@ -227,11 +257,10 @@ const StaffEditScreen = ({ history, match }) => {
                         Update
                     </Button>
                 </Form>
-            </Col>
-                 
-        </Row>
-        )
-        }
+            </div>
+        </main>
+        )}
+	</div>
         </>
     )
 }

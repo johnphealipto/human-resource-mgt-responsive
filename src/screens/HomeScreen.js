@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom'
-import { Button, Row, Col, Form } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserDetails } from '../actions/userActions'
+import { getUserDetails } from '../actions/userActions';
+import "../styles/Main.css";
 import '../styles/ProfileScreen.css';
 import Header from '../components/Header';
 import FixedNavbar from '../components/FixedNavbar';
+import hello from "../img/hello.svg";
+import Footer from '../components/Footer';
 
 const HomeScreen = ({ history }) => {
    
@@ -15,104 +16,119 @@ const HomeScreen = ({ history }) => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    const userDetails = useSelector(state => state.userDetails)
-    const { user } = userDetails
-
     useEffect(() => {
 
         if(!userInfo) {
             history.push('/')
-        } else {
-            dispatch(getUserDetails('me'))
-        }
-    }, [dispatch, history, user, userInfo])
+        } 
+    }, [history, userInfo])
+
+
+    // ---- For the FixedNavBar
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    
+    const openSidebar = () => {
+      setSidebarOpen(true);
+    };
+    
+    const closeSidebar = () => {
+      setSidebarOpen(false);
+    };
+
 
   return (
-    <>  
-      <Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-        <Col md={4} lg={2} className='d-none d-md-block'>
-          <FixedNavbar />
-        </Col>
-        <Col xs={12} md={8} lg={10}>
-          <Header />
-          <h1 className='page-header'>Home</h1>
-          
-          <Form key={user.id} className="form-container form-shadow">
-                <Form.Row>
-                  <Form.Group className="col-md-4">
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control 
-                    	type="text"
-                    	placeholder={user.firstname}
-                      disabled
-                    ></Form.Control>
-                  </Form.Group>
-                  <Form.Group className="col-md-4">
-                    <Form.Label>Middle Name</Form.Label>
-                    <Form.Control 
-                      type="text"
-                      placeholder={user.middlename}
-                      disabled
-                    ></Form.Control>
-                  </Form.Group>
-                  <Form.Group className="col-md-4">
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control 
-                    	type="text"
-                    	placeholder={user.lastname}
-                      disabled
-                    ></Form.Control>
-                  </Form.Group>
-                </Form.Row>
+    <div className="dashboard-container">
+        <Header sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
+        <FixedNavbar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
+        
+        <main>
+            <div className="dashboard-body">
+                <div className="dashboard-title">
+                <img src={hello} alt="hello" />
+                <div className="dashboard-greeting">
+                    <h1>Hello {userInfo.firstname}</h1>
+                    <p>Welcome to your admin dashboard</p>
+                </div>
+                </div>
+                <div className="dashboard-cards">
+                <div className="card">
+                    <i className="fas fa-user-check fa-2x"></i>
+                    <div className="card-inner">
+                    <p>Attendance</p>
+                    <span className="font-bold text-title"></span>
+                    </div>
+                </div>
 
-                <Form.Row>
-                  <Form.Group className="col-md-6">
-                    <Form.Label>Employee ID</Form.Label>
-                    <Form.Control 
-                      type="text"
-                      placeholder={user.employeeCode}
-                      disabled
-                    ></Form.Control>
-                	</Form.Group>
-                	<Form.Group className="col-md-6">
-                    <Form.Label>Department</Form.Label>
-                    <Form.Control 
-                      type="text"
-                      placeholder={user.department}
-                      disabled
-                    ></Form.Control>
-                  </Form.Group>
-                </Form.Row>
-                <Form.Row>
-                  <Form.Group className="col-md-6">
-                    <Form.Label>Role</Form.Label>
-                    <Form.Control 
-                      type="text"
-                      placeholder={user.role}
-                      disabled
-                    ></Form.Control>
-                	</Form.Group>
-                	<Form.Group className="col-md-6">
-                    <Form.Label>Mail Addresss</Form.Label>
-                    <Form.Control 
-                      type="text"
-                      placeholder={user.email}
-                      disabled
-                    ></Form.Control>
-                  </Form.Group>
-                </Form.Row>
-                {userInfo && (
-                <Link to='/dashboard'>
-                    <Button type='submit' variant='primary' className='btn-block'>
-                        <i className='fas fa-edit'></i> Edit
-                    </Button>
-                </Link>
-                )}
-              </Form>
-        </Col>
-        </Row>
-        </>
-    )
+                <div className="card">
+                    <i className="fa fa-calendar fa-2x"></i>
+                    <div className="card-inner">
+                    <p>Conversions</p>
+                    <span className="font-bold text-title"></span>
+                    </div>
+                </div>
+
+                <div className="card">
+                    <i className="fas fa-chart-line fa-2x"></i>
+                    <div className="card-inner">
+                    <p>Average Perfomance</p>
+                    <span className="font-bold text-title"></span>
+                    </div>
+                </div>
+
+                <div className="card">
+                    <i className="fa fa-thumbs-up fa-2x"></i>
+                    <div className="card-inner">
+                    <p>Number of recommendations</p>
+                    <span className="font-bold text-title"></span>
+                    </div>
+                </div>
+                </div>
+
+                <div className="charts">
+                <div className="charts-left">
+                    <div className="charts-left-title">
+                    <div>
+                        <h1>daily Reports</h1>
+                        <p>Opebi, Lagos, Nigeria</p>
+                    </div>
+                    <i className="fa fa-usd"></i>
+                    </div>
+                </div>
+                <div className="charts-right">
+                    <div className="charts-right-title">
+                    <div>
+                        <h1>daily Reports</h1>
+                        <p>Opebi, Lagos, Nigeria</p>
+                    </div>
+                    <i className="fa fa-usd"></i>
+                    </div>
+
+                    <div className="charts-right-cards">
+                    <div className="card1">
+                        <h1>Income</h1>
+                        <p></p>
+                    </div>
+                    <div className="card2">
+                        <h1>Sales</h1>
+                        <p></p>
+                    </div>
+                    <div className="card3">
+                        <h1>Users</h1>
+                        <p></p>
+                    </div>
+                    <div className="card4">
+                        <h1>Plans</h1>
+                        <p></p>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <Footer />
+        </main>
+      
+    </div>
+  )
 }
 
 export default HomeScreen;

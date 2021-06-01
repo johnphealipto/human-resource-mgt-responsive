@@ -1,0 +1,343 @@
+.kpi-body {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr;
+  column-gap: 1.5rem;
+  grid-template-areas: "kpi-performance kpi-legend";
+}
+.kpi-performance-section {
+  grid-area: kpi-performance;
+  display: flex;
+  flex-direction: column;
+}
+.add-field-btn {
+  float: right;
+}
+.add-field-btn,
+.KPI-submit-btn {
+  background-color: #e2522e;
+  color: #ffff;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15), 0 0 2px rgba(0, 0, 0, 0.15),
+    0 0 16px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+}
+.add-field-btn:hover,
+.KPI-submit-btn:hover,
+.KPI-close-btn:hover {
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15), 0 0 2px rgba(0, 0, 0, 0.15),
+    0 0 4px rgba(0, 0, 0, 0.15), 0 0 16px rgba(0, 0, 0, 0.15),
+    0 0 32px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+}
+.key-performance-box {
+  background-color: #ffff;
+  margin-top: 10px;
+  padding: 20px 30px;
+  border-radius: 3px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.05), 0 0 2px rgba(0, 0, 0, 0.05),
+    0 0 4px rgba(0, 0, 0, 0.05);
+}
+.key-perf-title {
+  display: grid;
+  grid-template-columns: 25rem 3.5rem 5rem;
+  column-gap: 10px;
+  margin-bottom: -10px;
+  font-weight: 600;
+  font-size: medium;
+  color: #5c5c5c;
+}
+.key-performance-box .performance-field {
+  margin: 20px 0;
+}
+.key-performance-box form {
+  max-height: 55vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.performance-field {
+  display: grid;
+  grid-template-columns: 25rem 3.5rem 3.5rem;
+  column-gap: 10px;
+}
+.performance-field {
+  animation: 0.4s customPerf;
+}
+@keyframes customPerf {
+  0% {
+    margin-top: -15px;
+  }
+  100% {
+    margin-top: 20px;
+  }
+}
+.key-performance-box input[type="text"],
+.key-performance-box input[value="x"],
+.key-performance-box textarea {
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 0 2px #e8e8e8;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+}
+.key-performance-box input[type="number"] {
+  outline: none;
+  padding-left: 20px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 0 2px #e8e8e8;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+}
+.key-performance-box input[value="x"] {
+  background-color: #e8e8e8;
+  border: none;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+}
+.key-performance-box textarea {
+  width: 25rem;
+  margin-bottom: 20px;
+}
+.key-performance-box form input[type="text"]:focus,
+.key-performance-box form textarea:focus {
+  outline: none;
+  border: 1px solid #e2522e;
+  box-shadow: 0 0 2px #e2522e;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+}
+.key-performance-box .inputField::-webkit-input-placeholder {
+  color: #d1d1d1;
+}
+.key-performance-box .inputField::-ms-input-placeholder {
+  color: #d1d1d1;
+}
+.key-performance-box .inputField::placeholder {
+  color: #d1d1d1;
+}
+
+/* --- KPI Legend--- */
+.kpi-legend-section {
+  grid-area: kpi-legend;
+}
+.grading-system {
+  background-color: #dfedff;
+  border-radius: 3px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.05), 0 0 2px rgba(0, 0, 0, 0.05),
+    0 0 4px rgba(0, 0, 0, 0.05);
+}
+.grading-system-title {
+  padding: 0 25px;
+  padding-top: 10px;
+}
+.grading-system-title > p {
+  color: #124383;
+  font-weight: 600;
+  font-size: medium;
+}
+.grading-system-body {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+.grading-system-body p:nth-child(odd) {
+  color: #5c5c5c;
+  font-size: medium;
+  font-weight: bold;
+  text-align: center;
+  border-right: 1px solid #ffffff;
+}
+.grading-system-body p:nth-child(even) {
+  color: #5c5c5c;
+  font-size: medium;
+  font-weight: 500;
+}
+.grading-system-body p {
+  border-top: 1px solid #ffffff;
+  padding: 12px;
+  margin: 0;
+}
+
+.kpi-summary {
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 15px 25px;
+  margin-top: 1rem;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.05), 0 0 2px rgba(0, 0, 0, 0.05),
+    0 0 4px rgba(0, 0, 0, 0.05);
+}
+.kpi-summary-title p {
+  color: #080808;
+  font-weight: 600;
+  font-size: medium;
+}
+.kpi-summary-body {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+}
+.kpi-summary-body p:nth-child(odd) {
+  color: #818181;
+  font-weight: 500;
+  border-right: 1px solid #ffffff;
+}
+.kpi-summary-body p:nth-child(even) {
+  color: #e2522e;
+  font-weight: bold;
+}
+.kpi-info-title p {
+  font-size: medium;
+  margin: 0;
+}
+.kpi-info-title {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+.kpi-info-title p:nth-child(odd) {
+  color: #818181; 
+}
+.kpi-info-title p:nth-child(even) {
+  color:#242424;
+}
+
+
+/* --- Confirmation Modal --- */
+.kpi-modal .modal-content {
+  background-color: #fff;
+  border-radius: 5px;
+}
+.kpi-modal .modal-title {
+  color: #5c5c5c;
+  font-size: medium;
+}
+.kpi-modal .modal-body {
+  color: #5c5c5c !important;
+  margin: 0 auto;
+  text-align: center;
+  padding: 15px;
+}
+.kpi-modal .modal-body p {
+  font-weight: bold;
+  margin: 0;
+}
+.kpi-modal .modal-body p:first-child {
+  font-size: x-large;
+  margin-bottom: 15px;
+}
+.kpi-modal .modal-body p:nth-child(2),
+.kpi-modal .modal-body p:nth-child(3) {
+  font-size: medium;
+}
+.kpi-modal .modal-body p:nth-child(3) {
+  margin-bottom: 30px;
+}
+.KPI-close-btn {
+  background-color: #124383;
+  color: #ffff;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15), 0 0 2px rgba(0, 0, 0, 0.15),
+    0 0 16px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+}
+
+
+/* --- Styles for KPI Overview --- */
+.EmployeeDetailsKpi{
+  padding: 20px 20px;
+  background-color: #fff;
+  height: 100vh;
+}
+.EmpCardText{
+  display: flex;
+  font-size: 14px;
+  
+}
+.EmpCardText P{
+  font-weight: bold;
+  letter-spacing: normal;
+  font-size: 14px !important;
+  margin: 1px ;
+  padding: 0px 0px;
+}
+.EmpCardText Span{
+  margin-left: 10px;
+  letter-spacing: normal;
+}
+/* .EmpCardText  p{
+  padding: 3px 0px;
+} */
+.employeeDetailsCard{
+  padding: 20px 20px;
+  width: 30%;
+  background-color: #F6f6f6;
+}
+.HrKpiHeader{
+
+height: 20%;
+box-shadow: none !important;
+background-color: #c4c4c4 !important;
+padding: 2px !important;
+border: none !important;
+}
+.table{
+  margin-top: 30px !important;
+}
+.table tbody tr{
+  border: none !important;
+}
+#title{
+  border: 1px solid #e8e8e8;
+  padding: 4px 8px;
+  color: #5c5c5c;
+  font-size: 12px;
+  width: 35%;
+  height: 50%;
+  margin-top: 5px;
+}
+
+.over td{
+  padding: 10px;
+}
+.agent-details-kpi{
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 12px;
+  text-transform: none;
+  
+  background-color: #c4c4c4;
+}
+.agent-details-kpi:hover{
+  background-color: #c94322;
+}
+.hrempdetail-btn{
+  font-size: 14px;
+  padding: 5px 20px;
+  border-radius: 3px;
+  margin-top: 15px;
+  background-color: #e2522e !important;
+}
+.title-head{
+  display: grid;
+  grid-template-columns: 3.5rem 3.5rem 3.5rem 3.5rem;
+  grid-column-gap: 30px ;
+  column-gap: 30px;
+}
+.hrcomments{
+  margin-top: 25px;
+}
+.empdetailsform p{
+  color: #5c5c5c;
+  font-weight: bold;
+  margin: 2px 0px;
+}

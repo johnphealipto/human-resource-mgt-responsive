@@ -1,0 +1,170 @@
+.pagedown {
+  max-height: 100%;
+  background-color: #e2522e;
+}
+
+.chat-screen-wrapper {
+  margin-top: 8.5vh;
+  padding: 0 5vh;
+}
+.chat-screen-head {
+  display: flex;
+  justify-content: space-between;
+}
+.chat-screen-head-text h3 {
+  text-transform: capitalize;
+}
+.chat-screen-head-text p {
+  font-size: 1.2rem;
+}
+.chat-screen-head-text h3,
+.chat-screen-head-text p {
+  color: var(--background-blue-color);
+}
+.messaging-modal .modal-content {
+  background-color: var(--background-white-color);
+  border-radius: 5px;
+}
+.messaging-modal .modal-content .modal-title {
+  color: var(--background-blue-color);
+}
+
+.messaging-modal form input,
+.messaging-modal form textarea {
+  margin-bottom: 1vh;
+  background-color: var(--input-field-color);
+  border-radius: 5px;
+}
+.messaging-modal form input:focus,
+.messaging-modal form textarea:focus {
+  background-color: var(--input-field-color);
+  border: 1px solid #e2522e;
+  box-shadow: 0 0 2px #e2522e;
+}
+button.msg-btn {
+  background-color: var(--background-blue-color);
+  border-radius: 5px;
+}
+button.msg-btn:hover,
+button.msg-btn:focus,
+button.msg-btn:active {
+  background-color: var(--background-blue-color);
+}
+
+/* --- Support Messaging --- */
+.messaging .messaging-box {
+  background-color: white;
+  max-width: 900px;
+  margin: auto;
+  /* padding: 15px 30px; */
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05), 2px 2px 2px rgba(0, 0, 0, 0.05),
+    -1px -1px 2px rgba(0, 0, 0, 0.05), -2px -2px 4px rgba(0, 0, 0, 0.05);
+}
+.messaging .messaging-box h4 {
+  color: var(--background-blue-color);
+  text-transform: capitalize;
+  padding: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+.messaging .messaging-container {
+  height: 45vh;
+  padding: 15px 40px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.sender-details {
+  margin-top: -2vh !important;
+}
+.sender-details span {
+  font-size: 12px;
+
+  font-weight: normal;
+  color: #5c5c5c;
+}
+#msg-date{
+  float: right;
+  /* margin-bottom: -40px; */
+}
+.lll {
+  /* display: inline-block; */
+}
+/* .ddd {
+  display: flex;
+  justify-content: flex-end;
+} */
+/* .kkk {
+  display: inline-block;
+  justify-content: flex-end;
+} */
+.msg-wrapper {
+  margin-bottom: 20px;
+  background-color: #f8f8f8;
+  border: 1px solid #e8e8e8;
+  color: #000;
+  width: fit-content;
+  font-size: 14px;
+  padding: 12px;
+  border-radius: 3px 3px 3px 0;
+}
+
+.msg-wrapper-reply {
+  margin-top: 20px;
+  width: 100%;
+  font-size: 14px;
+  background-color: #e87a5f;
+  color: #fff;
+  padding: 12px;
+  border-radius: 5px 5px 0px 5px;
+}
+
+.messaging .messaging-box {
+  color: #eeeeee;
+  padding: 12px;
+  border-radius: 5px 5px 5px 0;
+}
+.messaging .messaging-form {
+  padding: 5px 40px;
+  padding-top: 10px;
+}
+.messaging form.messaging-input-field {
+  background-color: rgba(0, 0, 0, 0) !important;
+  padding: 0 !important;
+  padding-top: 5vh;
+  /* border-radius: 5px; */
+}
+.messaging input {
+  border-radius: 5px 0 0 5px !important;
+}
+.messaging input,
+.messaging .input-group-text {
+  height: 50px !important;
+}
+.messaging .input-group-text {
+  background-color: var(--background-blue-color);
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+}
+.messaging form button.send-btn {
+  background-color: none !important;
+  letter-spacing: 0 !important;
+  border-radius: 0 !important;
+  width: 12px !important;
+  margin-top: 0 !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(0, 0, 0, 0),
+    0px 0px 0px rgba(0, 0, 0, 0);
+}
+.messaging form button.send-btn:hover,
+.messaging form button.send-btn:focus,
+.messaging form button.send-btn:active,
+.messaging form button.send-btn:visited {
+  background-color: var(--background-blue-color) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(0, 0, 0, 0),
+    0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(0, 0, 0, 0),
+    0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+}

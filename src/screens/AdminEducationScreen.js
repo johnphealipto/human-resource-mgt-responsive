@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom'
-import { Button, Row, Col, Nav, Form } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { EDUCATION_CREATE_EMPLOYEE_RESET, EDUCATION_DETAILS_EMPLOYEE_RESET, EDUCATION_UPDATE_RESET } from '../constants/educationConstants'
 import { createEducationEmpId, getEducationDetailsEmpId, updateEducation } from '../actions/educationActions'
 import '../styles/FixedNavbar.css';
-import AdminHeader from '../components/AdminHeader';
+import Header from '../components/Header';
 import '../styles/ProfileScreen.css';
+import AdminFixedNavbar from '../components/AdminFixedNav';
+
 
 const AdminEducationScreen = ({ history, match }) => {
     const userId = match.params.id
@@ -36,7 +37,7 @@ const AdminEducationScreen = ({ history, match }) => {
 
     useEffect(() => {
 
-        if(userInfo  && (userInfo.role === 'hr' || userInfo.role === 'hr-manager' || userInfo.role === 'admin')) {
+        if(userInfo  && (userInfo.role === 'Human Resource Executive' || userInfo.role === 'CEO' || userInfo.role === 'Super Admin' || userInfo.role === 'Assistant Manager - Human Resources' || userInfo.role === 'Manager - Human Resources')) {
             
             if(successUpdate || successCreate) {
                 dispatch({
@@ -85,49 +86,33 @@ const AdminEducationScreen = ({ history, match }) => {
            professionalMembership,
            yearOfGraduation
         }))
+       
     }
+
+    // ---- For the FixedNavBar
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    
+    const openSidebar = () => {
+      setSidebarOpen(true);
+    };
+    
+    const closeSidebar = () => {
+      setSidebarOpen(false);
+    };
 
     return (
         <>
          
-        <Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-        <Col md={4} lg={2} className='d-none d-md-block'>
-        <div className="fixednavbar-wrapper">
-            <div className='employee-details'>
-                <p>{userInfo.role}</p>
-                <p>{userInfo.email}</p>
-            </div>
-        <Nav className="flex-column">
-        <NavLink to='/admin/userlist' exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-home pr-3"></i>
-          All Employees
-        </NavLink>
-        <NavLink to={`/admin/user/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="far fa-id-card pr-3"></i>
-          Details
-        </NavLink>
-        <NavLink to={`/admin/profile/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-user-circle pr-3"></i>
-          Profile
-        </NavLink>
-        <NavLink to={`/admin/education/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-user-friends pr-3"></i>
-          Education
-        </NavLink>
-        <NavLink to={`/admin/nextofkin/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-graduation-cap pr-3"></i>
-          Employee Next Of Kin
-        </NavLink>
-        </Nav>
-        </div>
-        </Col>
+        <div className="dashboard-container">
 
-        <Col xs={12} md={8} lg={10}>
-                <AdminHeader
-                    userId
-                />
-                <h1 className='page-header'>Education</h1>
-               
+            <Header sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
+            <AdminFixedNavbar userId={userId} sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
+
+            <main className='profilescreen-wrapper'>
+                <div className="dashboard-body">
+                <div className='allLeave-title'>
+                <h3>Education</h3>
+                </div>
                
                 {successUpdate && <Message variant='success'>Profile Updated</Message>}
                 {loading && <Loader />}
@@ -138,7 +123,7 @@ const AdminEducationScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-6" controlId='institutionAttended'>
                                 <Form.Label>Institution Attended</Form.Label>
                                 <Form.Control 
-                                type='institutionAttended' 
+                                type='text' 
                             
                                 placeholder='Enter Institution Attended'
                                 value={institutionAttended}
@@ -148,19 +133,23 @@ const AdminEducationScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-6" controlId='courseOfStudy'>
                                 <Form.Label>Course Of Study</Form.Label>
                                 <Form.Control 
-                                type='courseOfStudy' 
+                                type='text' 
                                 
                                 placeholder='Enter Course Of Study'
                                 value={courseOfStudy}
                                 onChange={(e) => setCourseOfStudy(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
+                            
+                            
+                    
+                            
                         </Form.Row>
                         <Form.Row>
                             <Form.Group  className="col-md-6" controlId='professionalMembership'>
                                 <Form.Label>Professional Membership</Form.Label>
                                 <Form.Control 
-                                type='professionalMembership' 
+                                type='text' 
                                 
                                 placeholder='Enter Professional Membership'
                                 value={professionalMembership}
@@ -190,7 +179,7 @@ const AdminEducationScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-6" controlId='institutionAttended'>
                                 <Form.Label>Institution Attended</Form.Label>
                                 <Form.Control 
-                                type='institutionAttended' 
+                                type='text' 
                             
                                 placeholder='Enter Institution ATtended'
                                 value={institutionAttended}
@@ -200,7 +189,7 @@ const AdminEducationScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-6" controlId='courseOfStudy'>
                                 <Form.Label>Course Of Study</Form.Label>
                                 <Form.Control 
-                                type='courseOfStudy' 
+                                type='text' 
                                 
                                 placeholder='Enter Course Of Study'
                                 value={courseOfStudy}
@@ -216,7 +205,7 @@ const AdminEducationScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-6" controlId='professionalMembership'>
                                 <Form.Label>Professional Membership</Form.Label>
                                 <Form.Control 
-                                type='professionalMembership' 
+                                type='text' 
                                 
                                 placeholder='Enter Professional Membership'
                                 value={professionalMembership}
@@ -244,8 +233,9 @@ const AdminEducationScreen = ({ history, match }) => {
                     )
                 }
                 
-            </Col>
-        </Row>
+            </div>
+        </main>
+        </div>
         </>
     )
 }

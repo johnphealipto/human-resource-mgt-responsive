@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -19,6 +19,7 @@ const StaffCreateScreen = ({ history }) => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [role, setRole] = useState('')
+    const [leaveDays, setLeaveDays] = useState(0)
     
     const [message, setMessage] = useState(null)
     const dispatch = useDispatch()
@@ -30,7 +31,7 @@ const StaffCreateScreen = ({ history }) => {
     const { loading, error, success:successRegister } = userRegister
 
     useEffect(() => {
-        if (userInfo  && (userInfo.role === 'hr' || userInfo.role === 'hr-manager' || userInfo.role === 'admin')) {
+        if (userInfo  && (userInfo.role === 'Human Resource Executive' || userInfo.role === 'CEO' || userInfo.role === 'Super Admin' || userInfo.role === 'Assistant Manager - Human Resources' || userInfo.role === 'Manager - Human Resources')) {
            
             if(successRegister) {
                 dispatch({
@@ -58,23 +59,35 @@ const StaffCreateScreen = ({ history }) => {
                 department,
                 employeeCode,
                 role,
+                leaveDays,
                 password
             ))
             dispatch(listUsers())
-            history.push('/admin/userlist')
         }
         
     }
 
+     // ---- For the FixedNavBar
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+        
+    const openSidebar = () => {
+        setSidebarOpen(true);
+    };
+    
+    const closeSidebar = () => {
+        setSidebarOpen(false);
+    };
+
   return (
-    <>
-    	<Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-            <Col md={4} lg={2} className='d-none d-md-block'>
-                <FixedNavbar />
-            </Col>
-            <Col xs={12} md={8} lg={10}>
-                <Header />
-                <h1 className='page-header'>Register a New Employee</h1>
+    <div className="dashboard-container">
+        <Header sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
+        <FixedNavbar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
+        <main className='profilescreen-wrapper'>
+            <div className="dashboard-body">
+                <div className="page-header">
+                    <h3>Register a New Employee</h3>
+                    <p>{userInfo.firstname} - Create staff</p>
+                </div>
                 {message && <Message variant='danger'>{message}</Message>}
                 {error && <Message variant='danger'>{error}</Message>}
                 {successRegister && <Message variant='success'>Profile Created</Message>}
@@ -84,7 +97,7 @@ const StaffCreateScreen = ({ history }) => {
                         <Form.Group  className="col-md-4" controlId='firstname'>
                             <Form.Label>First Name</Form.Label>
                             <Form.Control 
-                            type='firstname' 
+                            type='text' 
                            
                             placeholder='Enter First name'
                             value={firstname}
@@ -94,7 +107,7 @@ const StaffCreateScreen = ({ history }) => {
                         <Form.Group  className="col-md-4" controlId='middlename'>
                             <Form.Label>Middle Name</Form.Label>
                             <Form.Control 
-                            type='middlename' 
+                            type='text' 
                             
                             placeholder='Enter Middle name'
                             value={middlename}
@@ -104,7 +117,7 @@ const StaffCreateScreen = ({ history }) => {
                         <Form.Group  className="col-md-4" controlId='lastname'>
                             <Form.Label>Last Name</Form.Label>
                             <Form.Control 
-                            type='lastname' 
+                            type='text' 
                             
                             placeholder='Enter Last name'
                             value={lastname}
@@ -119,15 +132,17 @@ const StaffCreateScreen = ({ history }) => {
                             type='email' 
                             placeholder='Enter Email'
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}></Form.Control>
+                            onChange={(e) => setEmail(e.target.value)}
+                           
+                            ></Form.Control>
                         </Form.Group>
                         <Form.Group  className="col-md-4" controlId='dateOfJoining'>
                             <Form.Label>Date Of Joining</Form.Label>
                             <Form.Control 
-                            type='date' 
-                            placeholder='Enter Date Of Joining'
-                            value={dateOfJoining}
-                            onChange={(e) => setDateOfJoining(e.target.value)} />
+                                type='date' 
+                                placeholder='Enter Date Of Joining'
+                                value={dateOfJoining}
+                                onChange={(e) => setDateOfJoining(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="col-md-4" controlId="formGridDepartment">
                             <Form.Label>Department</Form.Label>
@@ -138,29 +153,42 @@ const StaffCreateScreen = ({ history }) => {
                             value={department}
                             onChange={(e) => setDepartment(e.target.value)}>
                                 <option value=''>Select...</option>
-                                <option value='IT'>IT</option>
-                                <option value='PROJECT'>PROJECT</option>
-                                <option value='HR'>HR</option>
+                                <option value='Admin'>Admin</option>
+                                <option value='Sales'>Sales</option>
                                 <option value='MIS'>MIS</option>
-                                <option value='QUALITY-ASSURANCE'>QUALITY-ASSURANCE</option>
-                                <option value='TRAINING'>TRAINING</option>
-                                <option value='ADMIN'>ADMIN</option>
+                                <option value='Projects'>Projects</option>
+                                <option value='Operations'>Operations</option>
+                                <option value='QA'>QA</option>
+                                <option value='Customer Service'>Customer Service</option>
+                                <option value='Human Resources'>Human Resources</option>
+                                <option value='IT'>IT</option>
+                                <option value='Training & Development'>Training & Development</option>
+                                <option value='Accounts'>Accounts</option>
+                                <option value='Enugu - MCN'>Enugu - MCN</option>
+                                <option value='Branch'>Branch</option>
+                                <option value='Multichoice'>Multichoice</option>
+                                
+                                <option value='Ntel'>Ntel</option>
+                                <option value='Fairmoney'>Fairmoney</option>
+                                <option value='KYC'>KYC</option>
+                                <option value='Sim swap'>Sim swap</option>
+                                <option value='Enterprise'>Enterprise</option>
+                                <option value='Access bank'>Access bank</option>
                                 <option value='OUTCESS'>OUTCESS</option>
                             </Form.Control>
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
-                        
-                    <Form.Group  className="col-md-6" controlId='employeeCode'>
+                        <Form.Group  className="col-md-4" controlId='employeeCode'>
                             <Form.Label>Employee Code</Form.Label>
                             <Form.Control 
-                            type='employeeCode' 
+                            type='text' 
                             placeholder='Enter Employee Code'
                             value={employeeCode}
                             onChange={(e) => setEmployeeCode(e.target.value)}
                             ></Form.Control>
                         </Form.Group>
-                        <Form.Group className="col-md-6" controlId="formGridRole">
+                        <Form.Group className="col-md-4" controlId="formGridRole">
                             <Form.Label>Role</Form.Label>
                             <Form.Control 
                             as="select" 
@@ -169,21 +197,37 @@ const StaffCreateScreen = ({ history }) => {
                             value={role}
                             onChange={(e) => setRole(e.target.value)}>
                                 <option value=''>Select...</option>
-                                <option value='hr'>HR</option>
-                                <option value='employee'>EMPLOYEE</option>
-                                <option value='supervisor'>SUPERVISOR</option>
-                                <option value='admin'>ADMIN</option>
-                                <option value='hr-manager'>HR-MANAGER</option>
-                                <option value='trainer'>TRAINER</option>
-                                <option value='team-lead'>TEAM-LEAD</option>
-                                <option value='asst-manager'>ASST-MANAGER</option>
-                                <option value='IT-Support'>IT-SUPPORT</option>
-                                <option value='agent'>AGENT</option>
-                                <option value='manager'>MANAGER</option>
+                                <option value='Admin Executive'>Admin Executive</option>
+                                <option value='Sales Executive'>Sales Executive</option>
+                                <option value='MIS Executive'>MIS Executive</option>
+                                <option value='Projects Executive'>Projects Executive</option>
+                                <option value='Team Lead'>Team Lead</option>
+                                <option value='Quality Assessor'>Quality Assessor</option>
+                                <option value='Customer Service Officer'>Customer Service Officer</option>
+                                <option value='Assistant Manager - Human Resources'>Assistant Manager - Human Resources</option>
+                                <option value='IT Support Specialist'>IT Support Specialist</option>
+                                <option value='Frontdesk/Recruitment officer'>Frontdesk/Recruitment officer</option>
+                                <option value='Trainer'>Trainer</option>
+                                <option value='Human Resource Executive'>Human Resource Executive</option>
+                                <option value='Software Developer (Intern)'>Software Developer (Intern)</option>
+                                <option value='Accounts Officer'>Accounts Officer</option>
+                                <option value='Accountant'>Accountant</option>
+                                <option value='Head Of Department'>Head Of Department</option>
+                                <option value='Assistant Manager'>Assistant Manager</option>
+                                <option value='CEO'>CEO</option>
+                                <option value='Agent'>Agent</option>
                             </Form.Control>
                         </Form.Group>
-                        </Form.Row>
-                        <Form.Row>
+                        <Form.Group  className="col-md-4" controlId='leaveDays'>
+                            <Form.Label>Leave Balance</Form.Label>
+                            <Form.Control 
+                                type='number' 
+                                placeholder='Enter Leave Days Balance'
+                                value={leaveDays}
+                                onChange={(e) => setLeaveDays(e.target.value)} />
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
                         <Form.Group className="col-md-6" controlId='password'>
                             <Form.Label>Password</Form.Label>
                             <Form.Control 
@@ -207,10 +251,9 @@ const StaffCreateScreen = ({ history }) => {
                       Register
                     </Button>
                 </Form>
-            </Col>
-            
-        </Row>
-        </>
+                </div>
+            </main>
+        </div>
     )
 }
 

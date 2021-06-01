@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
-import { Button, Row, Col, Form, Nav} from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { createProfileEmpId, getProfileDetailsEmpId, updateProfile } from '../actions/profileActions'
 import { PROFILE_CREATE_EMPLOYEE_RESET, PROFILE_DETAILS_EMPLOYEE_RESET, PROFILE_UPDATE_RESET } from '../constants/profileConstants'
 import '../styles/FixedNavbar.css';
-import AdminHeader from '../components/AdminHeader';
+import Header from '../components/Header';
 import '../styles/ProfileScreen.css';
+import AdminFixedNavbar from '../components/AdminFixedNav';
 
 const AdminProfileScreen = ({ history, match }) => {
     const userId = match.params.id
@@ -46,7 +46,7 @@ const AdminProfileScreen = ({ history, match }) => {
 
     useEffect(() => {
 
-        if(userInfo  && (userInfo.role === 'hr' || userInfo.role === 'hr-manager' || userInfo.role === 'admin')) {
+        if(userInfo  && (userInfo.role === 'Human Resource Executive' ||userInfo.role === 'CEO' || userInfo.role === 'Super Admin' || userInfo.role === 'Assistant Manager - Human Resources' || userInfo.role === 'Manager - Human Resources')) {
             
             if(successUpdate || successCreate) {
                 dispatch({
@@ -122,48 +122,31 @@ const AdminProfileScreen = ({ history, match }) => {
        
     }
 
+     // ---- For the FixedNavBar
+     const [sidebarOpen, setSidebarOpen] = useState(false);
+    
+     const openSidebar = () => {
+       setSidebarOpen(true);
+     };
+     
+     const closeSidebar = () => {
+       setSidebarOpen(false);
+     };
+
+
     return (
         <>
-         
-        <Row className='ml-4 mr-4 py-4 profilescreen-wrapper'>
-            <Col md={4} lg={2} className='d-none d-md-block'>   
 
-        <div className="fixednavbar-wrapper">
-            <div className='employee-details'>
-                <p>{userInfo.role}</p>
-                <p>{userInfo.email}</p>
-            </div>
-        <Nav className="flex-column">
-        <NavLink to='/admin/userlist' exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-home pr-3"></i>
-          All Employees
-        </NavLink>
-        <NavLink to={`/admin/user/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="far fa-id-card pr-3"></i>
-          Details
-        </NavLink>
-        <NavLink to={`/admin/profile/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-user-circle pr-3"></i>
-          Profile
-        </NavLink>
-        <NavLink to={`/admin/education/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-user-friends pr-3"></i>
-          Education
-        </NavLink>
-        <NavLink to={`/admin/nextofkin/${userId}/edit`} exact className="nav-link" activeClassName='active-here'>
-          <i class="fas fa-graduation-cap pr-3"></i>
-          Employee Next Of Kin
-        </NavLink>
-        </Nav>
-        </div>
-        </Col>
+        <div className="dashboard-container">
 
-        <Col xs={12} md={8} lg={10}>
-                <AdminHeader
-                    userId
-                />
-                <h1 className='page-header'>My Profile</h1>
-               
+        <Header sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
+        <AdminFixedNavbar userId={userId} sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
+
+        <main className='profilescreen-wrapper'>
+            <div className="dashboard-body">
+            <div className='allLeave-title'> 
+            <h3>My Profile</h3>
+              </div> 
                
                 {successUpdate && <Message variant='success'>Profile Updated</Message>}
                 {loading && <Loader />}
@@ -184,7 +167,7 @@ const AdminProfileScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-4" controlId='contactNo'>
                                 <Form.Label>Contact Number</Form.Label>
                                 <Form.Control 
-                                type='contactNo' 
+                                type='text' 
                                 
                                 placeholder='Enter Contact Number'
                                 value={contactNo}
@@ -194,7 +177,7 @@ const AdminProfileScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-4" controlId='privateEmail'>
                                 <Form.Label>Email Address</Form.Label>
                                 <Form.Control 
-                                type='privateEmail' 
+                                type='email' 
                                 
                                 placeholder='Enter Private Email'
                                 value={privateEmail}
@@ -245,7 +228,7 @@ const AdminProfileScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-4" controlId='address'>
                                 <Form.Label>Address</Form.Label>
                                 <Form.Control 
-                                type='address' 
+                                type='text' 
                                 placeholder='Enter Address'
                                 value={address}
                                 onChange={(e) => setAddress(e.target.value)}
@@ -254,7 +237,7 @@ const AdminProfileScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-4" controlId='stateOfOrigin'>
                                 <Form.Label>State Of Origin</Form.Label>
                                 <Form.Control 
-                                type='stateOfOrigin' 
+                                type='text' 
                                 placeholder='Enter State Of Origin'
                                 value={stateOfOrigin}
                                 onChange={(e) => setStateOfOrigin(e.target.value)}
@@ -263,7 +246,7 @@ const AdminProfileScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-4" controlId='lga'>
                                 <Form.Label>LGA</Form.Label>
                                 <Form.Control 
-                                type='lga' 
+                                type='text' 
                                 placeholder='Enter LGA'
                                 value={lga}
                                 onChange={(e) => setLga(e.target.value)}
@@ -278,7 +261,7 @@ const AdminProfileScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-6" controlId='maritalStatus'>
                                 <Form.Label>Marital Status</Form.Label>
                                 <Form.Control 
-                                type='maritalStatus' 
+                                type='text' 
                                 placeholder='Enter Marital Status'
                                 value={maritalStatus}
                                 onChange={(e) => setMaritalStatus(e.target.value)}
@@ -287,7 +270,7 @@ const AdminProfileScreen = ({ history, match }) => {
                             <Form.Group  className="col-md-6" controlId='religion'>
                                 <Form.Label>Religion</Form.Label>
                                 <Form.Control 
-                                type='religion' 
+                                type='text' 
                                 placeholder='Enter Religion'
                                 value={religion}
                                 onChange={(e) => setReligion(e.target.value)}
@@ -318,7 +301,7 @@ const AdminProfileScreen = ({ history, match }) => {
                                 <Form.Group  className="col-md-4" controlId='contactNo'>
                                     <Form.Label>Contact Number</Form.Label>
                                     <Form.Control 
-                                    type='contactNo' 
+                                    type='text' 
                                     
                                     placeholder='Enter Contact Number'
                                     value={contactNo}
@@ -328,7 +311,7 @@ const AdminProfileScreen = ({ history, match }) => {
                                 <Form.Group  className="col-md-4" controlId='privateEmail'>
                                     <Form.Label>Email Address</Form.Label>
                                     <Form.Control 
-                                    type='privateEmail' 
+                                    type='email' 
                                     
                                     placeholder='Enter Private Email'
                                     value={privateEmail}
@@ -345,6 +328,7 @@ const AdminProfileScreen = ({ history, match }) => {
                                     <Form.Control 
                                     as="select" 
                                     size='sm'
+                                    custom
                                     value={gender}
                                     onChange={(e) => setGender(e.target.value)}>
                                         <option value=''>Select...</option>
@@ -379,7 +363,7 @@ const AdminProfileScreen = ({ history, match }) => {
                                 <Form.Group  className="col-md-4" controlId='address'>
                                     <Form.Label>Address</Form.Label>
                                     <Form.Control 
-                                    type='address' 
+                                    type='text' 
                                     placeholder='Enter Address'
                                     value={address}
                                     onChange={(e) => setAddress(e.target.value)}
@@ -388,7 +372,7 @@ const AdminProfileScreen = ({ history, match }) => {
                                 <Form.Group  className="col-md-4" controlId='stateOfOrigin'>
                                     <Form.Label>State Of Origin</Form.Label>
                                     <Form.Control 
-                                    type='stateOfOrigin' 
+                                    type='text' 
                                     placeholder='Enter State Of Origin'
                                     value={stateOfOrigin}
                                     onChange={(e) => setStateOfOrigin(e.target.value)}
@@ -397,7 +381,7 @@ const AdminProfileScreen = ({ history, match }) => {
                                 <Form.Group  className="col-md-4" controlId='lga'>
                                     <Form.Label>LGA</Form.Label>
                                     <Form.Control 
-                                    type='lga' 
+                                    type='text' 
                                     placeholder='Enter LGA'
                                     value={lga}
                                     onChange={(e) => setLga(e.target.value)}
@@ -412,7 +396,7 @@ const AdminProfileScreen = ({ history, match }) => {
                                 <Form.Group  className="col-md-6" controlId='maritalStatus'>
                                     <Form.Label>Marital Status</Form.Label>
                                     <Form.Control 
-                                    type='maritalStatus' 
+                                    type='text' 
                                     placeholder='Enter Marital Status'
                                     value={maritalStatus}
                                     onChange={(e) => setMaritalStatus(e.target.value)}
@@ -421,14 +405,12 @@ const AdminProfileScreen = ({ history, match }) => {
                                 <Form.Group  className="col-md-6" controlId='religion'>
                                     <Form.Label>Religion</Form.Label>
                                     <Form.Control 
-                                    type='religion' 
+                                    type='text' 
                                     placeholder='Enter Religion'
                                     value={religion}
                                     onChange={(e) => setReligion(e.target.value)}
                                     ></Form.Control>
                                 </Form.Group>
-                            
-                        
                                 
                             </Form.Row>
                         
@@ -439,8 +421,10 @@ const AdminProfileScreen = ({ history, match }) => {
                     )
                 }
                 
-            </Col>
-        </Row>
+            </div>
+        </main>
+        </div>
+         
         </>
     )
 }

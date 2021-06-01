@@ -14,9 +14,6 @@ const StaffListScreen = ({ history, match }) => {
     const pageNumber = match.params.pageNumber || 1
     const employees = 'admin/userlist'
     const dispatch = useDispatch()
-    //kk
-
-    
 
     const userList = useSelector(state => state.userList)
     const {  loading, error, data, pages, page } = userList
@@ -25,7 +22,7 @@ const StaffListScreen = ({ history, match }) => {
     const {  userInfo } = userLogin
 
     useEffect(() => {
-        if (userInfo  && (userInfo.role === 'hr' || userInfo.role === 'hr-manager' || userInfo.role === 'admin')) {
+        if (userInfo  && (userInfo.role === 'Human Resource Executive' || userInfo.role === 'CEO' || userInfo.role === 'Super Admin' || userInfo.role === 'Assistant Manager - Human Resources' || userInfo.role === 'Manager - Human Resources')) {
             
             dispatch(listUsers(keyword, pageNumber))
         } else {
@@ -45,15 +42,15 @@ const StaffListScreen = ({ history, match }) => {
             
             <Row className='align-items-center mr-3 ml-3'>
                 <Col>
-                <Link to='/home' className='btn btn-light my-3'>
-                Go Back
+                <Link to='/home' className='btn btn-light my-3 go-back-btn'>
+                    Go Back
                 </Link>
                 </Col>
                 <Col>
                     <SearchBox history={history} url={'/admin/userlist'} />
                 </Col>
                 <Col className='text-right'>
-                    <Button className='my-3' onClick={createUserHandler}>
+                    <Button className='my-3 create-user-btn' onClick={createUserHandler}>
                        <i className='fas fa-plus'></i> Create Employee
                     </Button>
                 </Col>
@@ -62,8 +59,8 @@ const StaffListScreen = ({ history, match }) => {
             {loading ? <Loader />
             : error ? <Message variant='danger'>{error}</Message>
             : (
-                <>
-                <Table striped bordered hover reesponsive className='table-sm mr-4 ml-3'>
+                <div className='container-fluid'>
+                <Table striped bordered hover responsive='true' className='table-sm'>
                     <thead>
                         <tr>
                             <th>EMPLOYEE ID</th>
@@ -74,7 +71,7 @@ const StaffListScreen = ({ history, match }) => {
                             <th>ROLE</th>
                             <th>DEPARTMENT</th>
                             <th>IS ACTIVE</th>
-                            {userInfo && (userInfo.role === 'hr') && (
+                            {userInfo && (userInfo.role === 'Human Resource Executive' || userInfo.role === 'Super Admin' || userInfo.role === 'Assistant Manager - Human Resources' || userInfo.role === 'Manager - Human Resources') && (
                             <th></th>
                             )}
                         </tr>
@@ -96,15 +93,15 @@ const StaffListScreen = ({ history, match }) => {
                                         <i className='fas fa-times' style={{  color: 'red' }}></i>
                                     )}
                                 </td>
-                                {userInfo && (userInfo.role === 'hr' || userInfo.role === 'hr-manager' || userInfo.role === 'admin') && (
+                                {userInfo && (userInfo.role === 'Human Resource Executive' || userInfo.role === 'Super Admin' || userInfo.role === 'Assistant Manager - Human Resources' || userInfo.role === 'Manager - Human Resources') && (
                                 <td>
                                     <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                                        <Button variant='light' className='btn-sm'>
+                                        <Button variant='light' className='btn-sm staff-list-btn-edit'>
                                             <i className='fas fa-edit'></i>
                                         </Button>
                                     </LinkContainer>
                                     <LinkContainer to={`/admin/user/${user._id}/role`}>
-                                        <Button variant='primary' className='btn-sm'>
+                                        <Button variant='primary' className='btn-sm staff-list-btn-key'>
                                             <i className='fas fa-key'></i>
                                         </Button>
                                     </LinkContainer>
@@ -120,7 +117,7 @@ const StaffListScreen = ({ history, match }) => {
                 pages={pages} 
                 page={page}
                 keyword={keyword ? keyword : ''} />
-                </>
+                </div>
             )}
         </>
     )

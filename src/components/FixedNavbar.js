@@ -2,13 +2,13 @@ import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom';
 import { Nav } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserDetails, logout } from '../actions/userActions';
+import { getUserDetails } from '../actions/userActions';
 import '../styles/FixedNavbar.css';
+import logo from "../img/outcess-logo.png";
 
 
-const FixedNavbar = ({ history }) => {
+const FixedNavbar = ({ history, sidebarOpen, closeSidebar }) => {
 
-   
   const dispatch = useDispatch()
 
   const userLogin = useSelector(state => state.userLogin)
@@ -27,72 +27,123 @@ const FixedNavbar = ({ history }) => {
     }
   }, [dispatch, history, user, userInfo])
 
-
-
-  const logoutHandler = () => {
-    dispatch(logout())
-  }
-
   return (
-    <div className="fixednavbar-wrapper">
-      <div className='employee-details'>
-        <p>{userInfo.role}</p>
-        <p>{userInfo.email}</p>
-      </div>
-
-      <Nav className="flex-column">
-        <NavLink to='/home' exact className="nav-link" activeClassName='active-here'>
-          <i className="fas fa-home pr-4"></i>
-          Home
-        </NavLink>
-        <NavLink to='/profile' exact className="nav-link" activeClassName='active-here'>
-          <i className="fas fa-user-circle pr-4"></i>
-          Profile
-        </NavLink>
-        <NavLink to='/dashboard' exact className="nav-link" activeClassName='active-here'>
-          <i className="far fa-id-card pr-4"></i>
-          Personal details
-        </NavLink>
-        <NavLink to='/nextofkin' exact className="nav-link" activeClassName='active-here'>
-          <i className="fas fa-user-friends pr-4"></i>
-          Next of Kin
-        </NavLink>
-        <NavLink to='/education' exact className="nav-link" activeClassName='active-here'>
-          <i className="fas fa-graduation-cap pr-4"></i>
-          Education
-        </NavLink>
-        <NavLink to='/myleave' exact className="nav-link" activeClassName='active-here'>
-        <i className="fas fa-paper-plane pr-4"></i>
-          My Leave
-        </NavLink>
-
-        {
-          (userInfo.role === 'hr' || userInfo.role === 'hr-manager' || userInfo.role === 'admin') && (
         <>
-          <NavLink to='/leaveapplications' exact className="nav-link" activeClassName='active-here'>
-            <i className="fas fa-folder-open pr-4"></i>
-            Leave Applications
-          </NavLink>
-          <NavLink to='/admin/userlist' exact className="nav-link" activeClassName='active-here'>
-            <i className="fas fa-users pr-4"></i>
-            All Employees
-          </NavLink>
-          <NavLink to='/admin/register' exact className="nav-link" activeClassName='active-here'>
-            <i className="fas fa-user-plus pr-4"></i>
-            Register Employee
-          </NavLink>
-        </>
-        )
-        }
-      </Nav>
-
-      <div className='logout'>
-        <NavLink to='/' className="nav-link-logout" onClick={logoutHandler}>
-          <i className="fas fa-sign-out-alt pr-3"></i>
-          Logout
-        </NavLink>
-      </div>
-    </div>
+          <div className={sidebarOpen ? "fixednavbar-responsive" : ""} id="sidebar">
+            <div className="fixednavbar-title">
+              <div className="fixednavbar-img">
+                <img src={logo} alt="logo" />
+              </div>
+              <i
+              className="fa fa-times"
+              id="sidebarIcon"
+              onClick={() => closeSidebar()} />
+            </div>
+            <div className="fixednavbar-menu">
+              <Nav className="flex-column">
+                <NavLink to='/home' exact className="nav-link" activeClassName='active-here'>
+                  <i className="fas fa-tachometer-alt"></i>
+                  Dashboard
+                </NavLink>
+                {
+                  (userInfo.role === 'Agent') ? (
+                    <NavLink to='/agentleave' exact className="nav-link" activeClassName='active-here'>
+                      <i className="fas fa-sign-out-alt"></i>
+                      Apply for Leave
+                    </NavLink>
+                  ) : (
+                    <NavLink to='/myleave' exact className="nav-link" activeClassName='active-here'>
+                      <i className="fas fa-sign-out-alt"></i>
+                      Apply for Leave
+                    </NavLink>
+                  )
+                }
+                {
+                  (userInfo.role === 'Team Lead') && (
+                    <NavLink to='/myteamapplications' exact className="nav-link" activeClassName='active-here'>
+                      <i className="fas fa-folder"></i>
+                        Team Leave Applications
+                    </NavLink>
+                  )
+                }
+                {
+                  (userInfo.role === 'Head Of Department') && (
+                    <NavLink to='/mydepartmentapplications' exact className="nav-link" activeClassName='active-here'>
+                      <i className="fas fa-folder"></i>
+                        Department Applications
+                    </NavLink>
+                  )
+                }
+                {
+                  (userInfo.role === 'Human Resource Executive' || userInfo.role === 'CEO' || userInfo.role === 'Super Admin' || userInfo.role === 'Assistant Manager - Human Resources' || userInfo.role === 'Manager - Human Resources') && (
+                  <>
+                    <NavLink to='/allagentleaveapplications' exact className="nav-link" activeClassName='active-here'>
+                      <i className="far fa-address-card"></i>
+                      Agent Leave Applications
+                    </NavLink>
+                    <NavLink to='/leaveapplications' exact className="nav-link" activeClassName='active-here'>
+                      <i className="fas fa-folder"></i>
+                      All Leave Applications
+                    </NavLink>
+                    <NavLink to='/admin/userlist' exact className="nav-link" activeClassName='active-here'>
+                      <i className="fas fa-users"></i>
+                      All Employees
+                    </NavLink>
+                    <NavLink to='/admin/register' exact className="nav-link" activeClassName='active-here'>
+                      <i className="fas fa-user-plus"></i>
+                      Register Employee
+                    </NavLink>
+                  </>
+                  )
+                }
+                <NavLink to='/supportservice'  className="nav-link" activeClassName='active-here'>
+                  <i className="fas fa-comment-dots"></i>
+                  Support Service
+                </NavLink>
+               {
+                  (userInfo.role === 'Human Resource Executive' || userInfo.role === 'Super Admin' || userInfo.role === 'Assistant Manager - Human Resources' || userInfo.role === 'Manager - Human Resources')&& (
+                    <NavLink to='/allsupportservice' exact className="nav-link" activeClassName='active-here'>
+                      <i className="fas fa-headset"></i>
+                      All Support Service
+                    </NavLink>
+                  )
+                }
+                <NavLink to='/kpi/details'  className="nav-link" activeClassName='active-here'>
+                  <i className="fas fa-chart-bar"></i>
+                  KPI Details
+                </NavLink>
+                <NavLink to='/kpi/user'  className="nav-link" activeClassName='active-here'>
+                  <i className="fas fa-chart-bar"></i>
+                  KPI Assessment
+                </NavLink>
+                {
+                  (userInfo.role === 'Head Of Department') && (
+                    <NavLink to='/kpi/teamassessments'  className="nav-link" activeClassName='active-here'>
+                      <i className="fas fa-chart-bar"></i>
+                      Team KPI Assessments
+                    </NavLink>
+                  )
+                }
+                {
+                  (userInfo.role === 'Human Resource Executive' || userInfo.role === 'Super Admin' || userInfo.role === 'Assistant Manager - Human Resources' || userInfo.role === 'Manager - Human Resources') && (
+                    <NavLink to='/kpi/allassessments'  className="nav-link" activeClassName='active-here'>
+                      <i className="fas fa-chart-bar"></i>
+                      All KPI Assessments
+                    </NavLink>
+                  )
+                }
+                {
+                  (userInfo.role === 'Human Resource Executive' || userInfo.role === 'Super Admin' || userInfo.role === 'Assistant Manager - Human Resources' || userInfo.role === 'Manager - Human Resources') && (
+                    <NavLink to='/alljobapplication' exact className="nav-link" activeClassName='active-here'>
+                      <i className="fas fa-vote-yea"></i>
+                      Job Applications
+                    </NavLink>
+                  )
+                }
+              </Nav>
+            </div>
+        </div>
+    </>
   );
 }
 

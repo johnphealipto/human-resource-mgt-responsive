@@ -1,8 +1,5 @@
-.profilescreen-wrapper {
-  overflow-y: hidden;
-}
 .profilescreen-wrapper form {
-  background-color: rgba(248, 248, 255, 0.8);
+  background-color: rgb(255, 255, 255);
   padding: 3vh;
   padding-top: 5vh;
   border-radius: 5px;
@@ -10,32 +7,43 @@
 .profilescreen-wrapper form textarea.form-control {
   background-color: var(--input-field-color);
 }
-.profilescreen-wrapper form input,
+
+.profilescreen-wrapper form input[type=text],
+.profilescreen-wrapper form input[type=email],
+.profilescreen-wrapper form input[type=password],
+.profilescreen-wrapper form input[type=date],
+.profilescreen-wrapper form input[type=number]
 .profilescreen-wrapper form select {
-  height: 6.9vh;
   margin-bottom: 1vh;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  height: 45px;
   background-color: var(--input-field-color);
+  border-radius: 5px;
 }
 .profilescreen-wrapper form input:focus,
 .profilescreen-wrapper form select:focus {
   background-color: var(--input-field-color);
-  box-shadow: 3px 0 0 var(--background-blue-color) inset;
-  /* outline: 0 none; */
+  border: 1px solid #e2522e;
+  box-shadow: 0 0 2px #e2522e;
 }
 .profilescreen-wrapper form button {
   background-color: var(--background-blue-color);
   letter-spacing: 1px;
   width: 17vh;
   margin-top: 2vh;
-  border-radius: 5px;
+  border-radius: 25px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25), 2px 2px 2px rgba(0, 0, 0, 0.25),
     4px 4px 4px rgba(0, 0, 0, 0.25);
+  transition: all 0.15s ease-out;
+  -webkit-transition: all 0.15s ease-out;
 }
 .profilescreen-wrapper form button:hover {
-  background-color: var(--light-hover-blue);
+  background-color: var(--background-blue-color);
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35), 2px 2px 2px rgba(0, 0, 0, 0.35),
     4px 4px 4px rgba(0, 0, 0, 0.35), -1px -1px 1px rgba(0, 0, 0, 0.05),
     -2px -2px 2px rgba(0, 0, 0, 0.05), -4px -4px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.15s ease-out;
+  -webkit-transition: all 0.15s ease-out;
+}
+.profilescreen-wrapper form button.rejectleave-btn {
+  background-color: #f14014 !important;
 }

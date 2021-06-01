@@ -1,53 +1,58 @@
-.loginpage-container {
-  /* margin: auto; */
-}
-.loginpage-wrapper .login-img {
-  background-color: var(--background-blue-color);
-  width: 100vh;
+.loginpage-wrapper  {
   height: 100vh;
-  margin-left: -35vh;
-  overflow: hidden;
+  overflow-x: hidden;
 }
-.loginpage-wrapper .login-img img {
-  width: 150%;
-  opacity: 0.8;
+.loginpage-wrapper{
+  background-color: #fff !important;
+}
+.login-img   {
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../img/call-center.jpg');
+
+}
+.loginform-col {
+  margin: auto;
+  width: 80%;
+  padding: 20px 40px;
+  margin-top: 18vh;
 }
 .loginpage-wrapper .logo {
-  margin-top: 55vh;
   width: 35vh;
   margin: auto;
   padding-bottom: 8vh;
 }
 .loginpage-wrapper .logo img {
-  margin-top: 23vh;
   width: 100%;
-}
-.loginpage-wrapper form {
-  margin-left: 16vh;
 }
 .loginpage-wrapper .loginform-col i {
   color: var(--background-blue-color);
 }
-.loginpage-wrapper .login-label {
-  text-align: left;
-  margin-bottom: -1vh;
-}
-.loginpage-wrapper .form-group.email,
-.loginpage-wrapper .form-group.password,
-.loginpage-wrapper button[type="submit"] {
-  width: 50vh;
-}
 .loginpage-wrapper .form-group.password {
   margin-top: 3vh;
 }
-.loginpage-wrapper input {
-  height: 6.6vh;
-  background-color: var(--input-field-color);
-  margin-top: .5vh;
+.loginpage-wrapper input[type=email] {
+  border-radius: 5px;
 }
-.loginpage-wrapper input:focus {
+.loginpage-wrapper input,
+.loginpage-wrapper .input-group-text {
+  height: 50px;
   background-color: var(--input-field-color);
-  box-shadow: 3px 0 0 var(--background-blue-color) inset;
+}
+.loginpage-wrapper .input-group-text {
+  cursor: pointer;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.loginpage-wrapper input[type=password],
+.loginpage-wrapper input[type=text] {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.loginpage-wrapper input:focus,
+.loginpage-wrapper .input-group:focus {
+  background-color: var(--input-field-color);
 }
 
 .loginpage-wrapper button[type="submit"] {
@@ -71,40 +76,21 @@
 }
 
 
-/* moves the eye image */
-.loginpage-wrapper i#eye {
-  position: relative;
-  bottom: 4.5vh;
-  right: -45vh;
-  cursor: pointer;
-}
-
-
 /* --- Media Queries --- */
 /*Extra small devices {xs} (portrait phones, less than 576px)*/
 @media (max-width: 575.98px) {
-  .loginpage-wrapper .form-group.email,
-  .loginpage-wrapper .form-group.password,
-  .loginpage-wrapper button[type="submit"] {
-    width: 40vh;
-  }
-  .loginpage-wrapper .logo,
-  .loginpage-wrapper form {
-    margin-left: 4.35vh;
-  }
-
-  .loginpage-wrapper i#eye {
-    position: relative;
-    bottom: 4.5vh;
-    left: 35vh;
-    cursor: pointer;
+  .loginform-col {
+    width: 90% !important;
   }
 }
-
-/*Iphone X*/
-@media (width: 375px) and (height: 812px) {
-  .loginpage-wrapper .logo,
-  .loginpage-wrapper form {
-    margin-left: 2vh;
+/*--- IPad Pro ---*/
+@media (width: 1024px) and (height: 1366px) {
+  .loginpage-wrapper .logo {
+    width: 25vh;
+    margin: auto;
+    padding-bottom: 8vh;
+  }
+  .loginpage-wrapper .login-img {
+    margin-left: -65vh;
   }
 }
